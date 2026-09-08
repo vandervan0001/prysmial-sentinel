@@ -14,6 +14,6 @@ Start with the consequences of an incorrect command, loss of supervision or inte
 
 Query ICS techniques in the [local reference](../../cyber-core/references/domain.md), then select relevant [structured controls](../../cyber-core/references/controls.json). An ICS technique describes possible behavior; feasibility still depends on the equipment model.
 
-ITI/ICS-Security-Tools and the registered ICS lists provide leads. Check older utilities, captures and scripts for date, protocol, version, licence and behavior before reuse. Third-party PCAPs may contain real data; use authorized excerpts or synthetic captures. The library does not replay these captures or run their executables.
+ITI/ICS-Security-Tools provides leads. Check older utilities, captures and scripts for date, protocol, version, licence and behavior before reuse. Third-party PCAPs may contain real data; use authorized excerpts or synthetic captures. The library does not replay these captures or run their executables.
 
 Report gaps by zone and equipment, with potential effect, offline evidence, compensating control and next measurement. Physical tests require a specific mandate, operating window, restorable backup and suitable stop procedure.

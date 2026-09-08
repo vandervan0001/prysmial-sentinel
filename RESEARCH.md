@@ -21,14 +21,14 @@ Pages under `latest` can change. The Solidity page reviewed here showed a develo
 
 ## Upstream selection
 
-The [repository registry](skills/cyber-audit/references/repositories.json) records 27 repositories and their commits. Their roles are:
+The [repository registry](skills/cyber-audit/references/repositories.json) records 22 repositories and their commits. Their roles are:
 
 - MITRE: an offline Enterprise, ICS and Mobile index. CAPEC remains a separate external reference.
 - Trail of Bits: eight selected documentation sets, with resources and licence retained.
 - OWASP and Semgrep collections: AppSec references. The six executable rules bundled here are local and tested.
 - ProjectDiscovery, PayloadsAllTheThings and HackTricks: references for choosing test hypotheses and procedures within scope.
 - OTRF, Sigma, Atomic, Elastic, Splunk and Velociraptor: hunting, detection, validation and investigation references.
-- ITI, ICS indexes, Wireshark, OPC Foundation and vendor portals: industrial review references.
+- ITI, Wireshark, OPC Foundation and vendor portals: industrial review references.
 
 The registry uses the official `splunk/security_content` repository in place of the proposed `rkondracki/security-content` fork. Licences vary across collections. Content without a reviewed licence and adaptation remains linked, without bulk copying or execution. [Splunk repository](https://github.com/splunk/security_content), [Semgrep rule terms](https://github.com/semgrep/semgrep-rules).
 

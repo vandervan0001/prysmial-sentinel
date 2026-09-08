@@ -9,8 +9,32 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def validate(root=ROOT):
+def distribution_errors(root):
     errors = []
+    plugin = json.loads((root/'.claude-plugin/plugin.json').read_text())
+    marketplace = json.loads((root/'.claude-plugin/marketplace.json').read_text())
+    if plugin.get('version') != (root/'VERSION').read_text().strip():
+        errors.append('Claude plugin version differs from VERSION')
+    entries = marketplace.get('plugins', [])
+    if len(entries) != 1 or entries[0].get('name') != plugin.get('name'):
+        errors.append('Claude marketplace does not select this plugin')
+    elif entries[0].get('source') != './':
+        errors.append('Claude marketplace must include the whole library root')
+    registry = json.loads((root/'skills/cyber-audit/references/repositories.json').read_text())['repositories']
+    if len({r['repository'] for r in registry}) != len(registry):
+        errors.append('Duplicate repository entries')
+    mitre = [r for r in registry if r['repository'] == 'mitre-attack/attack-stix-data']
+    provenance_path = 'skills/cyber-core/references/attack/provenance.json'
+    provenance = json.loads((root/provenance_path).read_text())
+    if (len(mitre) != 1 or mitre[0].get('reuse_kind') != 'derived-data'
+            or mitre[0].get('provenance') != provenance_path
+            or mitre[0].get('commit') != provenance['commit']):
+        errors.append('MITRE repository reuse differs from bundled provenance')
+    return errors
+
+
+def validate(root=ROOT):
+    errors = distribution_errors(root)
     base = root/'skills'
     skills = sorted(base.glob('cyber-*'))
     data = json.loads((base/'cyber-audit/references/catalog.json').read_text())
@@ -92,7 +116,8 @@ def validate(root=ROOT):
             if target.startswith(('https://','http://','#','mailto:')): continue
             if not (md.parent/target.split('#',1)[0]).exists(): errors.append(str(md)+': broken link '+target)
             checked_links+=1
-    return {'skills':len(skills),'modules':len(data['modules']),'source_references':len(sources),'local_links':checked_links,
+    repositories = json.loads((base/'cyber-audit/references/repositories.json').read_text())['repositories']
+    return {'skills':len(skills),'modules':len(data['modules']),'source_references':len(sources),'repository_references':len(repositories),'local_links':checked_links,
             'controls':len(controls),'upstream_files':len(lock['files']),'errors':errors}
 
 

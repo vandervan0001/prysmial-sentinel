@@ -66,7 +66,7 @@ def package(version=None, out_dir=None, root=ROOT):
     if not re.fullmatch(r'\d+\.\d+\.\d+(?:-[A-Za-z0-9.-]+)?',version):
         raise ValueError('A semantic release version is required')
     selected = []
-    for directory in ('skills','scripts','tests','examples','.github'):
+    for directory in ('skills','scripts','tests','examples','.github','.claude-plugin'):
         base = root/directory
         if base.is_symlink():
             raise ValueError('Package source directory is a symbolic link')

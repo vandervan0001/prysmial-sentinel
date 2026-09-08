@@ -30,7 +30,9 @@ For a release, update `VERSION`, describe the observed checks in [VALIDATION.md]
 
 ```bash
 python3 scripts/package_library.py build --out-dir /private/path/new-release
-python3 scripts/package_library.py verify /private/path/new-release/prysmial-sentinel-0.2.0.zip
+python3 scripts/package_library.py verify /private/path/new-release/prysmial-sentinel-0.3.0.zip
 ```
 
 Archive verification checks content integrity without extraction. Use `--sha256` with a digest obtained through a trusted channel when checking an expected release. Repeatable bytes assume the same compression implementation; reproducibility is tested locally on identical inputs.
+
+Claude Code uses the shared skill directory through `.claude-plugin/plugin.json`. Keep its version aligned with `VERSION`. Validate both manifests with `claude plugin validate .claude-plugin/plugin.json` and `claude plugin validate .claude-plugin/marketplace.json` when changing plugin metadata.

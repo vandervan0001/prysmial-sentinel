@@ -970,8 +970,7 @@
         "production_ot": true
       },
       "references": [
-        "https://www.wireshark.org/docs/",
-        "https://github.com/rayborg/ICS_repo"
+        "https://www.wireshark.org/docs/"
       ]
     },
     {

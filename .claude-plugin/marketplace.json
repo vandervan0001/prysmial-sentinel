@@ -1,0 +1,15 @@
+{
+  "name": "prysmial-sentinel",
+  "description": "Prysmial Sentinel security review skills for Claude Code.",
+  "owner": {
+    "name": "vandervan",
+    "url": "https://www.linkedin.com/in/tai-van/"
+  },
+  "plugins": [
+    {
+      "name": "prysmial-sentinel",
+      "source": "./",
+      "description": "Security review skills for code, infrastructure, AI systems, detection, incident response and OT."
+    }
+  ]
+}

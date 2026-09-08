@@ -1,0 +1,12 @@
+{
+  "name": "prysmial-sentinel",
+  "version": "0.3.0",
+  "description": "Security review skills for code, infrastructure, AI systems, detection, incident response and OT.",
+  "author": {
+    "name": "vandervan",
+    "url": "https://www.linkedin.com/in/tai-van/"
+  },
+  "homepage": "https://prysmial.com",
+  "repository": "https://github.com/vandervan0001/prysmial-sentinel",
+  "keywords": ["security", "appsec", "pentesting", "incident-response", "ot"]
+}

@@ -5,25 +5,15 @@
       "repository": "mitre-attack/attack-stix-data",
       "url": "https://github.com/mitre-attack/attack-stix-data",
       "checked_at": "2026-09-08",
-      "reuse": "reference-only; no third-party execution or blanket rule import",
+      "reuse": "derived-data; selected ATT&CK objects normalized into the bundled local index; no third-party code execution",
       "commit": "6cda5ad8462c79e14fbb872f4e09059b18e0cfc4",
       "archived": false,
       "pushed_at": "2026-08-05T22:57:21Z",
       "default_branch": "master",
       "license_declared": "NOASSERTION",
-      "description": "STIX data representing MITRE ATT&CK"
-    },
-    {
-      "repository": "mitre/cti",
-      "url": "https://github.com/mitre/cti",
-      "checked_at": "2026-09-08",
-      "reuse": "reference-only; no third-party execution or blanket rule import",
-      "commit": "8543c5b05bd9bbcace9fc37f30bba96b675b6f33",
-      "archived": false,
-      "pushed_at": "2026-08-05T22:57:18Z",
-      "default_branch": "master",
-      "license_declared": "NOASSERTION",
-      "description": "Cyber Threat Intelligence Repository expressed in STIX 2.0"
+      "description": "STIX data representing MITRE ATT&CK",
+      "provenance": "skills/cyber-core/references/attack/provenance.json",
+      "reuse_kind": "derived-data"
     },
     {
       "repository": "OTRF/ThreatHunter-Playbook",
@@ -84,18 +74,6 @@
       "default_branch": "master",
       "license_declared": "not-identified",
       "description": "Welcome to the page where you will find each trick/technique/whatever I have learnt in CTFs, real life apps, and reading researches and news."
-    },
-    {
-      "repository": "projectdiscovery/nuclei-templates",
-      "url": "https://github.com/projectdiscovery/nuclei-templates",
-      "checked_at": "2026-09-08",
-      "reuse": "reference-only; no third-party execution or blanket rule import",
-      "commit": "ca9197a381d96099b4ffbe36367e35c6a38d253f",
-      "archived": false,
-      "pushed_at": "2026-09-08T17:44:26Z",
-      "default_branch": "main",
-      "license_declared": "MIT",
-      "description": "Community curated list of templates for the nuclei engine to find security vulnerabilities."
     },
     {
       "repository": "projectdiscovery/nuclei",
@@ -168,18 +146,6 @@
       "default_branch": "master",
       "license_declared": "CC-BY-4.0",
       "description": "Tools, tips, tricks, and more for exploring ICS Security."
-    },
-    {
-      "repository": "hslatman/awesome-industrial-control-system-security",
-      "url": "https://github.com/hslatman/awesome-industrial-control-system-security",
-      "checked_at": "2026-09-08",
-      "reuse": "reference-only; no third-party execution or blanket rule import",
-      "commit": "ecb50861a4bcd9eb7b02c5ef3817d315e1da94cb",
-      "archived": false,
-      "pushed_at": "2025-10-10T09:48:06Z",
-      "default_branch": "main",
-      "license_declared": "Apache-2.0",
-      "description": "A curated list of resources related to Industrial Control System (ICS) security."
     },
     {
       "repository": "LOLBAS-Project/LOLBAS",
@@ -300,30 +266,6 @@
       "default_branch": "develop",
       "license_declared": "Apache-2.0",
       "description": "Splunk Security Content"
-    },
-    {
-      "repository": "paulveillard/cybersecurity-industrial-control-systems-security",
-      "url": "https://github.com/paulveillard/cybersecurity-industrial-control-systems-security",
-      "checked_at": "2026-09-08",
-      "reuse": "reference-only; no third-party execution or blanket rule import",
-      "commit": "d0ec758bcd3aaf04295ed84f2e2ed23f8a0348dc",
-      "archived": false,
-      "pushed_at": "2025-02-09T22:35:12Z",
-      "default_branch": "main",
-      "license_declared": "Apache-2.0",
-      "description": "A collection of awesome software, libraries, documents, books, resources and cool stuff about industrial control systems in cybersecurity. "
-    },
-    {
-      "repository": "rayborg/ICS_repo",
-      "url": "https://github.com/rayborg/ICS_repo",
-      "checked_at": "2026-09-08",
-      "reuse": "reference-only; no third-party execution or blanket rule import",
-      "commit": "e97c53ae6f05f06567ee796bfa736091a8c26cf4",
-      "archived": false,
-      "pushed_at": "2022-05-30T08:48:37Z",
-      "default_branch": "master",
-      "license_declared": "not-identified",
-      "description": "Collection of resources for Industrial control system cybersecurity"
     }
   ]
 }

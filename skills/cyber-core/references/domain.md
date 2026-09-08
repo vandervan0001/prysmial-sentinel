@@ -16,7 +16,7 @@ python3 skills/cyber-core/scripts/knowledge.py controls --domain cyber-ot --prot
 
 For each mapping, retain the domain, technique identifier and URL, observed behavior and confidence. Do not conflate equal identifiers across domains. Relationships can reference objects absent from this selected index; query results identify unresolved endpoints.
 
-ATT&CK describes adversary behavior, CWE weakness classes, CAPEC attack patterns and ASVS verification requirements. A shared word does not establish an official mapping. CAPEC is an external reference to check when needed and is not included in the ATT&CK snapshot. Verify the dataset before presenting `mitre/cti` as a CAPEC source.
+ATT&CK describes adversary behavior, CWE weakness classes, CAPEC attack patterns and ASVS verification requirements. A shared word does not establish an official mapping. CAPEC is an external reference to check when needed and is not included in the ATT&CK snapshot.
 
 ## Structured controls
 

@@ -8,10 +8,11 @@ authors:
     website: "https://github.com/vandervan0001"
 repository-code: "https://github.com/vandervan0001/prysmial-sentinel"
 url: "https://github.com/vandervan0001/prysmial-sentinel"
-abstract: "Cybersecurity skills and local audit tools for reviewing software, infrastructure and industrial systems in Codex."
+abstract: "Cybersecurity skills and local audit tools for reviewing software, infrastructure and industrial systems in Codex and Claude Code."
 keywords:
   - cybersecurity
   - appsec
   - pentesting
   - codex-skills
+  - claude-code
   - ot-security

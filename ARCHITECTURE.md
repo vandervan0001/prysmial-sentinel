@@ -1,6 +1,6 @@
 # Library architecture
 
-Codex discovers nine skills. The audit coordinator selects from eight domains, which load their methods as needed. Each method belongs to one domain. A handoff passes the evidence and the question the next domain needs to resolve.
+Codex and Claude Code discover the same nine skills. The audit coordinator selects from eight domains, which load their methods as needed. Each method belongs to one domain. A handoff passes the evidence and the question the next domain needs to resolve.
 
 ```mermaid
 flowchart TD
@@ -56,7 +56,9 @@ examples/           synthetic review, reproduction and assessment records
 
 Edit methods in `references/modules/*.md` or the domain reference files. Additional specialist controls live in `domain-controls.json`. `compile_controls.py` builds 58 records containing applicability, procedure, evidence requirements, references and execution conditions. They can be queried offline.
 
-The MITRE snapshot is a derived index, identified by its source commit and input bundle hashes. Trail of Bits file contents are unchanged. Their entry files are named `SOURCE.md` so that Codex treats them as references rather than additional skills. The provenance lock records the path mapping.
+The MITRE snapshot is a derived index, identified by its source commit and input bundle hashes. Trail of Bits file contents are unchanged. Their entry files are named `SOURCE.md` to prevent discovery as additional skills. The provenance lock records the path mapping.
+
+Claude Code's plugin manifests live in `.claude-plugin/`. The plugin contains the whole library, preserving references between domains. Codex continues to use the symlink installer. [PLATFORMS.md](PLATFORMS.md) documents both clients.
 
 Targeted guides live beside the domain references and are loaded through the relevant methods. They add test matrices without adding discoverable skill entry points. Scanner candidates and [reviewed assessments](skills/cyber-audit/references/assessment-format.md) have separate contracts; structural validity does not establish security.
 

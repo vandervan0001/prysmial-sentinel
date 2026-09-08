@@ -1,6 +1,6 @@
 # Prysmial Sentinel
 
-Read `KB.md` before changing tools or evidence contracts. Tai's global instructions apply, including the ban on archiving sessions.
+Read `KB.md` before changing tools or evidence contracts. Do not archive sessions.
 
 The nine entry points live in `skills/cyber-*`: one audit coordinator and eight domains. The shared contract is `skills/cyber-audit/references/engagement.md`. Specialist methods live in their domain's `references/modules/` directory. Do not create a separate skill entry point for every subtopic.
 

@@ -1,6 +1,6 @@
 # Prysmial Sentinel
 
-Prysmial Sentinel is a cybersecurity skill library for reviewing software, infrastructure and industrial systems in Codex. It covers code review, pentesting, detection, threat hunting and incident response, with a shared format for evidence and findings.
+Prysmial Sentinel is a cybersecurity skill library for reviewing software, infrastructure and industrial systems in Codex and Claude Code. It covers code review, pentesting, detection, threat hunting and incident response, with a shared format for evidence and findings.
 
 Created by [vandervan](https://github.com/vandervan0001), as part of [Prysmial](https://prysmial.com).
 
@@ -10,7 +10,7 @@ Seven targeted guides provide test cases for authorization across jobs and cache
 
 ## Install and start
 
-Use Python 3.10 or later. Clone the repository with an account that has access, then preview the installation and apply it:
+Use Python 3.10 or later. For Codex, clone the repository, preview the installation and apply it:
 
 ```bash
 git clone https://github.com/vandervan0001/prysmial-sentinel.git
@@ -23,7 +23,16 @@ A ZIP and SHA-256 checksum are also available in the [GitHub releases](https://g
 
 The installer links the nine skills into the Codex skills directory. It refuses conflicting paths and preserves existing skills. Keep this repository in place; if you move it, recreate the links. Codex may need a new task or a skill reload to discover them.
 
-In the project you want to review:
+For Claude Code, install the plugin inside the client:
+
+```text
+/plugin marketplace add vandervan0001/prysmial-sentinel
+/plugin install prysmial-sentinel@prysmial-sentinel
+```
+
+Then use `/prysmial-sentinel:cyber-audit` in the project to review. See [client setup](PLATFORMS.md) for local plugin loading, updates and domain commands.
+
+In Codex, start the review with:
 
 ```text
 $cyber-audit Review this project in depth. Start with the repository and local tests. Report confirmed findings, supporting evidence and checks that still require the running application.
@@ -69,7 +78,7 @@ See the [commands and limits](skills/cyber-audit/references/tooling.md). Semgrep
 
 ## Validation
 
-Local validation passed 66 tests and the Semgrep rule checks. An independent agent review exercised one synthetic service with 27 local checks. These results do not establish coverage across every stack or live client system. See the [validation record](VALIDATION.md) for the cases and environments checked.
+Local validation passed 70 tests and the Semgrep rule checks. Claude Code installation and discovery were checked with the native client. An independent agent review exercised one synthetic service with 27 local checks. These results do not establish coverage across every stack or live client system. See the [validation record](VALIDATION.md) for the cases and environments checked.
 
 Technical references and review history are kept in the [research notes](RESEARCH.md). [Third-party notices](THIRD_PARTY_NOTICES.md) cover bundled documentation and data.
 
