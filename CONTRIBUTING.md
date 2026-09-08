@@ -10,6 +10,8 @@ For a source update, record publication or revision date separately from access 
 
 Before copying third-party content, verify reuse terms and preserve attribution. Update provenance and hashes when the copied bytes change. Links to external code do not authorize its execution. Original Sentinel material currently has no general open-source licence grant; do not infer one from bundled third-party licences.
 
+Keep creator credits focused on Sentinel and redistributed third-party material. General background reading does not need a credit entry. In methods and research notes, retain citations that identify an external requirement, substantiate a research claim or document material reuse. Rewriting licensed material does not by itself remove its attribution or other licence conditions.
+
 ## Code and evidence
 
 Use synthetic fixtures without credentials, real customer records or live provider configuration. Tests should demonstrate an observable behavior and include a case that would distinguish failure from success. Keep intentionally vulnerable fixtures under `tests/fixtures/` and identify their purpose.

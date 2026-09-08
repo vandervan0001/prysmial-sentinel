@@ -1,6 +1,6 @@
 # Third-party notices and provenance
 
-Project creator and upstream acknowledgements are recorded in [CREDITS.md](CREDITS.md). The notices below apply to third-party material.
+Project authorship is recorded in [CREDITS.md](CREDITS.md). The notices below apply to redistributed third-party material.
 
 ## Trail of Bits
 
@@ -19,9 +19,3 @@ Source: [mitre-attack/attack-stix-data](https://github.com/mitre-attack/attack-s
 The Enterprise, ICS and Mobile bundles were transformed into a local index. The transformation selects active objects relevant to the library, removes revoked or deprecated objects and normalizes fields. The result is not a complete STIX bundle. [provenance.json](skills/cyber-core/references/attack/provenance.json) records the sources, input hashes and transformation.
 
 ATT&CK does not guarantee exhaustive coverage of adversary behavior. Its descriptions are reference data and do not authorize audit actions.
-
-## Linked sources
-
-Other repositories in the registry are research and method references. They are not distributed in full or installed automatically. GitHub licence metadata may be incomplete or return `NOASSERTION`; read the licence for the file and commit before reuse. No common licence is assigned to these projects here.
-
-Original procedures, local rules and audit tooling are separate from these third-party snapshots.

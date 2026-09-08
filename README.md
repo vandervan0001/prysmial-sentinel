@@ -67,19 +67,19 @@ The OT domain includes Modbus, S7, PROFINET, EtherNet/IP/CIP and OPC UA, plus Si
 
 See the [commands and limits](skills/cyber-audit/references/tooling.md). Semgrep must already be installed to run a scan. Other tools mentioned in the methods need to be selected, installed and checked for the project. Imported findings remain candidates until their cause and impact are verified.
 
-## Sources and validation
+## Validation
 
-The research baseline is 8 September 2026. It records [59 primary references](skills/cyber-audit/references/sources.json) and [27 upstream repositories](skills/cyber-audit/references/repositories.json). The package includes a derived MITRE index and eight selected Trail of Bits documentation sets, with source commits, licences and hashes.
+Local validation passed 66 tests and the Semgrep rule checks. An independent agent review exercised one synthetic service with 27 local checks. These results do not establish coverage across every stack or live client system. See the [validation record](VALIDATION.md) for the cases and environments checked.
 
-Read the [literature review](LITERATURE_REVIEW.md), [research notes](RESEARCH.md), [third-party notices](THIRD_PARTY_NOTICES.md) and [validation record](VALIDATION.md). Local validation passed 66 tests and the Semgrep rule checks. An independent agent review exercised one synthetic service with 27 local checks. These results do not establish coverage across every stack or live client system. Sources are updated manually.
+Technical references and review history are kept in the [research notes](RESEARCH.md). [Third-party notices](THIRD_PARTY_NOTICES.md) cover bundled documentation and data.
 
 ## Creator and Prysmial
 
 [vandervan](https://github.com/vandervan0001) created Prysmial Sentinel to organize security review methods, local tooling and evidence requirements in one repository.
 
-[Prysmial](https://prysmial.com) builds business software and process automation, including CRMs, applications, portals and AI integrations. Visit the site for project work and collaboration.
+[Prysmial](https://prysmial.com) builds business software and process automation, including CRMs, applications, portals and AI integrations. For project work or collaboration, contact [vandervan on LinkedIn](https://www.linkedin.com/in/tai-van/).
 
-See [project credits](CREDITS.md) for authorship and upstream acknowledgements. To reference Sentinel in an article, workshop or audit, use the [citation metadata](CITATION.cff) and identify the version you used.
+See [project credits](CREDITS.md) for authorship. To reference Sentinel in an article, workshop or audit, use the [citation metadata](CITATION.cff) and identify the version you used.
 
 ## Maintain the library
 
