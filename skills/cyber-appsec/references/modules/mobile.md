@@ -22,7 +22,7 @@ Use MobSF, JADX, Android/Apple tools and Frida instrumentation in an authorized 
 
 ## References
 
-- [OWASP MASVS et MASTG](https://mas.owasp.org/): Select versioned requirements and tests.
+- [OWASP MASVS and MASTG](https://mas.owasp.org/): Select versioned requirements and tests.
 - [NIST Digital Identity Guidelines](https://csrc.nist.gov/pubs/sp/800/63/4/final): 800-63-4, July 2025.
 - [OWASP API Security Top 10](https://owasp.org/API-Security/editions/2023/en/0x11-t10/): 2023.
 

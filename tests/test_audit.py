@@ -127,6 +127,17 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(result['candidate_count'],2)
         self.assertEqual([r['occurrences'] for r in result['findings']],[2,1])
 
+    def test_redaction_and_truncation_do_not_merge_distinct_evidence(self):
+        for paths in [
+            ['https://one.example.invalid/a', 'https://two.example.invalid/a'],
+            ['a'*250+'one.py', 'a'*250+'two.py'],
+        ]:
+            rows = [{'check_id':'r','path':p,'start':{'line':1}} for p in paths+paths[:1]]
+            result = audit.normalize(self.semgrep(results=rows),'semgrep','hash')
+            self.assertEqual(result['candidate_count'],2)
+            self.assertEqual([r['occurrences'] for r in result['findings']],[2,1])
+            self.assertEqual(result['findings'][0]['path'],result['findings'][1]['path'])
+
     def test_sarif_failed_execution_is_visible(self):
         raw = {'version':'2.1.0','runs':[{'tool':{'driver':{'name':'Scanner'}},
                 'invocations':[{'executionSuccessful':False}],'results':[]}]}
@@ -172,6 +183,21 @@ class EvidenceTests(unittest.TestCase):
         self.assertEqual(audit.location('https://user:secret@example.invalid/file?token=secret'),'[remote location omitted]')
         self.assertEqual(audit.location('src/file.py?token=secret'),'src/file.py')
 
+    def test_windows_drive_paths_remain_local(self):
+        self.assertEqual(audit.location(r'C:\work\app.py'),r'C:\work\app.py')
+        self.assertEqual(audit.location('D:/work/app.py'),'D:/work/app.py')
+
+    def test_scanner_report_cannot_promote_imports_to_confirmed(self):
+        data = audit.normalize([{'RuleID':'r','File':'a.py'}],'gitleaks','hash')
+        self.assertIn('| candidate |',audit.report(data))
+        data['findings'][0]['status']='confirmed'
+        with self.assertRaises(ValueError): audit.report(data)
+
+    def test_scanner_report_cannot_claim_unrecorded_verification(self):
+        data = audit.normalize([{'RuleID':'r','File':'a.py'}],'gitleaks','hash')
+        data['findings'][0]['verification']='passed'
+        with self.assertRaises(ValueError): audit.report(data)
+
     def test_report_does_not_render_untrusted_html(self):
         raw = [{'RuleID':'<script>x</script>','File':'a|b','StartLine':1}]
         rendered = audit.report(audit.normalize(raw,'gitleaks','hash'))
@@ -191,6 +217,38 @@ class EvidenceTests(unittest.TestCase):
         out,err,rc=audit.run_bounded([sys.executable,'-c',script],ROOT,os.environ.copy(),0.3)
         self.assertIsNone(rc)
         self.assertIn(b'started',out)
+
+    def test_output_limit_stops_noisy_process_and_caps_buffer(self):
+        script='import sys,time; sys.stdout.write("x"*2000); sys.stdout.flush(); time.sleep(20)'
+        out,err,rc=audit.run_bounded([sys.executable,'-c',script],ROOT,os.environ.copy(),2,1024)
+        self.assertEqual(rc,'output-limit')
+        self.assertEqual(len(out),1024)
+        self.assertEqual(err,b'')
+
+    def test_bounded_process_preserves_normal_stdout_stderr_and_exit(self):
+        script='import sys; print("observed"); print("diagnostic",file=sys.stderr); sys.exit(3)'
+        out,err,rc=audit.run_bounded([sys.executable,'-c',script],ROOT,os.environ.copy(),2,1024)
+        self.assertEqual((out,err,rc),(b'observed\n',b'diagnostic\n',3))
+
+    def test_scanner_resolution_rejects_project_binaries_and_relative_path(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)/'project'
+            root.mkdir()
+            binary=root/'semgrep'
+            binary.write_text('synthetic, never executed')
+            binary.chmod(0o700)
+            with self.assertRaises(ValueError): audit.scanner_path(root,str(root)+os.pathsep+'.')
+            trusted=Path(tmp)/'installed'
+            trusted.mkdir()
+            link=trusted/'semgrep'
+            link.symlink_to(binary)
+            with self.assertRaises(ValueError): audit.scanner_path(root,str(trusted))
+            link.unlink()
+            link.write_text('synthetic installed executable, never executed')
+            link.chmod(0o700)
+            found,search=audit.scanner_path(root,str(root)+os.pathsep+str(trusted))
+            self.assertEqual(Path(found),link.resolve())
+            self.assertEqual(search,str(trusted.resolve()))
 
     def test_exclusive_evidence_write_and_symlink_rejection(self):
         with tempfile.TemporaryDirectory() as tmp:

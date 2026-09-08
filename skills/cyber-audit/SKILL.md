@@ -34,4 +34,6 @@ Keep a coverage table with object, method, evidence and status. Confirm findings
 
 Import external results with `audit.py normalize`, then record triage decisions and prepare the report using the triage method in `cyber-core`. The generated Markdown report lists candidates; complete it with verified findings and coverage.
 
+For structured delivery, use the [assessment contract](references/assessment-format.md). Its validator checks evidence references and the support required for each status. Review the cited evidence as well; valid JSON cannot establish that an observation is true. The [synthetic review](../../examples/review-lab-report.md) shows the difference between scanner output and verified findings.
+
 For recent changes and advisories, consult the [dated references](references/sources.json) and follow the [research method](references/research-policy.md). Selected Trail of Bits references are available with [provenance and hashes](references/upstream-lock.json).

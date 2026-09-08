@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "security-assessment",
+  "target": {
+    "name": "Synthetic document service",
+    "revision": "819550ed509c29e6d627fbbb44ba8732f4718aa51d8d53b8b3f6dfa5a4314e5b",
+    "environment": "local in-memory fixture",
+    "scope": "Document access, exports, shared cache and simulated approved actions"
+  },
+  "evidence": [
+    {
+      "id": "E-local",
+      "kind": "local reproduction",
+      "source": "examples/review-lab-results.json",
+      "sha256": "7b479befbc43a8222a9017294497572328321a59d37789e640cd3a62fdffb5d9",
+      "observation": "27 recorded expectations reproduced, including allowed cases, denials and unsafe effects."
+    }
+  ],
+  "controls": [
+    {
+      "id": "EXPORT",
+      "asset": "queue_export and run_export",
+      "method": "Source tracing and local function calls",
+      "status": "tested",
+      "outcome": "fail",
+      "evidence": [
+        "E-local"
+      ],
+      "execution": {
+        "cases_run": 2,
+        "method": "examples/review_lab.py, cases associated with this finding",
+        "positive_control": "Own-document exports work and empty user ID is denied.",
+        "expected": "Operations respect document visibility or approved parameters.",
+        "observed": "Foreign document body is returned through the worker."
+      }
+    },
+    {
+      "id": "CACHE",
+      "asset": "cached_search",
+      "method": "Source tracing and local function calls",
+      "status": "tested",
+      "outcome": "fail",
+      "evidence": [
+        "E-local"
+      ],
+      "execution": {
+        "cases_run": 4,
+        "method": "examples/review_lab.py, cases associated with this finding",
+        "positive_control": "Fresh cache returns only the caller tenant records.",
+        "expected": "Operations respect document visibility or approved parameters.",
+        "observed": "Shared cache returns another tenant records in both priming orders."
+      }
+    },
+    {
+      "id": "APPROVAL",
+      "asset": "approve and invoke",
+      "method": "Source tracing and local function calls",
+      "status": "tested",
+      "outcome": "fail",
+      "evidence": [
+        "E-local"
+      ],
+      "execution": {
+        "cases_run": 3,
+        "method": "examples/review_lab.py, cases associated with this finding",
+        "positive_control": "Unapproved action is denied; unchanged approved action works.",
+        "expected": "Operations respect document visibility or approved parameters.",
+        "observed": "Changed destination or body executes with an already approved ID."
+      }
+    }
+  ],
+  "findings": [
+    {
+      "id": "F1",
+      "title": "Export bypasses document authorization",
+      "status": "confirmed",
+      "controls": [
+        "EXPORT"
+      ],
+      "evidence": [
+        "E-local"
+      ],
+      "mechanism": "Worker directly reads the document without using the actor authority.",
+      "preconditions": "Caller can choose a foreign document ID, enqueue and receive the worker output.",
+      "impact": "Foreign synthetic document body is disclosed.",
+      "attempt_to_disprove": "Direct foreign reads are denied; own-document exports succeed.",
+      "remediation": "Authorize enqueue and execution with a trusted subject."
+    },
+    {
+      "id": "F2",
+      "title": "Shared cache omits authorization scope",
+      "status": "confirmed",
+      "controls": [
+        "CACHE"
+      ],
+      "evidence": [
+        "E-local"
+      ],
+      "mechanism": "Cache hit uses query alone and skips tenant filtering.",
+      "preconditions": "A cache instance is shared by users from different tenants.",
+      "impact": "Another tenant synthetic result is disclosed or an allowed result is hidden.",
+      "attempt_to_disprove": "Fresh per-tenant caches return only expected records; both shared-cache orders reproduce the defect.",
+      "remediation": "Scope the cache and invalidation to the effective visibility policy."
+    },
+    {
+      "id": "F3",
+      "title": "Approved ID permits changed payload",
+      "status": "confirmed",
+      "controls": [
+        "APPROVAL"
+      ],
+      "evidence": [
+        "E-local"
+      ],
+      "mechanism": "Invocation verifies ID membership without binding recipient and body.",
+      "preconditions": "Caller can change the execution payload after trusted approval.",
+      "impact": "A simulated effect uses an unapproved destination or body.",
+      "attempt_to_disprove": "An unchanged approved action succeeds and an unapproved action is denied.",
+      "remediation": "Execute an immutable approved action or compare all execution fields."
+    },
+    {
+      "id": "Q1",
+      "title": "Repeated approved invocation",
+      "status": "needs-context",
+      "controls": [
+        "APPROVAL"
+      ],
+      "evidence": [
+        "E-local"
+      ],
+      "reason": "The fixture does not declare a single-use or repeatable approval policy."
+    }
+  ],
+  "limitations": [
+    "No deployed endpoint, authenticated UI or real provider was tested.",
+    "Proposed corrections are not implemented in this intentionally vulnerable fixture.",
+    "One independent agent evaluation does not establish a general detection rate."
+  ]
+}

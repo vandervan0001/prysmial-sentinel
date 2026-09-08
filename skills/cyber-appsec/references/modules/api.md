@@ -12,6 +12,8 @@
 
 5. Check webhook validation against raw bytes, signatures, timestamps, replay, idempotency and the associated business object. For uploads, examine actual file type, names, archive extraction, size, storage and download paths.
 
+6. Use the [targeted verification cases](../parser-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Keep the minimal sanitized request, identity, object, response and effect. A 200 response with no objects can hide incorrectly combined filters; check against a known existing object.

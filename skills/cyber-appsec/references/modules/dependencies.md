@@ -12,6 +12,8 @@
 
 5. Prioritize a CVE using local impact, KEV, a dated EPSS score and an applicable fix. Prepare the smallest update with build and retest of affected paths, without rewriting the whole lockfile.
 
+6. Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 For each affected component, record resolved identity, presence, sourced vulnerable version range, usage context, fix and limits. A raw CVE list remains a candidate inventory.
@@ -30,7 +32,7 @@ Read the [Trail of Bits method](../../../cyber-audit/references/upstream/trailof
 - [Trivy](https://trivy.dev/latest/docs/): Check the installed version.
 - [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog): Updated catalogue.
 - [FIRST EPSS](https://www.first.org/epss/): Retrieve a dated score for each CVE.
-- [SLSA](https://slsa.dev/spec/v1.1/): 1.1; versioned reference, not a claim of the latest release.
+- [SLSA](https://slsa.dev/spec/v1.2/): 1.2; approved specification, source and build tracks.
 - [OpenSSF Scorecard](https://github.com/ossf/scorecard): Maintenance indicators; not proof of security.
 
 For recent requirements or vulnerabilities, use the [research method](../../../cyber-audit/references/research-policy.md).

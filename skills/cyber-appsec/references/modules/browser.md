@@ -12,6 +12,8 @@
 
 5. Review postMessage, window.opener, iframes, service workers, CDN caches and browser storage. Verify that authenticated responses cannot be reused by another identity.
 
+6. Use the [targeted verification cases](../parser-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide the origin, credentials used and affected action or data. Verify the path in a real browser. Do not report HTML injection without a JavaScript effect as confirmed XSS.

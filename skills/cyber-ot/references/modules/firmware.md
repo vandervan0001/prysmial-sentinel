@@ -12,6 +12,8 @@
 
 5. On an authorized emulator or laboratory device, test update formats, simulated power loss and restoration. Document limitations that prevent reproducing physical behavior.
 
+6. Use the [targeted verification cases](../recovery-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide the hash, model, firmware, extraction path and observation. A string in a binary does not prove a service is active.
@@ -24,6 +26,6 @@ Use Binwalk, Ghidra, format tools and emulation as appropriate. Treat extractors
 
 - [NIST OT security](https://csrc.nist.gov/pubs/sp/800/82/r3/final): 800-82 rev. 3.
 - [OSS-Fuzz](https://github.com/google/oss-fuzz): External tool reference.
-- [SLSA](https://slsa.dev/spec/v1.1/): 1.1; versioned reference, not a claim of the latest release.
+- [SLSA](https://slsa.dev/spec/v1.2/): 1.2; approved specification, source and build tracks.
 
 For recent requirements or vulnerabilities, use the [research method](../../../cyber-audit/references/research-policy.md).

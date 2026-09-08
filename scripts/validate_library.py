@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -18,7 +19,16 @@ def validate(root=ROOT):
     actual = [p.name for p in skills]
     if len(names) != len(set(names)): errors.append('Duplicate catalogue entry')
     if set(actual) != set(names)|{'cyber-audit'}: errors.append('Catalogue and skill directories differ')
-    sources = {s['id'] for s in json.loads((base/'cyber-audit/references/sources.json').read_text())['sources']}
+    source_records = json.loads((base/'cyber-audit/references/sources.json').read_text())['sources']
+    sources = {s['id'] for s in source_records}
+    if len(sources) != len(source_records): errors.append('Duplicate source IDs')
+    modules_by_name = {m['name']:m for m in data['modules']}
+    if len(modules_by_name) != len(data['modules']): errors.append('Duplicate module IDs')
+    for domain in catalog:
+        declared = domain['modules']
+        expected = {m['name'] for m in data['modules'] if m['domain']==domain['name']}
+        if len(set(declared)) != len(declared) or set(declared) != expected:
+            errors.append('Domain module ownership mismatch: '+domain['name'])
     for entry in data['modules']:
         if set(entry['sources'])-sources: errors.append('Unknown source in '+entry['name'])
         if entry['domain'] not in names: errors.append('Unknown domain in '+entry['name'])
@@ -68,14 +78,19 @@ def validate(root=ROOT):
     controls=json.loads((base/'cyber-core/references/controls.json').read_text())['controls']
     if len({c['id'] for c in controls})!=len(controls): errors.append('Duplicate control IDs')
     for record in controls:
+        for ref in record.get('references',[]):
+            parsed = urlsplit(ref)
+            if ref not in sources and not (parsed.scheme == 'https' and parsed.netloc):
+                errors.append('Unknown control source: '+record['id'])
+        if record.get('domain') not in names: errors.append('Unknown control domain: '+record['id'])
         if 'source_path' in record:
             path=root/record['source_path']
             if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest()!=record['source_sha256']:
                 errors.append('Stale compiled control: '+record['id'])
-    for md in root.glob('*.md'):
+    for md in list(root.glob('*.md'))+list((root/'examples').glob('*.md')):
         for _,target in re.findall(r'\[([^\]]*)\]\(([^)]+)\)',md.read_text()):
             if target.startswith(('https://','http://','#','mailto:')): continue
-            if not (root/target.split('#',1)[0]).exists(): errors.append(str(md)+': broken link '+target)
+            if not (md.parent/target.split('#',1)[0]).exists(): errors.append(str(md)+': broken link '+target)
             checked_links+=1
     return {'skills':len(skills),'modules':len(data['modules']),'source_references':len(sources),'local_links':checked_links,
             'controls':len(controls),'upstream_files':len(lock['files']),'errors':errors}

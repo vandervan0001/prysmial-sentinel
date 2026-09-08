@@ -12,6 +12,8 @@
 
 5. Assess exports to third-party services and models: content, configured region, retention and available controls. Record technical verification separately from any legal assessment.
 
+6. Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide the data-flow map, fields, authorized identities, exposure paths and deletion evidence for each storage location. A written policy does not establish enforcement.

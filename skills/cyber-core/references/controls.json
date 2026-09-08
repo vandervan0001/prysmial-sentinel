@@ -224,7 +224,8 @@
           "Match security advisories to exact versions and ecosystems, including CVE/GHSA aliases and vendor fixes. A backport can fix a vulnerability without adopting the upstream version number.",
           "Assess reachability, enabled features, development/build/runtime context, privileges and exposure. Keep reachability unresolved when evidence is missing.",
           "Check installation scripts, provenance, maintainers and publication permissions using dated records. An unavailable measurement must remain unknown rather than becoming a risk indicator.",
-          "Prioritize a CVE using local impact, KEV, a dated EPSS score and an applicable fix. Prepare the smallest update with build and retest of affected paths, without rewriting the whole lockfile."
+          "Prioritize a CVE using local impact, KEV, a dated EPSS score and an applicable fix. Prepare the smallest update with build and retest of affected paths, without rewriting the whole lockfile.",
+          "Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -247,6 +248,10 @@
         {
           "phase": "review",
           "instruction": "Prioritize a CVE using local impact, KEV, a dated EPSS score and an applicable fix. Prepare the smallest update with build and retest of affected paths, without rewriting the whole lockfile."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -269,10 +274,11 @@
         "kev",
         "epss",
         "slsa",
-        "supply-tools"
+        "supply-tools",
+        "ssdf"
       ],
       "source_path": "skills/cyber-appsec/references/modules/dependencies.md",
-      "source_sha256": "c30bb7fbe3a77926007cb827c543442985ca175300865ae7d54a78cc2db11e8b"
+      "source_sha256": "b8d5d2721c3386744af0ba9dbef21e5204c785fb7770d27e649fb0954407dbc6"
     },
     {
       "id": "APPSEC-SECRETS",
@@ -364,7 +370,8 @@
           "Check sessions and revocation across cookies, APIs, WebSocket connections and jobs. Test account disablement, logout and refresh-token rotation alongside a still-valid session.",
           "For OAuth/OIDC, check issuer, audience, exact redirect URI, state, flow-specific nonce requirements, PKCE, session binding and privileges. Read the provider guidance and RFC 9700 for the actual client type.",
           "For WebAuthn and passkeys, examine RP ID, origin, single-use challenge, account binding and user verification requirements for the action. Include enrollment and recovery in the review.",
-          "Build a subject × action × object matrix covering direct access, lists, exports, search, attachments, admin operations and deferred jobs. A permission check in the interface does not protect the server function."
+          "Build a subject × action × object matrix covering direct access, lists, exports, search, attachments, admin operations and deferred jobs. A permission check in the interface does not protect the server function.",
+          "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -387,6 +394,10 @@
         {
           "phase": "review",
           "instruction": "Build a subject × action × object matrix covering direct access, lists, exports, search, attachments, admin operations and deferred jobs. A permission check in the interface does not protect the server function."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -409,7 +420,7 @@
         "asvs"
       ],
       "source_path": "skills/cyber-appsec/references/modules/auth.md",
-      "source_sha256": "175e1008e3f48e56f461bdea1f2781d4b898b315190debe05548e9b5c906e639"
+      "source_sha256": "bd425286af0116383838786fc037c405ae11508ab3b189b6bf37f12cf364e7f0"
     },
     {
       "id": "APPSEC-API",
@@ -433,7 +444,8 @@
           "Test access to objects and properties: reads, partial updates, mass assignment, list filters and aggregates. Find paths that omit a restriction applied in the main CRUD handler.",
           "For GraphQL, review cost, depth, aliases, batching, subscriptions and resolver authorization. Introspection alone is not a vulnerability.",
           "Trace user-supplied URLs through DNS, redirects and server requests. Test destination and outbound restrictions in a laboratory with a controlled receiver; do not contact real cloud metadata services by default.",
-          "Check webhook validation against raw bytes, signatures, timestamps, replay, idempotency and the associated business object. For uploads, examine actual file type, names, archive extraction, size, storage and download paths."
+          "Check webhook validation against raw bytes, signatures, timestamps, replay, idempotency and the associated business object. For uploads, examine actual file type, names, archive extraction, size, storage and download paths.",
+          "Use the [targeted verification cases](../parser-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -456,6 +468,10 @@
         {
           "phase": "review",
           "instruction": "Check webhook validation against raw bytes, signatures, timestamps, replay, idempotency and the associated business object. For uploads, examine actual file type, names, archive extraction, size, storage and download paths."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../parser-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -476,10 +492,12 @@
         "api",
         "asvs",
         "wstg",
-        "postgres"
+        "postgres",
+        "ssrf",
+        "http11"
       ],
       "source_path": "skills/cyber-appsec/references/modules/api.md",
-      "source_sha256": "7c4df754cca277e42287440aa1b9b3231de7c017fa35141182608f21e797336b"
+      "source_sha256": "887db6031ac6a958c58951fb90b1ea7969bd31d821af9ed2345d641914895bf1"
     },
     {
       "id": "APPSEC-BROWSER",
@@ -501,7 +519,8 @@
           "Read response headers on actual routes, including errors and cache hits. Assess CSP against dynamically loaded scripts; use report-only mode when a proposed change could break application flows.",
           "Relate CORS to the credential model. Test expected, unexpected and null origins as applicable. A permissive header without sensitive data or credentials is insufficient to establish impact.",
           "Test CSRF on cookie-authenticated mutations, forms and method or content-type changes. Check Origin, tokens and SameSite behavior on the exposed flow.",
-          "Review postMessage, window.opener, iframes, service workers, CDN caches and browser storage. Verify that authenticated responses cannot be reused by another identity."
+          "Review postMessage, window.opener, iframes, service workers, CDN caches and browser storage. Verify that authenticated responses cannot be reused by another identity.",
+          "Use the [targeted verification cases](../parser-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -524,6 +543,10 @@
         {
           "phase": "review",
           "instruction": "Review postMessage, window.opener, iframes, service workers, CDN caches and browser storage. Verify that authenticated responses cannot be reused by another identity."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../parser-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -543,10 +566,11 @@
       "references": [
         "wstg",
         "asvs",
-        "cheatsheets"
+        "cheatsheets",
+        "http11"
       ],
       "source_path": "skills/cyber-appsec/references/modules/browser.md",
-      "source_sha256": "50d9b7d7446a2a923a0c57c55437a5e65a8f1acb648a0129f73a8749d74ee98b"
+      "source_sha256": "a1f44d58dabdcc468ad25e03f5cc2967e0b07d4705dc63df47bb5bb8e2a0fb6b"
     },
     {
       "id": "APPSEC-BUSINESS-LOGIC",
@@ -570,7 +594,8 @@
           "Check idempotency and binding between the key, subject, operation and parameters. The cache must distinguish repeated identical requests from different requests.",
           "Use synthetic data and a controlled order of concurrent requests to expose the window between checking and writing. Check transactions, uniqueness constraints, isolation and recovery after conflicts.",
           "For money or quantities, trace rounding, currency, quantity, sign, decimals, limits and price sources. Compare invariants before and after the operation, including compensation, without real billing.",
-          "Review distributed quotas, reservations, expiry and job recovery. A retry after a timeout may repeat an operation already completed by a third party."
+          "Review distributed quotas, reservations, expiry and job recovery. A retry after a timeout may repeat an operation already completed by a third party.",
+          "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -593,6 +618,10 @@
         {
           "phase": "review",
           "instruction": "Review distributed quotas, reservations, expiry and job recovery. A retry after a timeout may repeat an operation already completed by a third party."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -615,7 +644,7 @@
         "tob"
       ],
       "source_path": "skills/cyber-appsec/references/modules/business-logic.md",
-      "source_sha256": "96a3ddfc96ebf6678605d442f55ef9ad961594cceee2e2bb877fc3879f20143c"
+      "source_sha256": "fa0a8fd2dd0fab9af49db51225df1b20c3404db94b69589ca854ef1dac626868"
     },
     {
       "id": "APPSEC-REALTIME",
@@ -637,7 +666,8 @@
           "Test expiry, logout, role removal, closure and reconnection. Reassess channels opened before revocation according to the declared policy.",
           "Check WebSocket Origin and transport-appropriate CSRF protection. CORS alone does not control the WebSocket handshake. For SSE, review cookies, caching and Last-Event-ID recovery.",
           "Test ordering, duplication, replay, recovery, dead-letter handling and partial state with synthetic messages. Broker guarantees do not create a transaction with the business database.",
-          "Review limits per message, queue, connection and identity, plus backpressure and cancellation. Verify that limits stop the actual processing. Hiding client-side output does not enforce a processing limit."
+          "Review limits per message, queue, connection and identity, plus backpressure and cancellation. Verify that limits stop the actual processing. Hiding client-side output does not enforce a processing limit.",
+          "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -660,6 +690,10 @@
         {
           "phase": "review",
           "instruction": "Review limits per message, queue, connection and identity, plus backpressure and cancellation. Verify that limits stop the actual processing. Hiding client-side output does not enforce a processing limit."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -681,7 +715,7 @@
         "asvs"
       ],
       "source_path": "skills/cyber-appsec/references/modules/realtime.md",
-      "source_sha256": "b57e6aadb4ea5140c995c653b828379d1f1609952792ff50c15f8c9325fc1e81"
+      "source_sha256": "c595cf2d9bcdaab85a0ed382e3638e66ddfe5a96037a3fd6f9ff81864ba8077a"
     },
     {
       "id": "APPSEC-CLOUD",
@@ -749,7 +783,7 @@
         "slsa"
       ],
       "source_path": "skills/cyber-appsec/references/modules/cloud.md",
-      "source_sha256": "475937299668089f40bed3b51817a9748493932b45e367176c9991c13c683d74"
+      "source_sha256": "12089158b6564a59971d4737454e21b561182dca8ffb4d6846ec329a9fea1df7"
     },
     {
       "id": "APPSEC-KUBERNETES",
@@ -837,7 +871,8 @@
           "Look for secrets passed through ARG/ENV, build files, caches or layer history. Deleting a secret in a later layer leaves it in the original layer.",
           "Check the base image digest, updates, signature and SBOM for the delivered image. Review the signature verifier trust policy: expected identity, issuer and provenance.",
           "Relate capabilities, seccomp, UID, mounts, Docker socket access and resource limits to the actual risk. A non-root container with a privileged socket may retain extensive access.",
-          "Test shutdown, signals, temporary files and missing configuration in an isolated runtime. Keep the host socket and real credentials outside the laboratory."
+          "Test shutdown, signals, temporary files and missing configuration in an isolated runtime. Keep the host socket and real credentials outside the laboratory.",
+          "Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -860,6 +895,10 @@
         {
           "phase": "review",
           "instruction": "Test shutdown, signals, temporary files and missing configuration in an isolated runtime. Keep the host socket and real credentials outside the laboratory."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -882,7 +921,7 @@
         "k8s"
       ],
       "source_path": "skills/cyber-appsec/references/modules/containers.md",
-      "source_sha256": "e47ba61f57314fdd140073cac846bcaedf3390161723eaac5ed7031d8c51b4a1"
+      "source_sha256": "ac1e12634c93dd71f843a8c8f39ea76be3283ac296d575444f5ca3fdba7d1049"
     },
     {
       "id": "APPSEC-IAC",
@@ -971,7 +1010,8 @@
           "Review pull_request_target, workflow_run and bot commands against the commit actually checked out. Job chaining must not give an untrusted branch secrets or a write token.",
           "Check least-privilege permissions, protected environments, OIDC, persistent runners, caches and artifacts. Verify provenance rather than relying on the presence of an attestation.",
           "For AI agents, trace untrusted input, available capabilities, secrets, outbound access and the final action. Verify that review or approval covers the exact bytes and target executed.",
-          "Verify that CI builds the deployed artifact and runs type checks and relevant tests with a nonzero case count. Passing tsc does not prove the build succeeds; a build does not prove type checks pass."
+          "Verify that CI builds the deployed artifact and runs type checks and relevant tests with a nonzero case count. Passing tsc does not prove the build succeeds; a build does not prove type checks pass.",
+          "Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -994,6 +1034,10 @@
         {
           "phase": "review",
           "instruction": "Verify that CI builds the deployed artifact and runs type checks and relevant tests with a nonzero case count. Passing tsc does not prove the build succeeds; a build does not prove type checks pass."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1013,10 +1057,11 @@
       "references": [
         "github-actions",
         "slsa",
-        "tob"
+        "tob",
+        "ssdf"
       ],
       "source_path": "skills/cyber-appsec/references/modules/cicd.md",
-      "source_sha256": "4f4394a689862703df0154b51cd10a50325670173c5b3817309c43d893bfe36d"
+      "source_sha256": "d34b9420711b11830a82606fde7470faf40ddfccfe47cf4804b1618e8e8d7542"
     },
     {
       "id": "APPSEC-AI",
@@ -1038,7 +1083,8 @@
           "Write scenarios with synthetic markers and simulated tools: changed destinations, unrequested actions, access to a forbidden document, replay and persistence in memory. Measure the effect; a refusal message alone is insufficient.",
           "Examine controls enforced outside the model: tool and object authorization, parameter schemas, outbound access, sandboxing, output validation and approval bound to the specific action.",
           "Measure legitimate task completion, prohibited actions and disclosure separately. Repeat stochastic cases and record model, parameters, budget and dataset version. An agent that fails every task has not demonstrated useful protection.",
-          "Check loops, delegation, costs, cancellation and retries. Review secondary agents and composed tools; a limit on the first agent cannot protect a tool that bypasses it."
+          "Check loops, delegation, costs, cancellation and retries. Review secondary agents and composed tools; a limit on the first agent cannot protect a tool that bypasses it.",
+          "Use the [targeted verification cases](../agent-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -1061,6 +1107,10 @@
         {
           "phase": "review",
           "instruction": "Check loops, delegation, costs, cancellation and retries. Review secondary agents and composed tools; a limit on the first agent cannot protect a tool that bypasses it."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../agent-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1083,10 +1133,12 @@
         "agentdojo",
         "firewalls",
         "pyrit",
-        "garak"
+        "garak",
+        "ssdf-ai",
+        "acs"
       ],
       "source_path": "skills/cyber-appsec/references/modules/ai.md",
-      "source_sha256": "36c14e965e394898d32780f7d88d9a9bab8c1f888ea4945c70377f08618fecc0"
+      "source_sha256": "8c18994084adb3af588e3ae32ef251546cd9d775cae9aa0b697e75c189519856"
     },
     {
       "id": "APPSEC-MCP",
@@ -1109,7 +1161,8 @@
           "Treat tool descriptions, annotations, resources and responses as untrusted data. Use a modified description and a synthetic marker to verify that permissions remain enforced outside the model.",
           "Check request and object authorization, session binding, transport-specific origin handling, reconnection and invalidation. A session identifier is not an authentication credential.",
           "For skills, read SKILL.md, references, scripts, installers, hooks and dependencies together. Check paths outside the intended directory, shell substitutions, downloads and secret access before execution.",
-          "Review tool changes between approval and invocation, lookalike names, hidden parameters and redirects. Bind existing approval to the actual target, content and version executed."
+          "Review tool changes between approval and invocation, lookalike names, hidden parameters and redirects. Bind existing approval to the actual target, content and version executed.",
+          "Use the [targeted verification cases](../agent-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -1132,6 +1185,10 @@
         {
           "phase": "review",
           "instruction": "Review tool changes between approval and invocation, lookalike names, hidden parameters and redirects. Bind existing approval to the actual target, content and version executed."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../agent-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1152,10 +1209,11 @@
         "mcp",
         "oauth",
         "runtime-skills",
-        "agentsecbench"
+        "agentsecbench",
+        "ssrf"
       ],
       "source_path": "skills/cyber-appsec/references/modules/mcp.md",
-      "source_sha256": "32abe2f7d272ea81da1f38efc6030a793f64a9d4603c9447fe026b6b56cc9c72"
+      "source_sha256": "c9a3a06360c653116af27b75e5b84eb8532afd2e07a29f29fb4698acdd6a63f1"
     },
     {
       "id": "APPSEC-RAG",
@@ -1178,7 +1236,8 @@
           "Create two corpora with distinct markers. Verify that a query finds an authorized document, then repeat the query with a forbidden identity. An empty search without a positive control does not test the ACL.",
           "Review caches, conversation history, shared memory, exports and citations for leaks between users. Check that cache keys include all required authorization context.",
           "Test updates, access revocation and deletion through indexes and caches. Verify both source document removal and removal of derived copies.",
-          "For poisoning tests, use laboratory documents with instructions unrelated to the task. Observe selection, provenance and influence on tools without inserting the test corpus into a live index."
+          "For poisoning tests, use laboratory documents with instructions unrelated to the task. Observe selection, provenance and influence on tools without inserting the test corpus into a live index.",
+          "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -1201,6 +1260,10 @@
         {
           "phase": "review",
           "instruction": "For poisoning tests, use laboratory documents with instructions unrelated to the task. Observe selection, provenance and influence on tools without inserting the test corpus into a live index."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1224,7 +1287,7 @@
         "postgres"
       ],
       "source_path": "skills/cyber-appsec/references/modules/rag.md",
-      "source_sha256": "51772ef9494332340c03106ea2e40ebe8987284290d06972b8fcad2fcf6e1a4d"
+      "source_sha256": "9ba417c61fefae945ebd7407b7048f95d8f8a532f59418a94cb8efaf41b71a7d"
     },
     {
       "id": "APPSEC-MOBILE",
@@ -1291,7 +1354,7 @@
         "api"
       ],
       "source_path": "skills/cyber-appsec/references/modules/mobile.md",
-      "source_sha256": "08dcce26374ed10df99d503aa2587da54b4ea1d5457b6b7c6eaec8297662e98e"
+      "source_sha256": "30dd2af5a57565e0b286f262740dd4b3735dde3916d83c6bcf30e3c509248caf"
     },
     {
       "id": "APPSEC-DESKTOP",
@@ -1516,7 +1579,8 @@
           "Check AEAD use, nonce uniqueness, domain separation, RNGs, KDFs, signature verification and context binding. Test malformed formats and validation errors against known vectors.",
           "For code that depends on secrets, examine compiler output, branches, memory access and erasure. A branch-free source loop does not prove constant-time behavior on the target platform.",
           "Inventory asymmetric cryptography and data lifetimes for PQC preparation. Check the published standard, maintained implementation, protocol support and measured interoperability separately.",
-          "Evaluate migration or hybrid operation in a laboratory with size, latency, certificate and rollback budgets. Check errata for the selected primitives; avoid improvised cryptographic substitutions."
+          "Evaluate migration or hybrid operation in a laboratory with size, latency, certificate and rollback budgets. Check errata for the selected primitives; avoid improvised cryptographic substitutions.",
+          "Use the [targeted verification cases](../crypto-agility.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -1539,6 +1603,10 @@
         {
           "phase": "review",
           "instruction": "Evaluate migration or hybrid operation in a laboratory with size, latency, certificate and rollback budgets. Check errata for the selected primitives; avoid improvised cryptographic substitutions."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../crypto-agility.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1558,10 +1626,12 @@
       "references": [
         "pqc",
         "wycheproof",
-        "tob"
+        "tob",
+        "ml-dsa",
+        "slh-dsa"
       ],
       "source_path": "skills/cyber-appsec/references/modules/crypto.md",
-      "source_sha256": "fc6f865be45f2d8253da45a4b68995a941356d41a6a5bc4e46f80d3bc14359de"
+      "source_sha256": "11bce2addaa8c51865e8c2a419b41c7b9285e57942b32bbff651190309fa16d8"
     },
     {
       "id": "PENTEST-NETWORK",
@@ -1852,7 +1922,8 @@
           "Trace maintenance access, engineering workstations, backups, vendor accounts and IT/OT transfers. Review zones, permitted flows and ways to observe their use.",
           "Review controller/HMI exports and communication settings: remote writes, passwords, critical commands, readback, versioning and restoration. Do not load a change into equipment merely to verify it.",
           "Use existing captures and simulators for industrial protocols. Assess authenticity, replay, limits and command consistency on a bench disconnected from the process.",
-          "Prepare physical intervention only with an operating window, operator, restorable backup, monitoring and suitable stop procedure. A tool labeled passive may still send traffic to the controller."
+          "Prepare physical intervention only with an operating window, operator, restorable backup, monitoring and suitable stop procedure. A tool labeled passive may still send traffic to the controller.",
+          "Use the [targeted verification cases](../recovery-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -1875,6 +1946,10 @@
         {
           "phase": "review",
           "instruction": "Prepare physical intervention only with an operating window, operator, restorable backup, monitoring and suitable stop procedure. A tool labeled passive may still send traffic to the controller."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../recovery-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1897,7 +1972,7 @@
         "ir"
       ],
       "source_path": "skills/cyber-ot/references/modules/ot.md",
-      "source_sha256": "b5ef2e609bd709165ff299ad170161a7b72f6f62a5bcb0ea572f0b57ffaa8fc9"
+      "source_sha256": "14d284f485e93521d6e664c778324da19be8ad5aa624e8728d7823ad5ea0c309"
     },
     {
       "id": "OT-FIRMWARE",
@@ -1919,7 +1994,8 @@
           "Inventory components, services, potential secrets and default configuration. Match discovered versions to the exact firmware and vendor backports.",
           "Review the boot chain, update signatures, signer identity and rollback protection. A signature included in an archive does not prove the device checks it.",
           "Review debug interfaces, provisioning, device identity, key storage and reset behavior. Distinguish physical-access attacks from exposed network inputs.",
-          "On an authorized emulator or laboratory device, test update formats, simulated power loss and restoration. Document limitations that prevent reproducing physical behavior."
+          "On an authorized emulator or laboratory device, test update formats, simulated power loss and restoration. Document limitations that prevent reproducing physical behavior.",
+          "Use the [targeted verification cases](../recovery-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -1942,6 +2018,10 @@
         {
           "phase": "review",
           "instruction": "On an authorized emulator or laboratory device, test update formats, simulated power loss and restoration. Document limitations that prevent reproducing physical behavior."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../recovery-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -1964,7 +2044,7 @@
         "slsa"
       ],
       "source_path": "skills/cyber-ot/references/modules/firmware.md",
-      "source_sha256": "c4f14cc89a631e48cb02f22bcaec58b0781f949b30b1642fb9557f1fe077f39a"
+      "source_sha256": "1ad9370c5e71aaa59a77762237bca3c92527a1db34cdd6f30c9630699a13dd51"
     },
     {
       "id": "APPSEC-SMART-CONTRACTS",
@@ -2031,7 +2111,7 @@
         "slsa"
       ],
       "source_path": "skills/cyber-appsec/references/modules/smart-contracts.md",
-      "source_sha256": "f8bf439ac3e065a83d8cd91140d7e81c6a6f46645fc2e662db4b8f80f184b6d1"
+      "source_sha256": "1d3518d50dfd6cbd66e8221534c59ef80f9cb25f574c9d6a90130d57371e9885"
     },
     {
       "id": "DETECTION-DETECTION",
@@ -2053,7 +2133,8 @@
           "Review collection, timestamps, identity, enrichment, normalization and retention. Fields in source logs may disappear before correlation.",
           "Write rules against stable fields and relevant variants. Add positive and benign events, then test backend conversion and actual query syntax.",
           "Measure matches, false positives and volume in an identified corpus. For YARA, assess string cost and engine limits; for network rules, assess direction, protocol and flow state.",
-          "Test event → rule → alert → notification using authorized synthetic data. A matching query does not prove the operator received an alert."
+          "Test event → rule → alert → notification using authorized synthetic data. A matching query does not prove the operator received an alert.",
+          "Use the [targeted verification cases](../telemetry-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -2076,6 +2157,10 @@
         {
           "phase": "review",
           "instruction": "Test event → rule → alert → notification using authorized synthetic data. A matching query does not prove the operator received an alert."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../telemetry-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -2096,10 +2181,11 @@
         "sigma",
         "suricata",
         "attack",
-        "atlas"
+        "atlas",
+        "sigma-spec"
       ],
       "source_path": "skills/cyber-detection/references/modules/detection.md",
-      "source_sha256": "52cc2d093acdb9f620403b51886ed7cf64185543be95f4727af1068106342cb9"
+      "source_sha256": "8eb19904ae4632f8951440b92850eaec992e895fda8fb3fd05b3f50b0bda0846"
     },
     {
       "id": "DFIR-INCIDENT",
@@ -2187,7 +2273,8 @@
           "Look for excessive fields, identifiers in URLs, request logging and overly broad responses. Check redaction before transfer or storage, including paths outside the interface.",
           "Review access to primary and derived data: search, attachments, reports, caches, backups and support access.",
           "Test retention and deletion with a synthetic identifier traced through every known copy. Document delays, backup exceptions and deferred effects.",
-          "Assess exports to third-party services and models: content, configured region, retention and available controls. Record technical verification separately from any legal assessment."
+          "Assess exports to third-party services and models: content, configured region, retention and available controls. Record technical verification separately from any legal assessment.",
+          "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         ]
       },
       "workflow": [
@@ -2210,6 +2297,10 @@
         {
           "phase": "review",
           "instruction": "Assess exports to third-party services and models: content, configured region, retention and available controls. Record technical verification separately from any legal assessment."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits."
         }
       ],
       "verification": {
@@ -2232,7 +2323,7 @@
         "postgres"
       ],
       "source_path": "skills/cyber-appsec/references/modules/privacy.md",
-      "source_sha256": "32c479e43efdf9015b2e07feb5ce04ec7279685c2ccb94c6541c3779ef892029"
+      "source_sha256": "c52d7794c4e64fc0bebfbb06b0bb23b444e28f33ae0707321f94cb97660bf3b9"
     },
     {
       "id": "CORE-TRIAGE",
@@ -2388,7 +2479,8 @@
           "Verify affected ranges, fixes, vulnerability aliases and preconditions. Match the component and version before applying a product CVE.",
           "For tools, review licence, maintenance, mechanism, limitations and installation. Pin reused code and inspect dependencies before running it.",
           "Distinguish peer-reviewed research, preprints, documentation and commercial claims. Examine tasks, metrics, baselines, controls, costs and available reproduction code.",
-          "Turn relevant results into project-specific checks. Preserve contradictions and missing data; benchmark performance does not establish local protection."
+          "Turn relevant results into project-specific checks. Preserve contradictions and missing data; benchmark performance does not establish local protection.",
+          "Use framework mappings as leads for requirement review. The [OWASP GenAI crosswalk](https://genai.owasp.org/resource/genai-security-industry-framework-crosswalk/) connects several frameworks; a mapped entry still needs the applicable edition, requirement wording and local evidence before a coverage claim."
         ]
       },
       "workflow": [
@@ -2411,6 +2503,10 @@
         {
           "phase": "review",
           "instruction": "Turn relevant results into project-specific checks. Preserve contradictions and missing data; benchmark performance does not establish local protection."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use framework mappings as leads for requirement review. The [OWASP GenAI crosswalk](https://genai.owasp.org/resource/genai-security-industry-framework-crosswalk/) connects several frameworks; a mapped entry still needs the applicable edition, requirement wording and local evidence before a coverage claim."
         }
       ],
       "verification": {
@@ -2432,10 +2528,11 @@
         "epss",
         "tob",
         "agentdojo",
-        "firewalls"
+        "firewalls",
+        "genai-crosswalk"
       ],
       "source_path": "skills/cyber-core/references/modules/research.md",
-      "source_sha256": "c0e21a461b6ab2d837ef0af849f26342cecc3817fb77f9cd5794cd66fb5ae3eb"
+      "source_sha256": "a945916ca3c1faf18208a786cf875c13fb1cde49e2c23a87ae9638a5e295609e"
     },
     {
       "id": "CORE-ATTACK-MAPPING",

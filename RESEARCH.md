@@ -9,7 +9,7 @@ The library contains original procedures, selected third-party documentation and
 - OWASP published the GenAI LLM Top 10 2026 in August 2026. The AI methods also examine agent permissions, MCP trust boundaries, tools, memory and controls enforced outside the model. [OWASP GenAI](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/).
 - FIPS 203 is the reference for ML-KEM preparation. The cryptography method checks the primitive, library, protocol and tested integration separately. [NIST](https://csrc.nist.gov/pubs/fips/203/final).
 
-Pages under `latest` can change. The Solidity page reviewed here showed a development version, so the method requires documentation matching the target compiler. SLSA 1.1 is a versioned reference; it is not claimed to be the latest edition.
+Pages under `latest` can change. The Solidity page reviewed here showed a development version, so the method requires documentation matching the target compiler. The final review updated SLSA references to approved version 1.2 and its source and build tracks. [SLSA 1.2](https://slsa.dev/spec/v1.2/).
 
 ## Research and agent evaluation
 
@@ -35,3 +35,11 @@ The registry uses the official `splunk/security_content` repository in place of 
 ## What was verified
 
 All 50 initial links were accessible during the HTTP check. That records availability at the time of the check; scientific quality requires reading the relevant source. Library tests cover method selection, data formats, control records, local queries and bundled rules. No live service pentest or physical controller test was performed.
+
+## Final review
+
+The [literature review](LITERATURE_REVIEW.md) records the material inspected and its effect on the methods. The registry now includes 59 references. All 59 were accessible across the final 57-source check and two-source supplement.
+
+Added references cover SSDF, HTTP/1.1, SSRF, ML-DSA, SLH-DSA, Sigma, ACS and the OWASP GenAI crosswalk. SSDF 1.2 remains marked as a draft. The new guides use these sources for bounded test designs; research scores and framework mappings are not imported as claims about Sentinel.
+
+Original analysis also identified defects in the importer and report pipeline. The [synthetic example](examples/review-lab-report.md) demonstrates authorization and state failures through real local calls. Its observed results are separate from the cited research experiments.

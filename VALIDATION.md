@@ -4,7 +4,7 @@
 
 | Check | Observed result |
 |---|---|
-| Tool, import, control and local query tests | 40 tests run, 40 passed |
+| Tool, import, assessment, package and local query tests | 66 tests run, 66 passed |
 | Bundled Semgrep rules | 6 rules; 7 positive cases detected; 6 safe cases without alerts; 2 files scanned |
 | Codex entry point validation | 9 skills accepted by `quick_validate.py` |
 | Control schema | 58 records validated against JSON Schema draft 2020-12 |
@@ -15,6 +15,9 @@
 | Upstream repositories | 27 HEAD commits resolved; maintenance metadata and declared licences recorded |
 | Local installation | 9 links created to this repository, without collisions or overwrites |
 | Installed entry point checks | SaaS/MCP/OT plan generated with 16 methods pointing to existing files; MITRE and Modbus queries passed |
+| Final source availability | 59 references reachable across two checks; content-review scope recorded separately |
+| Independent review | One synthetic service; three defects confirmed, one policy question retained; 27 local behavior checks |
+| Package checks | Repeatability on identical inputs, overwrite refusal, altered files, extra members, traversal and duplicate members tested |
 
 Semgrep version: 1.165.0. The main commands use the Python standard library. The one-off schema and skill checks used PyYAML and jsonschema from the installed Semgrep runtime; these packages are not required for inventory or queries.
 
@@ -41,7 +44,11 @@ The 40 tests, nine skill checks, 58 schema checks and 203 local link checks pass
 
 ## Limits
 
-These results cover local tools and specific library behaviors. Specialist methods have not been evaluated across every possible stack or through an independent agent evaluation. Third-party scripts and workflows have not been executed or fully audited.
+The final review corrected finding identity after redaction, Windows path handling and candidate-status promotion. Additional tests cover scanner executable lookup, bounded output, assessment evidence requirements and release archives. The delivered reproduction script snapshots mutable observations before recording them, and its persisted actual/expected values are checked.
+
+The changed local runner completed a Semgrep scan of the two rule fixture files. The six-rule test harness detected seven positive cases and left six safe cases unflagged. GitHub's workflow checks Python 3.10 and 3.13, runs the standard-library suite and builds the release archive; it does not install or run Semgrep.
+
+These results cover local tools and specific library behaviors. The [independent review](examples/review-lab-report.md) covers one synthetic service and has no population-level detection metric. Specialist methods have not been evaluated across every possible stack. Third-party scripts and workflows have not been executed or fully audited.
 
 No active test was run against a client endpoint, cloud account, authenticated application, live SIEM or industrial device. Additional scanners require installation, configuration and effect checks for the project concerned. Deployment behavior still requires evidence from the running system.
 

@@ -12,6 +12,8 @@
 
 5. Verify that CI builds the deployed artifact and runs type checks and relevant tests with a nonzero case count. Passing tsc does not prove the build succeeds; a build does not prove type checks pass.
 
+6. Use the [targeted verification cases](../supply-chain-verification.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide the event → data → privileged step path and identify the code executed. Use synthetic receivers in place of external actions for local demonstrations.
@@ -27,7 +29,7 @@ Read the [Trail of Bits method](../../../cyber-audit/references/upstream/trailof
 ## References
 
 - [GitHub Actions security](https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions): Software delivery.
-- [SLSA](https://slsa.dev/spec/v1.1/): 1.1; versioned reference, not a claim of the latest release.
+- [SLSA](https://slsa.dev/spec/v1.2/): 1.2; approved specification, source and build tracks.
 - [Trail of Bits skills](https://github.com/trailofbits/skills): Snapshot recorded in upstream-lock.json.
 
 For recent requirements or vulnerabilities, use the [research method](../../../cyber-audit/references/research-policy.md).

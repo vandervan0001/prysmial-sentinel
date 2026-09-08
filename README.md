@@ -6,6 +6,8 @@ Created by [vandervan](https://github.com/vandervan0001), as part of [Prysmial](
 
 The library contains nine skills: one audit coordinator and eight domains. They provide 36 specialist methods and 58 searchable controls. Local tools handle project inventory, audit planning, a limited Semgrep scan and scanner report imports. The methods guide the rest of the review.
 
+Seven targeted guides provide test cases for authorization across jobs and caches, parser boundaries, agent permissions, release provenance, cryptographic migration, telemetry and OT recovery. A [reproducible review example](examples/review-lab-report.md) shows three defects that the bundled scanner patterns do not detect.
+
 ## Install and start
 
 Use Python 3.10 or later. Clone the repository with an account that has access, then preview the installation and apply it:
@@ -60,14 +62,16 @@ The OT domain includes Modbus, S7, PROFINET, EtherNet/IP/CIP and OPC UA, plus Si
 - Semgrep, SARIF 2.1.0, Gitleaks and Trivy imports, with sanitized JSON and Markdown reports.
 - Offline searches across MITRE ATT&CK Enterprise, ICS and Mobile, and controls filtered by domain or protocol.
 - Checks for catalogue consistency, local links, skill metadata and imported file integrity.
+- Assessment validation that requires supporting evidence for reviewed finding and coverage statuses.
+- Versioned release archives with complete file manifests and verification without extraction.
 
 See the [commands and limits](skills/cyber-audit/references/tooling.md). Semgrep must already be installed to run a scan. Other tools mentioned in the methods need to be selected, installed and checked for the project. Imported findings remain candidates until their cause and impact are verified.
 
 ## Sources and validation
 
-The research baseline is 8 September 2026. It records [50 primary references](skills/cyber-audit/references/sources.json) and [27 upstream repositories](skills/cyber-audit/references/repositories.json). The package includes a derived MITRE index and eight selected Trail of Bits documentation sets, with source commits, licences and hashes.
+The research baseline is 8 September 2026. It records [59 primary references](skills/cyber-audit/references/sources.json) and [27 upstream repositories](skills/cyber-audit/references/repositories.json). The package includes a derived MITRE index and eight selected Trail of Bits documentation sets, with source commits, licences and hashes.
 
-Read the [research notes](RESEARCH.md), [third-party notices](THIRD_PARTY_NOTICES.md) and [validation record](VALIDATION.md). Local validation passed 40 tests and the Semgrep rule checks. Specialist methods have not been evaluated across every supported stack or against live client systems. Sources are updated manually.
+Read the [literature review](LITERATURE_REVIEW.md), [research notes](RESEARCH.md), [third-party notices](THIRD_PARTY_NOTICES.md) and [validation record](VALIDATION.md). Local validation passed 66 tests and the Semgrep rule checks. An independent agent review exercised one synthetic service with 27 local checks. These results do not establish coverage across every stack or live client system. Sources are updated manually.
 
 ## Creator and Prysmial
 
@@ -89,3 +93,5 @@ python3 scripts/validate_library.py
 ```
 
 Keep raw audit evidence in a private output directory. Record untested areas in each report, including checks that require a deployed service, authenticated session or physical device.
+
+See [contribution guidance](CONTRIBUTING.md) for method and release changes, and [SECURITY.md](SECURITY.md) for vulnerability reports and tool boundaries.

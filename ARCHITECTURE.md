@@ -51,11 +51,14 @@ skills/
   cyber-ot/          architecture, protocols, firmware and vendors
 scripts/            compilation, validation, installation and source checks
 tests/              tool tests, queries and Semgrep fixtures
+examples/           synthetic review, reproduction and assessment records
 ```
 
 Edit methods in `references/modules/*.md` or the domain reference files. Additional specialist controls live in `domain-controls.json`. `compile_controls.py` builds 58 records containing applicability, procedure, evidence requirements, references and execution conditions. They can be queried offline.
 
 The MITRE snapshot is a derived index, identified by its source commit and input bundle hashes. Trail of Bits file contents are unchanged. Their entry files are named `SOURCE.md` so that Codex treats them as references rather than additional skills. The provenance lock records the path mapping.
+
+Targeted guides live beside the domain references and are loaded through the relevant methods. They add test matrices without adding discoverable skill entry points. Scanner candidates and [reviewed assessments](skills/cyber-audit/references/assessment-format.md) have separate contracts; structural validity does not establish security.
 
 ## Handoff and results
 

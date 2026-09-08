@@ -12,6 +12,8 @@
 
 5. Review distributed quotas, reservations, expiry and job recovery. A retry after a timeout may repeat an operation already completed by a third party.
 
+6. Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Demonstrate the broken invariant with initial state, operation order and final state. Include the same scenario run sequentially as a control. A burst of requests alone does not prove a race condition.

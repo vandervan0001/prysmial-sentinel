@@ -12,6 +12,8 @@
 
 5. Turn relevant results into project-specific checks. Preserve contradictions and missing data; benchmark performance does not establish local protection.
 
+6. Use framework mappings as leads for requirement review. The [OWASP GenAI crosswalk](https://genai.owasp.org/resource/genai-security-industry-framework-crosswalk/) connects several frameworks; a mapped entry still needs the applicable edition, requirement wording and local evidence before a coverage claim.
+
 ## Required evidence
 
 Write a short note with primary links, dates, versions, the supported claim and its effect on the audit. Mark blocked or missing sources as unverified.

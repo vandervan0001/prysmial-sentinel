@@ -25,6 +25,6 @@ Prowler, ScoutSuite and IAM simulators depend on provider and version. Collector
 - [AWS IAM best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html): IAM.
 - [Microsoft identity management](https://learn.microsoft.com/en-us/azure/security/fundamentals/identity-management-best-practices): Azure and Entra.
 - [Google service account keys](https://docs.cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys): IAM.
-- [SLSA](https://slsa.dev/spec/v1.1/): 1.1; versioned reference, not a claim of the latest release.
+- [SLSA](https://slsa.dev/spec/v1.2/): 1.2; approved specification, source and build tracks.
 
 For recent requirements or vulnerabilities, use the [research method](../../../cyber-audit/references/research-policy.md).

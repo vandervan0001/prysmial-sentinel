@@ -59,17 +59,17 @@
     {
       "id": "mcp",
       "title": "MCP security best practices",
-      "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/docs/2026-07-28/tutorials/security/security_best_practices.mdx",
+      "url": "https://modelcontextprotocol.io/docs/2026-07-28/tutorials/security/security_best_practices",
       "kind": "living",
-      "version_note": "Evolving documentation; match the negotiated protocol version",
+      "version_note": "2026-07-28 documentation; match the deployed protocol and transport",
       "baseline_date": "2026-09-08"
     },
     {
       "id": "slsa",
       "title": "SLSA",
-      "url": "https://slsa.dev/spec/v1.1/",
+      "url": "https://slsa.dev/spec/v1.2/",
       "kind": "standard",
-      "version_note": "1.1; versioned reference, not a claim of the latest release",
+      "version_note": "1.2, approved; source and build tracks",
       "baseline_date": "2026-09-08"
     },
     {
@@ -162,7 +162,7 @@
     },
     {
       "id": "mas",
-      "title": "OWASP MASVS et MASTG",
+      "title": "OWASP MASVS and MASTG",
       "url": "https://mas.owasp.org/",
       "kind": "living",
       "version_note": "Select versioned requirements and tests",
@@ -269,7 +269,7 @@
       "title": "Indirect Prompt Injections: Are Firewalls All You Need, or Stronger Benchmarks?",
       "url": "https://arxiv.org/abs/2510.05244",
       "kind": "research",
-      "version_note": "2025; evaluation metric critique",
+      "version_note": "v2, 23 March 2026; benchmark and metric limitations",
       "baseline_date": "2026-09-08"
     },
     {
@@ -398,6 +398,78 @@
       "url": "https://github.com/ossf/scorecard",
       "kind": "repository",
       "version_note": "Maintenance indicators; not proof of security",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ssdf",
+      "title": "NIST Secure Software Development Framework",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/final",
+      "kind": "standard",
+      "version_note": "SP 800-218, SSDF 1.1 final; 1.2 remains draft at review",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ssdf-ai",
+      "title": "NIST GenAI SSDF profile",
+      "url": "https://csrc.nist.gov/pubs/sp/800/218/a/final",
+      "kind": "standard",
+      "version_note": "SP 800-218A, final July 2024",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ssrf",
+      "title": "OWASP SSRF Prevention Cheat Sheet",
+      "url": "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html",
+      "kind": "living",
+      "version_note": "Application and network destination controls",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "http11",
+      "title": "HTTP/1.1",
+      "url": "https://www.rfc-editor.org/rfc/rfc9112.html",
+      "kind": "standard",
+      "version_note": "RFC 9112; message framing and request smuggling",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ml-dsa",
+      "title": "NIST ML-DSA",
+      "url": "https://csrc.nist.gov/pubs/fips/204/final",
+      "kind": "standard",
+      "version_note": "FIPS 204; check errata",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "slh-dsa",
+      "title": "NIST SLH-DSA",
+      "url": "https://csrc.nist.gov/pubs/fips/205/final",
+      "kind": "standard",
+      "version_note": "FIPS 205",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "sigma-spec",
+      "title": "Sigma specification",
+      "url": "https://sigmahq.io/sigma-specification/",
+      "kind": "living",
+      "version_note": "Match rule, correlation and converter versions",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "acs",
+      "title": "OWASP Agent Control Standard",
+      "url": "https://genai.owasp.org/resource/agent-control-standard-acs/",
+      "kind": "living",
+      "version_note": "OWASP resource dated 1 September 2026; evolving runtime middleware specification",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "genai-crosswalk",
+      "title": "OWASP GenAI Security Industry Framework Crosswalk",
+      "url": "https://genai.owasp.org/resource/genai-security-industry-framework-crosswalk/",
+      "kind": "living",
+      "version_note": "OWASP resource dated 1 September 2026; mappings need requirement-level verification",
       "baseline_date": "2026-09-08"
     }
   ]

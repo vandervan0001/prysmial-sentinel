@@ -12,6 +12,8 @@
 
 5. Evaluate migration or hybrid operation in a laboratory with size, latency, certificate and rollback budgets. Check errata for the selected primitives; avoid improvised cryptographic substitutions.
 
+6. Use the [targeted verification cases](../crypto-agility.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide the key and primitive inventory, expected property, vector or measurement, platform and limitations. No statistical signal in a sample does not prove the absence of a side channel.

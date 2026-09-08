@@ -12,6 +12,8 @@
 
 5. Build a subject × action × object matrix covering direct access, lists, exports, search, attachments, admin operations and deferred jobs. A permission check in the interface does not protect the server function.
 
+6. Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Run an authorized operation, then repeat the path with a forbidden account or object. Record role, object, session state and persistent effect, with secrets masked.

@@ -12,6 +12,8 @@
 
 5. For poisoning tests, use laboratory documents with instructions unrelated to the task. Observe selection, provenance and influence on tools without inserting the test corpus into a live index.
 
+6. Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Keep synthetic IDs, expected ACLs, intermediate results and the context sent to the model. A response can omit the marker even if the model received a forbidden document; inspect access before generation.

@@ -12,6 +12,8 @@
 
 5. Review limits per message, queue, connection and identity, plus backpressure and cancellation. Verify that limits stop the actual processing. Hiding client-side output does not enforce a processing limit.
 
+6. Use the [targeted verification cases](../authorization-lifecycle.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Show two subscribers with distinct identities and channels, then a known event received only by the authorized subject. For a leak, retain the observed routing with synthetic content.

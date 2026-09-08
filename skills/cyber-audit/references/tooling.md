@@ -14,11 +14,14 @@ python3 skills/cyber-audit/scripts/audit.py scan-local /path/project --execute -
 python3 skills/cyber-audit/scripts/audit.py normalize /path/semgrep.json --format semgrep --out /private/path/candidates.json
 python3 skills/cyber-audit/scripts/audit.py normalize /path/codeql.sarif --format sarif --out /private/path/codeql-candidates.json
 python3 skills/cyber-audit/scripts/audit.py report /private/path/candidates.json --out /private/path/candidates.md
+python3 skills/cyber-audit/scripts/assessment.py /private/path/assessment.json
 ```
 
 Output paths must be new. Writes refuse to replace existing evidence. Supported imports are Semgrep JSON, SARIF 2.1.0, Gitleaks JSON and Trivy SchemaVersion 2. Unknown variants fail explicitly. Imports make no enrichment requests.
 
 Generated reports contain identifiers, locations and scanner severities. They omit raw messages, code, matched content and secrets. Review metadata before sharing; filenames and component names can also be confidential. Raw scanner JSON and stderr stay in the private output directory.
+
+The scanner report rejects promoted finding statuses. Use a separate [assessment](assessment-format.md) for reviewed decisions. Finding fingerprints use original metadata before redaction so distinct locations remain separate even when their displayed labels match. These hashes are identity aids, not anonymization guarantees.
 
 ## Bundled scan coverage
 
@@ -29,6 +32,8 @@ Inventory is limited to 20,000 files and 256 KiB per inspected manifest. Scan co
 Exit code 0 from `scan-local --execute` means the process succeeded and Semgrep reported a nonempty scan without errors for the selected scope. Findings may still exist. Exit code 2 means incomplete collection, an error or no targets. Read `run.json`, exclusions and analyzed file counts. The child environment removes inherited credentials and disables metrics and version checks; it does not enforce a system network firewall.
 
 ## Additional tools
+
+The scanner rejects relative executable-search paths and scanner binaries inside the reviewed project. Its version probe runs from the temporary directory. Runtime output is capped at 32 MiB per stream; an exceeded limit is reported as `output-limit`. These controls do not isolate hostile code at the OS level. Use an OS sandbox for unknown scanner installations or a concurrently hostile filesystem.
 
 | Need | Options | Check before running |
 |---|---|---|

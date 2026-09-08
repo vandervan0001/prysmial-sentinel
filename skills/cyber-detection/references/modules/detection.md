@@ -12,6 +12,8 @@
 
 5. Test event → rule → alert → notification using authorized synthetic data. A matching query does not prove the operator received an alert.
 
+6. Use the [targeted verification cases](../telemetry-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide the rule, engine version, sanitized corpus, positive and negative cases, and alert delivery stage actually verified. Record missing fields as gaps in coverage.

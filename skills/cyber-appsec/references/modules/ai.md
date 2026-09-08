@@ -12,6 +12,8 @@
 
 5. Check loops, delegation, costs, cancellation and retries. Review secondary agents and composed tools; a limit on the first agent cannot protect a tool that bypasses it.
 
+6. Use the [targeted verification cases](../agent-boundaries.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide sanitized tool-call traces, preconditions, observed outcomes and benign test cases. Keep product evaluation results separate from published benchmark scores.

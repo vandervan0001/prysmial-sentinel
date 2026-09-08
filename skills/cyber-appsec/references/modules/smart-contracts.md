@@ -28,6 +28,6 @@ Read the [Trail of Bits method](../../../cyber-audit/references/upstream/trailof
 
 - [Solidity security considerations](https://docs.soliditylang.org/en/latest/security-considerations.html): The latest URL may show a development version.
 - [Trail of Bits skills](https://github.com/trailofbits/skills): Snapshot recorded in upstream-lock.json.
-- [SLSA](https://slsa.dev/spec/v1.1/): 1.1; versioned reference, not a claim of the latest release.
+- [SLSA](https://slsa.dev/spec/v1.2/): 1.2; approved specification, source and build tracks.
 
 For recent requirements or vulnerabilities, use the [research method](../../../cyber-audit/references/research-policy.md).

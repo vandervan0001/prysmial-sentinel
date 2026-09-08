@@ -154,7 +154,8 @@
         "kev",
         "epss",
         "slsa",
-        "supply-tools"
+        "supply-tools",
+        "ssdf"
       ],
       "domain": "cyber-appsec",
       "module": "dependencies",
@@ -208,7 +209,9 @@
         "api",
         "asvs",
         "wstg",
-        "postgres"
+        "postgres",
+        "ssrf",
+        "http11"
       ],
       "domain": "cyber-appsec",
       "module": "api",
@@ -224,7 +227,8 @@
       "sources": [
         "wstg",
         "asvs",
-        "cheatsheets"
+        "cheatsheets",
+        "http11"
       ],
       "domain": "cyber-appsec",
       "module": "browser",
@@ -337,7 +341,8 @@
       "sources": [
         "github-actions",
         "slsa",
-        "tob"
+        "tob",
+        "ssdf"
       ],
       "domain": "cyber-appsec",
       "module": "cicd",
@@ -356,7 +361,9 @@
         "agentdojo",
         "firewalls",
         "pyrit",
-        "garak"
+        "garak",
+        "ssdf-ai",
+        "acs"
       ],
       "domain": "cyber-appsec",
       "module": "ai",
@@ -374,7 +381,8 @@
         "mcp",
         "oauth",
         "runtime-skills",
-        "agentsecbench"
+        "agentsecbench",
+        "ssrf"
       ],
       "domain": "cyber-appsec",
       "module": "mcp",
@@ -474,7 +482,9 @@
       "sources": [
         "pqc",
         "wycheproof",
-        "tob"
+        "tob",
+        "ml-dsa",
+        "slh-dsa"
       ],
       "domain": "cyber-appsec",
       "module": "crypto",
@@ -604,7 +614,8 @@
         "sigma",
         "suricata",
         "attack",
-        "atlas"
+        "atlas",
+        "sigma-spec"
       ],
       "domain": "cyber-detection",
       "module": "detection",
@@ -685,7 +696,8 @@
         "epss",
         "tob",
         "agentdojo",
-        "firewalls"
+        "firewalls",
+        "genai-crosswalk"
       ],
       "domain": "cyber-core",
       "module": "research",

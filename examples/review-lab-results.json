@@ -1,0 +1,348 @@
+{
+  "executed_at": "2026-09-08T21:41:13.522160+00:00",
+  "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "target": "tests/fixtures/review_lab",
+  "sha256": {
+    "README.md": "34afb31a64a8e06cdd56df036804d36fda3be9949f99cbdf2773f4d42a77cc93",
+    "service.py": "819550ed509c29e6d627fbbb44ba8732f4718aa51d8d53b8b3f6dfa5a4314e5b"
+  },
+  "case_count": 27,
+  "passed": 27,
+  "failed": 0,
+  "meaning": "Passed means the recorded current behavior was reproduced; findings reproduce unsafe effects.",
+  "results": [
+    {
+      "case": "direct_alpha_own",
+      "kind": "legitimate",
+      "observed": "ALPHA_SYNTHETIC",
+      "expected_current_behavior": "ALPHA_SYNTHETIC",
+      "passed": true
+    },
+    {
+      "case": "direct_beta_own",
+      "kind": "legitimate",
+      "observed": "BETA_SYNTHETIC",
+      "expected_current_behavior": "BETA_SYNTHETIC",
+      "passed": true
+    },
+    {
+      "case": "direct_alpha_foreign_denied",
+      "kind": "denial-control",
+      "observed": "document denied",
+      "expected_current_behavior": "document denied",
+      "passed": true
+    },
+    {
+      "case": "direct_beta_foreign_denied",
+      "kind": "denial-control",
+      "observed": "document denied",
+      "expected_current_behavior": "document denied",
+      "passed": true
+    },
+    {
+      "case": "anonymous_export_denied",
+      "kind": "denial-control",
+      "observed": "login required",
+      "expected_current_behavior": "login required",
+      "passed": true
+    },
+    {
+      "case": "denied_export_no_job",
+      "kind": "denial-control",
+      "observed": [],
+      "expected_current_behavior": [],
+      "passed": true
+    },
+    {
+      "case": "export_alpha_a",
+      "kind": "legitimate",
+      "observed": {
+        "queue_length": 1,
+        "job": {
+          "actor": "alice",
+          "document_id": "a"
+        },
+        "body": "ALPHA_SYNTHETIC"
+      },
+      "expected_current_behavior": {
+        "queue_length": 1,
+        "job": {
+          "actor": "alice",
+          "document_id": "a"
+        },
+        "body": "ALPHA_SYNTHETIC"
+      },
+      "passed": true
+    },
+    {
+      "case": "export_beta_b",
+      "kind": "legitimate",
+      "observed": {
+        "queue_length": 1,
+        "job": {
+          "actor": "bob",
+          "document_id": "b"
+        },
+        "body": "BETA_SYNTHETIC"
+      },
+      "expected_current_behavior": {
+        "queue_length": 1,
+        "job": {
+          "actor": "bob",
+          "document_id": "b"
+        },
+        "body": "BETA_SYNTHETIC"
+      },
+      "passed": true
+    },
+    {
+      "case": "export_alpha_b",
+      "kind": "F1",
+      "observed": {
+        "queue_length": 1,
+        "job": {
+          "actor": "alice",
+          "document_id": "b"
+        },
+        "body": "BETA_SYNTHETIC"
+      },
+      "expected_current_behavior": {
+        "queue_length": 1,
+        "job": {
+          "actor": "alice",
+          "document_id": "b"
+        },
+        "body": "BETA_SYNTHETIC"
+      },
+      "passed": true
+    },
+    {
+      "case": "export_beta_a",
+      "kind": "F1",
+      "observed": {
+        "queue_length": 1,
+        "job": {
+          "actor": "bob",
+          "document_id": "a"
+        },
+        "body": "ALPHA_SYNTHETIC"
+      },
+      "expected_current_behavior": {
+        "queue_length": 1,
+        "job": {
+          "actor": "bob",
+          "document_id": "a"
+        },
+        "body": "ALPHA_SYNTHETIC"
+      },
+      "passed": true
+    },
+    {
+      "case": "fresh_search_alpha",
+      "kind": "legitimate",
+      "observed": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "expected_current_behavior": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "passed": true
+    },
+    {
+      "case": "fresh_search_beta",
+      "kind": "legitimate",
+      "observed": [
+        "BETA_SYNTHETIC"
+      ],
+      "expected_current_behavior": [
+        "BETA_SYNTHETIC"
+      ],
+      "passed": true
+    },
+    {
+      "case": "shared_search_alpha_then_beta",
+      "kind": "F2",
+      "observed": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "expected_current_behavior": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "passed": true
+    },
+    {
+      "case": "shared_search_beta_then_alpha",
+      "kind": "F2",
+      "observed": [
+        "BETA_SYNTHETIC"
+      ],
+      "expected_current_behavior": [
+        "BETA_SYNTHETIC"
+      ],
+      "passed": true
+    },
+    {
+      "case": "foreign_specific_query_fresh_denied",
+      "kind": "denial-control",
+      "observed": [],
+      "expected_current_behavior": [],
+      "passed": true
+    },
+    {
+      "case": "negative_cache_hides_authorized_result",
+      "kind": "F2-variant",
+      "observed": [],
+      "expected_current_behavior": [],
+      "passed": true
+    },
+    {
+      "case": "authorized_specific_query_fresh",
+      "kind": "legitimate",
+      "observed": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "expected_current_behavior": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "passed": true
+    },
+    {
+      "case": "specific_query_cached_foreign_leak",
+      "kind": "F2-variant",
+      "observed": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "expected_current_behavior": [
+        "ALPHA_SYNTHETIC"
+      ],
+      "passed": true
+    },
+    {
+      "case": "unapproved_send_denied",
+      "kind": "denial-control",
+      "observed": "approval required",
+      "expected_current_behavior": "approval required",
+      "passed": true
+    },
+    {
+      "case": "denied_send_no_effect",
+      "kind": "denial-control",
+      "observed": [],
+      "expected_current_behavior": [],
+      "passed": true
+    },
+    {
+      "case": "approved_send_result",
+      "kind": "legitimate",
+      "observed": "simulated",
+      "expected_current_behavior": "simulated",
+      "passed": true
+    },
+    {
+      "case": "approved_send_effect",
+      "kind": "legitimate",
+      "observed": [
+        [
+          "approved@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ]
+      ],
+      "expected_current_behavior": [
+        [
+          "approved@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "approved_action_changed_recipient",
+      "kind": "F3",
+      "observed": [
+        [
+          "changed@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ]
+      ],
+      "expected_current_behavior": [
+        [
+          "changed@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "approved_action_changed_body",
+      "kind": "F3",
+      "observed": [
+        [
+          "approved@example.invalid",
+          "UNAPPROVED_SYNTHETIC"
+        ]
+      ],
+      "expected_current_behavior": [
+        [
+          "approved@example.invalid",
+          "UNAPPROVED_SYNTHETIC"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "new_action_reuses_approved_id",
+      "kind": "F3-variant",
+      "observed": [
+        [
+          "replacement@example.invalid",
+          "REPLACED_SYNTHETIC"
+        ]
+      ],
+      "expected_current_behavior": [
+        [
+          "replacement@example.invalid",
+          "REPLACED_SYNTHETIC"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "repeat_identical_approved_action",
+      "kind": "needs-context-single-use-policy",
+      "observed": [
+        [
+          "approved@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ],
+        [
+          "approved@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ]
+      ],
+      "expected_current_behavior": [
+        [
+          "approved@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ],
+        [
+          "approved@example.invalid",
+          "APPROVED_SYNTHETIC"
+        ]
+      ],
+      "passed": true
+    },
+    {
+      "case": "target_hashes_unchanged",
+      "kind": "integrity",
+      "observed": {
+        "README.md": "34afb31a64a8e06cdd56df036804d36fda3be9949f99cbdf2773f4d42a77cc93",
+        "service.py": "819550ed509c29e6d627fbbb44ba8732f4718aa51d8d53b8b3f6dfa5a4314e5b"
+      },
+      "expected_current_behavior": {
+        "README.md": "34afb31a64a8e06cdd56df036804d36fda3be9949f99cbdf2773f4d42a77cc93",
+        "service.py": "819550ed509c29e6d627fbbb44ba8732f4718aa51d8d53b8b3f6dfa5a4314e5b"
+      },
+      "passed": true
+    }
+  ]
+}

@@ -17,6 +17,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from urllib.parse import urlsplit, unquote
 
@@ -243,10 +244,11 @@ def safe_label(value):
 
 def location(value):
     s = str(value or '')
-    parsed = urlsplit(s)
-    if parsed.scheme:
-        if parsed.scheme != 'file': return '[remote location omitted]'
-        s = unquote(parsed.path)
+    if not re.match(r'^[A-Za-z]:[\\/]', s):
+        parsed = urlsplit(s)
+        if parsed.scheme:
+            if parsed.scheme != 'file': return '[remote location omitted]'
+            s = unquote(parsed.path)
     s = s.split('?',1)[0].split('#',1)[0]
     return safe_label(s)
 
@@ -268,10 +270,11 @@ def normalize(raw, fmt, source_hash):
     analyzed = None
     tool = fmt
     def add(rule,path='',line=None,sev='unknown',component=None):
+        # Redacted or truncated display labels must not merge different evidence.
+        identity = json.dumps([tool,rule,path,positive_line(line),component],ensure_ascii=False,sort_keys=True)
         rule, path = safe_label(rule), location(path)
         line = positive_line(line)
         component = safe_label(component) if component else None
-        identity = json.dumps([tool,rule,path,line,component],ensure_ascii=False)
         rows.append({'id':'F-'+digest(identity.encode())[:16], 'status':'candidate',
                      'tool':tool,'rule':rule,'title':'Scanner candidate: '+rule,
                      'path':path,'line':line,'scanner_severity':severity(sev),
@@ -373,6 +376,9 @@ def normalize(raw, fmt, source_hash):
 
 def report(data):
     if data.get('kind') != 'scanner-candidates': raise ValueError('normalized candidates required')
+    if any(row.get('status') != 'candidate' or row.get('verification') != 'not-performed'
+           for row in data.get('findings', [])):
+        raise ValueError('Scanner reports accept candidates only; record reviewed decisions in an assessment.')
     def cell(v):
         s = html.escape(str(v if v is not None else 'not reported')).replace('|','&#124;').replace('\n',' ')
         for character in ('[',']','`','*','_','\\'):
@@ -392,21 +398,68 @@ def report(data):
     return '\n'.join(lines)
 
 
-def run_bounded(args,cwd,env,timeout):
-    """Bound the whole scanner process group on POSIX, including engine children."""
+def run_bounded(args,cwd,env,timeout,output_limit=32*1024*1024):
+    """Bound runtime and each output stream; stop the process group on POSIX."""
+    if output_limit < 1 or timeout <= 0:
+        raise ValueError('Positive runtime and output limits required')
     with subprocess.Popen(args,cwd=cwd,env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,
                           start_new_session=(os.name=='posix')) as proc:
-        try:
-            stdout,stderr=proc.communicate(timeout=timeout)
-            return stdout,stderr,proc.returncode
-        except subprocess.TimeoutExpired:
+        buffers = [bytearray(), bytearray()]
+        overflow = threading.Event()
+        def collect(stream, target):
+            while True:
+                chunk = stream.read1(65536)
+                if not chunk: return
+                remaining = output_limit-len(target)
+                target.extend(chunk[:remaining])
+                if len(chunk) > remaining:
+                    overflow.set()
+                    return
+        readers = [threading.Thread(target=collect,args=(stream,buf),daemon=True)
+                   for stream,buf in zip((proc.stdout,proc.stderr),buffers)]
+        for reader in readers: reader.start()
+        deadline = time.monotonic()+timeout
+        reason = None
+        while proc.poll() is None or any(reader.is_alive() for reader in readers):
+            if overflow.is_set():
+                reason = 'output-limit'
+                break
+            if time.monotonic() >= deadline:
+                reason = 'timeout'
+                break
+            time.sleep(0.01)
+        if overflow.is_set(): reason = 'output-limit'
+        if reason:
             if os.name=='posix':
                 try: os.killpg(proc.pid,signal.SIGKILL)
                 except ProcessLookupError: pass
             else:
                 proc.kill()
-            stdout,stderr=proc.communicate(timeout=10)
-            return stdout,stderr,None
+        proc.wait(timeout=10)
+        for reader in readers: reader.join(timeout=10)
+        if any(reader.is_alive() for reader in readers):
+            raise ValueError('Scanner descendants retained an output pipe; use an OS sandbox')
+        rc = None if reason == 'timeout' else ('output-limit' if reason else proc.returncode)
+        return bytes(buffers[0]),bytes(buffers[1]),rc
+
+
+def scanner_path(project, path_value):
+    """Exclude relative PATH entries and executables supplied by the reviewed project."""
+    root = Path(project).resolve()
+    entries = []
+    for entry in path_value.split(os.pathsep):
+        p = Path(entry)
+        if not entry or not p.is_absolute(): continue
+        resolved = p.resolve()
+        if resolved == root or root in resolved.parents: continue
+        entries.append(str(resolved))
+    trusted_path = os.pathsep.join(entries)
+    binary = shutil.which('semgrep',path=trusted_path)
+    if not binary: raise ValueError('Semgrep is not installed outside the project; no installation attempted')
+    resolved = Path(binary).resolve()
+    if resolved == root or root in resolved.parents:
+        raise ValueError('Scanner executable resolves inside the reviewed project')
+    return str(resolved),trusted_path
 
 
 def scan_local(project, out_dir=None, execute=False, timeout=120):
@@ -415,11 +468,11 @@ def scan_local(project, out_dir=None, execute=False, timeout=120):
     plan = {'kind':'local-scan-plan','root':inv['root'],'tool':'semgrep',
             'rules':str(BASE/'assets/semgrep-rules.yml'), 'execute':False,
             'note':'Bundled rules, isolated bounded file copy, no project execution or install.',
-            'limits':{'file_bytes':1024*1024,'total_bytes':128*1024*1024,'timeout_seconds':timeout},
+            'limits':{'file_bytes':1024*1024,'total_bytes':128*1024*1024,'timeout_seconds':timeout,
+                      'output_bytes_per_stream':32*1024*1024},
             'inventory_status':inv['status']}
     if not execute: return plan
-    binary = shutil.which('semgrep')
-    if not binary: raise ValueError('Semgrep is not installed; no installation attempted')
+    binary, trusted_path = scanner_path(inv['root'],os.environ.get('PATH',''))
     if not out_dir: raise ValueError('--out-dir is required with --execute')
     destination = Path(out_dir).expanduser().absolute()
     destination.mkdir(parents=True,exist_ok=False,mode=0o700)
@@ -451,6 +504,7 @@ def scan_local(project, out_dir=None, execute=False, timeout=120):
             except (OSError,ValueError) as exc:
                 omissions.append({'path':rel,'reason':str(exc)[:80]})
         env = {k:os.environ[k] for k in ('PATH','LANG','LC_ALL','SYSTEMROOT') if k in os.environ}
+        env['PATH'] = trusted_path
         # Task-scoped child environment; do not inherit user credentials or Semgrep settings.
         env.update({'HOME':str(tmp/'home'),'XDG_CONFIG_HOME':str(tmp/'config'),
                     'SEMGREP_SEND_METRICS':'off','SEMGREP_ENABLE_VERSION_CHECK':'0'})
@@ -459,8 +513,9 @@ def scan_local(project, out_dir=None, execute=False, timeout=120):
                 '--json','--metrics=off','--disable-version-check','--no-git-ignore',
                 '--no-rewrite-rule-ids',
                 '--jobs','2','--timeout','10','.']
-        version = subprocess.run([binary,'--version'],env=env,capture_output=True,text=True,timeout=30)
-        if version.returncode != 0: raise ValueError('Semgrep version check failed')
+        version_out,_,version_rc = run_bounded([binary,'--version'],tmp,env,30,65536)
+        if version_rc != 0: raise ValueError('Semgrep version check failed')
+        version_text = version_out.decode('utf-8',errors='replace').strip()
         if not copied: raise ValueError('No eligible source files: scan not performed')
         t0 = time.monotonic()
         stdout, stderr, rc = run_bounded(args,snapshot,env,timeout)
@@ -468,8 +523,10 @@ def scan_local(project, out_dir=None, execute=False, timeout=120):
         private_write(destination/'raw-semgrep.json',stdout.decode('utf-8',errors='replace'))
         private_write(destination/'scanner.stderr.txt',stderr.decode('utf-8',errors='replace'))
         metadata = {'schema_version':1,'kind':'local-scan-run','started_at':started,'finished_at':now(),
-                    'duration_seconds':duration,'tool':'semgrep','tool_version':safe_label(version.stdout.strip()),
-                    'exit_code':rc,'status':'timeout' if rc is None else ('failed' if rc != 0 else 'unknown'),
+                    'duration_seconds':duration,'tool':'semgrep','tool_version':safe_label(version_text),
+                    'exit_code':rc if isinstance(rc,int) else None,
+                    'status':'timeout' if rc is None else ('output-limit' if rc == 'output-limit' else ('failed' if rc != 0 else 'unknown')),
+                    'output_limit_bytes_per_stream':32*1024*1024,
                     'source_root':inv['root'],'snapshot_files':len(copied),'snapshot_bytes':total,
                     'files_sha256':hashes,'rules_sha256':digest((BASE/'assets/semgrep-rules.yml').read_bytes()),
                     'raw_sha256':digest(stdout),'omissions':omissions,'excluded_paths':inv['excluded_paths'],

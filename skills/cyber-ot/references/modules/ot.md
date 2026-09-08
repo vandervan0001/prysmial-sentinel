@@ -12,6 +12,8 @@
 
 5. Prepare physical intervention only with an operating window, operator, restorable backup, monitoring and suitable stop procedure. A tool labeled passive may still send traffic to the controller.
 
+6. Use the [targeted verification cases](../recovery-validation.md) when this surface is present. Select cases for the actual architecture and record the observed limits.
+
 ## Required evidence
 
 Provide access paths, documented gaps, potential process effects and required follow-up checks. Identify whether evidence comes from an offline export, simulator or physical equipment.
