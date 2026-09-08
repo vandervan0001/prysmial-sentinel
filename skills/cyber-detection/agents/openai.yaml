@@ -1,0 +1,4 @@
+interface:
+  display_name: "Detection engineering"
+  short_description: "Write and test Sigma, YARA and SIEM rules"
+  default_prompt: "Use $cyber-detection to review these rules against the available telemetry and test positive and benign cases."

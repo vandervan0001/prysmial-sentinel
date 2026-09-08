@@ -1,0 +1,404 @@
+{
+  "sources": [
+    {
+      "id": "asvs",
+      "title": "OWASP ASVS",
+      "url": "https://owasp.org/www-project-application-security-verification-standard/",
+      "kind": "standard",
+      "version_note": "5.0.0",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "wstg",
+      "title": "OWASP WSTG",
+      "url": "https://owasp.org/www-project-web-security-testing-guide/",
+      "kind": "living",
+      "version_note": "Check the stable version when starting the review",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "api",
+      "title": "OWASP API Security Top 10",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0x11-t10/",
+      "kind": "standard",
+      "version_note": "2023",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "auth",
+      "title": "NIST Digital Identity Guidelines",
+      "url": "https://csrc.nist.gov/pubs/sp/800/63/4/final",
+      "kind": "standard",
+      "version_note": "800-63-4, July 2025",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "oauth",
+      "title": "OAuth Security BCP",
+      "url": "https://www.rfc-editor.org/rfc/rfc9700.html",
+      "kind": "standard",
+      "version_note": "RFC 9700, January 2025",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "llm",
+      "title": "OWASP GenAI LLM Top 10",
+      "url": "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/",
+      "kind": "standard",
+      "version_note": "2026, August 2026",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "agentic",
+      "title": "OWASP Top 10 for Agentic Applications",
+      "url": "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/",
+      "kind": "standard",
+      "version_note": "2026",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "mcp",
+      "title": "MCP security best practices",
+      "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/docs/2026-07-28/tutorials/security/security_best_practices.mdx",
+      "kind": "living",
+      "version_note": "Evolving documentation; match the negotiated protocol version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "slsa",
+      "title": "SLSA",
+      "url": "https://slsa.dev/spec/v1.1/",
+      "kind": "standard",
+      "version_note": "1.1; versioned reference, not a claim of the latest release",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "kev",
+      "title": "CISA KEV",
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "kind": "living",
+      "version_note": "Updated catalogue",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "epss",
+      "title": "FIRST EPSS",
+      "url": "https://www.first.org/epss/",
+      "kind": "living",
+      "version_note": "Retrieve a dated score for each CVE",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "cvss",
+      "title": "FIRST CVSS",
+      "url": "https://www.first.org/cvss/v4.0/specification-document",
+      "kind": "standard",
+      "version_note": "4.0",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "semgrep",
+      "title": "Semgrep documentation",
+      "url": "https://semgrep.dev/docs/running-rules",
+      "kind": "living",
+      "version_note": "Match the installed CLI",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "codeql",
+      "title": "GitHub CodeQL",
+      "url": "https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options",
+      "kind": "living",
+      "version_note": "Workflow options",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "osv",
+      "title": "OSV-Scanner",
+      "url": "https://google.github.io/osv-scanner/",
+      "kind": "tool",
+      "version_note": "Check the installed version and output format",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "trivy",
+      "title": "Trivy",
+      "url": "https://trivy.dev/latest/docs/",
+      "kind": "tool",
+      "version_note": "Check the installed version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "k8s",
+      "title": "Kubernetes security checklist",
+      "url": "https://kubernetes.io/docs/concepts/security/security-checklist/",
+      "kind": "living",
+      "version_note": "Match the cluster version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "aws",
+      "title": "AWS IAM best practices",
+      "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+      "kind": "living",
+      "version_note": "IAM",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "azure",
+      "title": "Microsoft identity management",
+      "url": "https://learn.microsoft.com/en-us/azure/security/fundamentals/identity-management-best-practices",
+      "kind": "living",
+      "version_note": "Azure and Entra",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "gcp",
+      "title": "Google service account keys",
+      "url": "https://docs.cloud.google.com/iam/docs/best-practices-for-managing-service-account-keys",
+      "kind": "living",
+      "version_note": "IAM",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "mas",
+      "title": "OWASP MASVS et MASTG",
+      "url": "https://mas.owasp.org/",
+      "kind": "living",
+      "version_note": "Select versioned requirements and tests",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "electron",
+      "title": "Electron security",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+      "kind": "living",
+      "version_note": "Match the bundled Electron version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "solidity",
+      "title": "Solidity security considerations",
+      "url": "https://docs.soliditylang.org/en/latest/security-considerations.html",
+      "kind": "living",
+      "version_note": "The latest URL may show a development version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "libfuzzer",
+      "title": "LLVM libFuzzer",
+      "url": "https://llvm.org/docs/LibFuzzer.html",
+      "kind": "living",
+      "version_note": "Coverage-guided fuzzing",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ossfuzz",
+      "title": "OSS-Fuzz",
+      "url": "https://github.com/google/oss-fuzz",
+      "kind": "repository",
+      "version_note": "External tool reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "wycheproof",
+      "title": "Project Wycheproof",
+      "url": "https://github.com/C2SP/wycheproof",
+      "kind": "repository",
+      "version_note": "External test vector reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ot",
+      "title": "NIST OT security",
+      "url": "https://csrc.nist.gov/pubs/sp/800/82/r3/final",
+      "kind": "standard",
+      "version_note": "800-82 rev. 3",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "ir",
+      "title": "NIST incident response",
+      "url": "https://csrc.nist.gov/pubs/sp/800/61/r3/final",
+      "kind": "standard",
+      "version_note": "800-61 rev. 3",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "pqc",
+      "title": "NIST ML-KEM",
+      "url": "https://csrc.nist.gov/pubs/fips/203/final",
+      "kind": "standard",
+      "version_note": "FIPS 203",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "attack",
+      "title": "MITRE ATT&CK",
+      "url": "https://attack.mitre.org/",
+      "kind": "living",
+      "version_note": "Cite technique and version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "atlas",
+      "title": "MITRE ATLAS",
+      "url": "https://atlas.mitre.org/",
+      "kind": "living",
+      "version_note": "AI taxonomy",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "agentdojo",
+      "title": "AgentDojo paper",
+      "url": "https://arxiv.org/abs/2406.13352",
+      "kind": "research",
+      "version_note": "2024; check revisions",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "asb",
+      "title": "Agent Security Bench paper",
+      "url": "https://arxiv.org/abs/2410.02644",
+      "kind": "research",
+      "version_note": "2024, ICLR 2025",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "firewalls",
+      "title": "Indirect Prompt Injections: Are Firewalls All You Need, or Stronger Benchmarks?",
+      "url": "https://arxiv.org/abs/2510.05244",
+      "kind": "research",
+      "version_note": "2025; evaluation metric critique",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "agentsecbench",
+      "title": "AgentSecBench",
+      "url": "https://arxiv.org/abs/2605.26269",
+      "kind": "research",
+      "version_note": "2026 preprint",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "runtime-skills",
+      "title": "Runtime Skill Audit",
+      "url": "https://arxiv.org/abs/2606.11671",
+      "kind": "research",
+      "version_note": "2026 preprint",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "tob",
+      "title": "Trail of Bits skills",
+      "url": "https://github.com/trailofbits/skills",
+      "kind": "repository",
+      "version_note": "Snapshot recorded in upstream-lock.json",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "zap",
+      "title": "OWASP ZAP",
+      "url": "https://github.com/zaproxy/zaproxy",
+      "kind": "repository",
+      "version_note": "External tool reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "nuclei",
+      "title": "Nuclei",
+      "url": "https://github.com/projectdiscovery/nuclei",
+      "kind": "repository",
+      "version_note": "External tool reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "gitleaks",
+      "title": "Gitleaks",
+      "url": "https://github.com/gitleaks/gitleaks",
+      "kind": "repository",
+      "version_note": "External tool reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "pyrit",
+      "title": "Microsoft PyRIT",
+      "url": "https://github.com/microsoft/PyRIT",
+      "kind": "repository",
+      "version_note": "External tool reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "garak",
+      "title": "NVIDIA garak",
+      "url": "https://github.com/NVIDIA/garak",
+      "kind": "repository",
+      "version_note": "External tool reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "agentdojo-code",
+      "title": "AgentDojo repository",
+      "url": "https://github.com/ethz-spylab/agentdojo",
+      "kind": "repository",
+      "version_note": "External benchmark reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "cheatsheets",
+      "title": "OWASP Cheat Sheet Series",
+      "url": "https://cheatsheetseries.owasp.org/",
+      "kind": "living",
+      "version_note": "Read the relevant guide",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "github-actions",
+      "title": "GitHub Actions security",
+      "url": "https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions",
+      "kind": "living",
+      "version_note": "Software delivery",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "sigma",
+      "title": "Sigma rules",
+      "url": "https://github.com/SigmaHQ/sigma",
+      "kind": "repository",
+      "version_note": "External detection reference",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "suricata",
+      "title": "Suricata documentation",
+      "url": "https://docs.suricata.io/en/latest/",
+      "kind": "living",
+      "version_note": "Match the deployed engine",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "postgres",
+      "title": "PostgreSQL row security",
+      "url": "https://www.postgresql.org/docs/current/ddl-rowsecurity.html",
+      "kind": "living",
+      "version_note": "Match the role and database version",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "cwe",
+      "title": "MITRE CWE",
+      "url": "https://cwe.mitre.org/",
+      "kind": "living",
+      "version_note": "Verify each identifier",
+      "baseline_date": "2026-09-08"
+    },
+    {
+      "id": "supply-tools",
+      "title": "OpenSSF Scorecard",
+      "url": "https://github.com/ossf/scorecard",
+      "kind": "repository",
+      "version_note": "Maintenance indicators; not proof of security",
+      "baseline_date": "2026-09-08"
+    }
+  ]
+}

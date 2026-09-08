@@ -1,0 +1,695 @@
+{
+  "version": 2,
+  "skills": [
+    {
+      "name": "cyber-core",
+      "title": "Cyber references and evidence",
+      "description": "Connect observations to ATT&CK techniques, requirements, evidence and priorities when planning or reporting a security review.",
+      "modules": [
+        "cyber-threat-model",
+        "cyber-triage",
+        "cyber-research"
+      ]
+    },
+    {
+      "name": "cyber-pentest",
+      "title": "Pentesting and exposure",
+      "description": "Review attack surface and run authorized application, network, Windows/AD and Linux tests with minimal evidence.",
+      "modules": [
+        "cyber-network",
+        "cyber-pentest",
+        "cyber-windows-ad",
+        "cyber-linux"
+      ]
+    },
+    {
+      "name": "cyber-appsec",
+      "title": "AppSec, cloud and AI",
+      "description": "Review code, APIs, identity, cloud, CI/CD, AI applications, mobile, desktop and native components using methods selected for the project.",
+      "modules": [
+        "cyber-code-review",
+        "cyber-sast",
+        "cyber-dependencies",
+        "cyber-secrets",
+        "cyber-auth",
+        "cyber-api",
+        "cyber-browser",
+        "cyber-business-logic",
+        "cyber-realtime",
+        "cyber-cloud",
+        "cyber-kubernetes",
+        "cyber-containers",
+        "cyber-iac",
+        "cyber-cicd",
+        "cyber-ai",
+        "cyber-mcp",
+        "cyber-rag",
+        "cyber-mobile",
+        "cyber-desktop",
+        "cyber-native",
+        "cyber-fuzzing",
+        "cyber-crypto",
+        "cyber-smart-contracts",
+        "cyber-privacy",
+        "cyber-remediation"
+      ]
+    },
+    {
+      "name": "cyber-detection",
+      "title": "Detection engineering",
+      "description": "Write and verify Sigma, YARA and SIEM detections against defined telemetry, with positive and benign test cases.",
+      "modules": [
+        "cyber-detection"
+      ]
+    },
+    {
+      "name": "cyber-hunting",
+      "title": "Threat hunting",
+      "description": "Investigate a hypothesis using logs and ATT&CK behaviors, then assess findings and collection gaps.",
+      "modules": []
+    },
+    {
+      "name": "cyber-purple-team",
+      "title": "Detection validation",
+      "description": "Validate behavior, telemetry, detection and alert delivery in an authorized laboratory using reviewed Atomic scenarios.",
+      "modules": []
+    },
+    {
+      "name": "cyber-dfir",
+      "title": "Investigation and response",
+      "description": "Collect and analyze digital evidence, assess an incident or suspicious artifact, and prepare containment and recovery.",
+      "modules": [
+        "cyber-incident"
+      ]
+    },
+    {
+      "name": "cyber-ot",
+      "title": "Industrial OT and ICS security",
+      "description": "Review OT/ICS architecture, captures and exports using protocol, firmware, vendor and IEC 62443 methods.",
+      "modules": [
+        "cyber-ot",
+        "cyber-firmware"
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "name": "cyber-threat-model",
+      "title": "Threat modeling",
+      "description": "Model threats for an architecture, service or planned change before the security review.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "asvs",
+        "attack",
+        "atlas"
+      ],
+      "domain": "cyber-core",
+      "module": "threat-model",
+      "path": "cyber-core/references/modules/threat-model.md"
+    },
+    {
+      "name": "cyber-code-review",
+      "title": "Security code review",
+      "description": "Review code and diffs for security defects, then trace related variants across the project.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "asvs",
+        "cwe",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "code-review",
+      "path": "cyber-appsec/references/modules/code-review.md"
+    },
+    {
+      "name": "cyber-sast",
+      "title": "Static analysis and rules",
+      "description": "Configure Semgrep, CodeQL and SARIF analysis for the actual language, framework and tool edition.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "semgrep",
+        "codeql",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "sast",
+      "path": "cyber-appsec/references/modules/sast.md"
+    },
+    {
+      "name": "cyber-dependencies",
+      "title": "Dependencies and software supply chain",
+      "description": "Review resolved dependencies, SBOMs, vulnerability advisories and component provenance.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "osv",
+        "trivy",
+        "kev",
+        "epss",
+        "slsa",
+        "supply-tools"
+      ],
+      "domain": "cyber-appsec",
+      "module": "dependencies",
+      "path": "cyber-appsec/references/modules/dependencies.md"
+    },
+    {
+      "name": "cyber-secrets",
+      "title": "Secrets and credentials",
+      "description": "Find exposed secrets and review their storage, distribution, rotation and removal.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "gitleaks",
+        "cheatsheets",
+        "aws"
+      ],
+      "domain": "cyber-appsec",
+      "module": "secrets",
+      "path": "cyber-appsec/references/modules/secrets.md"
+    },
+    {
+      "name": "cyber-auth",
+      "title": "Authentication and authorization",
+      "description": "Review sign-in, sessions, OAuth/OIDC, passkeys and access to objects and functions.",
+      "tags": [
+        "web",
+        "api",
+        "mobile",
+        "desktop"
+      ],
+      "sources": [
+        "auth",
+        "oauth",
+        "asvs"
+      ],
+      "domain": "cyber-appsec",
+      "module": "auth",
+      "path": "cyber-appsec/references/modules/auth.md"
+    },
+    {
+      "name": "cyber-api",
+      "title": "APIs and data isolation",
+      "description": "Review REST, GraphQL, gRPC, webhooks, uploads and data isolation between users.",
+      "tags": [
+        "web",
+        "api",
+        "ai"
+      ],
+      "sources": [
+        "api",
+        "asvs",
+        "wstg",
+        "postgres"
+      ],
+      "domain": "cyber-appsec",
+      "module": "api",
+      "path": "cyber-appsec/references/modules/api.md"
+    },
+    {
+      "name": "cyber-browser",
+      "title": "Browser and frontend security",
+      "description": "Review XSS, CSP, CORS, CSRF, caches and browser trust boundaries in web applications.",
+      "tags": [
+        "web"
+      ],
+      "sources": [
+        "wstg",
+        "asvs",
+        "cheatsheets"
+      ],
+      "domain": "cyber-appsec",
+      "module": "browser",
+      "path": "cyber-appsec/references/modules/browser.md"
+    },
+    {
+      "name": "cyber-business-logic",
+      "title": "Business logic and concurrency",
+      "description": "Find workflow abuse, replay, race conditions and inconsistencies in billing or quotas.",
+      "tags": [
+        "web",
+        "api",
+        "payments"
+      ],
+      "sources": [
+        "wstg",
+        "asvs",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "business-logic",
+      "path": "cyber-appsec/references/modules/business-logic.md"
+    },
+    {
+      "name": "cyber-realtime",
+      "title": "WebSocket, SSE and message queues",
+      "description": "Review persistent connections, subscriptions, task queues and isolation between channels.",
+      "tags": [
+        "realtime"
+      ],
+      "sources": [
+        "cheatsheets",
+        "asvs"
+      ],
+      "domain": "cyber-appsec",
+      "module": "realtime",
+      "path": "cyber-appsec/references/modules/realtime.md"
+    },
+    {
+      "name": "cyber-cloud",
+      "title": "Cloud and service identities",
+      "description": "Review AWS, Azure, GCP or application cloud configuration and effective identity permissions.",
+      "tags": [
+        "cloud"
+      ],
+      "sources": [
+        "aws",
+        "azure",
+        "gcp",
+        "slsa"
+      ],
+      "domain": "cyber-appsec",
+      "module": "cloud",
+      "path": "cyber-appsec/references/modules/cloud.md"
+    },
+    {
+      "name": "cyber-kubernetes",
+      "title": "Kubernetes and orchestration",
+      "description": "Review Kubernetes RBAC, admission, networking, secrets and workload isolation.",
+      "tags": [
+        "kubernetes"
+      ],
+      "sources": [
+        "k8s",
+        "trivy"
+      ],
+      "domain": "cyber-appsec",
+      "module": "kubernetes",
+      "path": "cyber-appsec/references/modules/kubernetes.md"
+    },
+    {
+      "name": "cyber-containers",
+      "title": "Images and containers",
+      "description": "Review OCI images, Dockerfiles, layers, privileges and runtime configuration.",
+      "tags": [
+        "containers"
+      ],
+      "sources": [
+        "trivy",
+        "slsa",
+        "k8s"
+      ],
+      "domain": "cyber-appsec",
+      "module": "containers",
+      "path": "cyber-appsec/references/modules/containers.md"
+    },
+    {
+      "name": "cyber-iac",
+      "title": "Infrastructure as code",
+      "description": "Review Terraform, OpenTofu, CloudFormation, Helm and infrastructure policies before deployment.",
+      "tags": [
+        "iac"
+      ],
+      "sources": [
+        "trivy",
+        "aws",
+        "k8s"
+      ],
+      "domain": "cyber-appsec",
+      "module": "iac",
+      "path": "cyber-appsec/references/modules/iac.md"
+    },
+    {
+      "name": "cyber-cicd",
+      "title": "CI/CD and development agents",
+      "description": "Review pipelines, runners, releases, provenance and AI agent integrations in software delivery.",
+      "tags": [
+        "cicd"
+      ],
+      "sources": [
+        "github-actions",
+        "slsa",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "cicd",
+      "path": "cyber-appsec/references/modules/cicd.md"
+    },
+    {
+      "name": "cyber-ai",
+      "title": "LLMs and AI agents",
+      "description": "Review LLM applications and agents for prompt injection, excessive permissions, data leaks and tool abuse.",
+      "tags": [
+        "ai"
+      ],
+      "sources": [
+        "llm",
+        "agentic",
+        "agentdojo",
+        "firewalls",
+        "pyrit",
+        "garak"
+      ],
+      "domain": "cyber-appsec",
+      "module": "ai",
+      "path": "cyber-appsec/references/modules/ai.md"
+    },
+    {
+      "name": "cyber-mcp",
+      "title": "MCP, skills and connectors",
+      "description": "Review MCP servers and clients, imported skills and connectors that give agents access to tools or data.",
+      "tags": [
+        "mcp",
+        "ai"
+      ],
+      "sources": [
+        "mcp",
+        "oauth",
+        "runtime-skills",
+        "agentsecbench"
+      ],
+      "domain": "cyber-appsec",
+      "module": "mcp",
+      "path": "cyber-appsec/references/modules/mcp.md"
+    },
+    {
+      "name": "cyber-rag",
+      "title": "RAG, search and memory",
+      "description": "Review ingestion, vector search, reranking, citations and persistent memory in AI systems.",
+      "tags": [
+        "ai",
+        "rag"
+      ],
+      "sources": [
+        "llm",
+        "asb",
+        "agentsecbench",
+        "postgres"
+      ],
+      "domain": "cyber-appsec",
+      "module": "rag",
+      "path": "cyber-appsec/references/modules/rag.md"
+    },
+    {
+      "name": "cyber-mobile",
+      "title": "Mobile applications",
+      "description": "Review Android and iOS applications using MASVS/MASTG, source code and the distributed binary.",
+      "tags": [
+        "mobile"
+      ],
+      "sources": [
+        "mas",
+        "auth",
+        "api"
+      ],
+      "domain": "cyber-appsec",
+      "module": "mobile",
+      "path": "cyber-appsec/references/modules/mobile.md"
+    },
+    {
+      "name": "cyber-desktop",
+      "title": "Desktop, Electron and extensions",
+      "description": "Review privilege boundaries in Electron, Tauri, desktop applications and browser extensions.",
+      "tags": [
+        "desktop"
+      ],
+      "sources": [
+        "electron",
+        "asvs",
+        "auth"
+      ],
+      "domain": "cyber-appsec",
+      "module": "desktop",
+      "path": "cyber-appsec/references/modules/desktop.md"
+    },
+    {
+      "name": "cyber-native",
+      "title": "Native code and memory",
+      "description": "Review C, C++, Rust, FFI and binary processing for memory corruption and concurrency defects.",
+      "tags": [
+        "native"
+      ],
+      "sources": [
+        "libfuzzer",
+        "ossfuzz",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "native",
+      "path": "cyber-appsec/references/modules/native.md"
+    },
+    {
+      "name": "cyber-fuzzing",
+      "title": "Fuzzing and property tests",
+      "description": "Build fuzzing campaigns and property tests for parsers, protocols and state transitions.",
+      "tags": [
+        "native",
+        "all"
+      ],
+      "sources": [
+        "libfuzzer",
+        "ossfuzz",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "fuzzing",
+      "path": "cyber-appsec/references/modules/fuzzing.md"
+    },
+    {
+      "name": "cyber-crypto",
+      "title": "Cryptography and PQC migration",
+      "description": "Review cryptography use, key management, sensitive implementations and post-quantum migration readiness.",
+      "tags": [
+        "crypto",
+        "native"
+      ],
+      "sources": [
+        "pqc",
+        "wycheproof",
+        "tob"
+      ],
+      "domain": "cyber-appsec",
+      "module": "crypto",
+      "path": "cyber-appsec/references/modules/crypto.md"
+    },
+    {
+      "name": "cyber-network",
+      "title": "Networks, DNS and TLS",
+      "description": "Review network exposure, TLS, DNS, proxies and segmentation from configuration or authorized targets.",
+      "tags": [
+        "network"
+      ],
+      "sources": [
+        "wstg",
+        "attack",
+        "cheatsheets"
+      ],
+      "domain": "cyber-pentest",
+      "module": "network",
+      "path": "cyber-pentest/references/modules/network.md"
+    },
+    {
+      "name": "cyber-pentest",
+      "title": "Application pentesting",
+      "description": "Plan and run scoped application tests with bounded active checks and minimal evidence.",
+      "tags": [
+        "active"
+      ],
+      "sources": [
+        "wstg",
+        "zap",
+        "nuclei",
+        "api"
+      ],
+      "domain": "cyber-pentest",
+      "module": "pentest",
+      "path": "cyber-pentest/references/modules/pentest.md"
+    },
+    {
+      "name": "cyber-windows-ad",
+      "title": "Windows, AD and Entra",
+      "description": "Review Windows, Active Directory and Entra identities using exports and privilege paths.",
+      "tags": [
+        "windows"
+      ],
+      "sources": [
+        "azure",
+        "auth",
+        "attack"
+      ],
+      "domain": "cyber-pentest",
+      "module": "windows-ad",
+      "path": "cyber-pentest/references/modules/windows-ad.md"
+    },
+    {
+      "name": "cyber-linux",
+      "title": "Linux and system services",
+      "description": "Review Linux configuration, services, local privileges and server or container isolation.",
+      "tags": [
+        "linux"
+      ],
+      "sources": [
+        "attack",
+        "cheatsheets",
+        "ir"
+      ],
+      "domain": "cyber-pentest",
+      "module": "linux",
+      "path": "cyber-pentest/references/modules/linux.md"
+    },
+    {
+      "name": "cyber-ot",
+      "title": "OT, ICS and control systems",
+      "description": "Review industrial architecture, controllers, supervision and maintenance access from documents or laboratory evidence.",
+      "tags": [
+        "ot"
+      ],
+      "sources": [
+        "ot",
+        "attack",
+        "ir"
+      ],
+      "domain": "cyber-ot",
+      "module": "ot",
+      "path": "cyber-ot/references/modules/ot.md"
+    },
+    {
+      "name": "cyber-firmware",
+      "title": "Firmware, IoT and embedded devices",
+      "description": "Review firmware and IoT devices using supplied images, source code and laboratory interfaces.",
+      "tags": [
+        "firmware"
+      ],
+      "sources": [
+        "ot",
+        "ossfuzz",
+        "slsa"
+      ],
+      "domain": "cyber-ot",
+      "module": "firmware",
+      "path": "cyber-ot/references/modules/firmware.md"
+    },
+    {
+      "name": "cyber-smart-contracts",
+      "title": "Smart contracts and protocols",
+      "description": "Review blockchain contracts and protocols using code, invariants and local-chain tests.",
+      "tags": [
+        "blockchain"
+      ],
+      "sources": [
+        "solidity",
+        "tob",
+        "slsa"
+      ],
+      "domain": "cyber-appsec",
+      "module": "smart-contracts",
+      "path": "cyber-appsec/references/modules/smart-contracts.md"
+    },
+    {
+      "name": "cyber-detection",
+      "title": "Detection and telemetry",
+      "description": "Review detection coverage and write Sigma, YARA or network rules using laboratory traces.",
+      "tags": [
+        "detection"
+      ],
+      "sources": [
+        "sigma",
+        "suricata",
+        "attack",
+        "atlas"
+      ],
+      "domain": "cyber-detection",
+      "module": "detection",
+      "path": "cyber-detection/references/modules/detection.md"
+    },
+    {
+      "name": "cyber-incident",
+      "title": "Incident response and evidence",
+      "description": "Analyze an incident, build a timeline and prepare containment, recovery and verification.",
+      "tags": [
+        "incident"
+      ],
+      "sources": [
+        "ir",
+        "attack"
+      ],
+      "domain": "cyber-dfir",
+      "module": "incident",
+      "path": "cyber-dfir/references/modules/incident.md"
+    },
+    {
+      "name": "cyber-privacy",
+      "title": "Sensitive data and isolation",
+      "description": "Review sensitive data flows, minimization, access, retention and deletion.",
+      "tags": [
+        "privacy"
+      ],
+      "sources": [
+        "asvs",
+        "llm",
+        "postgres"
+      ],
+      "domain": "cyber-appsec",
+      "module": "privacy",
+      "path": "cyber-appsec/references/modules/privacy.md"
+    },
+    {
+      "name": "cyber-triage",
+      "title": "Finding triage and reporting",
+      "description": "Verify scanner findings, reject false positives and write an evidence-based security report.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "cvss",
+        "epss",
+        "cwe"
+      ],
+      "domain": "cyber-core",
+      "module": "triage",
+      "path": "cyber-core/references/modules/triage.md"
+    },
+    {
+      "name": "cyber-remediation",
+      "title": "Remediation and retesting",
+      "description": "Fix a confirmed security defect and verify the correction, legitimate behavior and related variants.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "asvs",
+        "tob",
+        "codeql"
+      ],
+      "domain": "cyber-appsec",
+      "module": "remediation",
+      "path": "cyber-appsec/references/modules/remediation.md"
+    },
+    {
+      "name": "cyber-research",
+      "title": "Security research",
+      "description": "Find current vendor advisories, standards, research and tools for a specific security question.",
+      "tags": [
+        "all"
+      ],
+      "sources": [
+        "kev",
+        "epss",
+        "tob",
+        "agentdojo",
+        "firewalls"
+      ],
+      "domain": "cyber-core",
+      "module": "research",
+      "path": "cyber-core/references/modules/research.md"
+    }
+  ]
+}

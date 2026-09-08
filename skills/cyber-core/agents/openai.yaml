@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cyber references and evidence"
+  short_description: "Assess threat models, references and evidence"
+  default_prompt: "Use $cyber-core to assess the threat model, verify references and classify the available evidence."

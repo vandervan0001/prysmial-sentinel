@@ -1,0 +1,4 @@
+interface:
+  display_name: "Threat hunting"
+  short_description: "Test threat hypotheses against available logs"
+  default_prompt: "Use $cyber-hunting to test this hypothesis against the supplied logs, with known events and alternative explanations."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Industrial OT and ICS security"
+  short_description: "Review industrial systems, protocols and firmware"
+  default_prompt: "Use $cyber-ot to review this industrial system from the supplied architecture, exports and captures, with process constraints recorded."

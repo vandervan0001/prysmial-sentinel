@@ -1,0 +1,1261 @@
+{
+  "controls": [
+    {
+      "id": "CORE-ATTACK-MAPPING",
+      "domain": "cyber-core",
+      "title": "Mapping behavior to ATT&CK",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Mapping behavior to ATT&CK"
+        ],
+        "questions": [
+          "Describe the observed actor, action, asset and effect without attributing a group.",
+          "Find the domain, technique and sub-technique in the dated snapshot.",
+          "Compare observed behavior with the technique and record missing evidence.",
+          "Retain the URL, version and mapping confidence."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Describe the observed actor, action, asset and effect without attributing a group."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Find the domain, technique and sub-technique in the dated snapshot."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare observed behavior with the technique and record missing evidence."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Retain the URL, version and mapping confidence."
+        }
+      ],
+      "verification": {
+        "acceptance": "Cite an existing identifier in the correct domain and a supporting observation from the audit record.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "knowledge.py attack"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/mitre-attack/attack-stix-data"
+      ]
+    },
+    {
+      "id": "PENTEST-ASSET-SCOPE",
+      "domain": "cyber-pentest",
+      "title": "Asset discovery and scope",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Asset discovery and scope"
+        ],
+        "questions": [
+          "List supplied assets and the source of each discovery.",
+          "Distinguish presumed ownership, DNS relationships and permission to test.",
+          "Prepare exact probes and ports after confirming target scope."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "List supplied assets and the source of each discovery."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Distinguish presumed ownership, DNS relationships and permission to test."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare exact probes and ports after confirming target scope."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record provenance, role and permission for the proposed test before adding a target.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Supplied inventory",
+          "Authorized public sources"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/projectdiscovery/subfinder",
+        "https://github.com/projectdiscovery/httpx"
+      ]
+    },
+    {
+      "id": "PENTEST-LOL-PRIVILEGE",
+      "domain": "cyber-pentest",
+      "title": "Legitimate binaries and privilege paths",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Legitimate binaries and privilege paths"
+        ],
+        "questions": [
+          "Identify the binary, path, signature and version.",
+          "Trace the principal, permissions, controllable arguments and privileged operation.",
+          "Compare expected administrative use and prepare a laboratory scenario."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the binary, path, signature and version."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Trace the principal, permissions, controllable arguments and privileged operation."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare expected administrative use and prepare a laboratory scenario."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish the privilege path; the binary alone is insufficient evidence.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Permission exports",
+          "Process logs"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/LOLBAS-Project/LOLBAS",
+        "https://github.com/GTFOBins/GTFOBins.github.io"
+      ]
+    },
+    {
+      "id": "HUNT-HYPOTHESIS",
+      "domain": "cyber-hunting",
+      "title": "Hunt hypothesis and log coverage",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Hunt hypothesis and log coverage"
+        ],
+        "questions": [
+          "State the hypothesis, population, period and rejection criterion.",
+          "Find a known positive event in the pipeline.",
+          "Count results before and after each filter.",
+          "Assess anomalies and alternative explanations."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "State the hypothesis, population, period and rejection criterion."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Find a known positive event in the pipeline."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Count results before and after each filter."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Assess anomalies and alternative explanations."
+        }
+      ],
+      "verification": {
+        "acceptance": "Retain population counts, evidence and telemetry limits. An empty population cannot disprove the hypothesis.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Existing logs",
+          "Read-only queries"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/OTRF/ThreatHunter-Playbook"
+      ]
+    },
+    {
+      "id": "PURPLE-ATOMIC-CHAIN",
+      "domain": "cyber-purple-team",
+      "title": "Detection validation with an Atomic scenario",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Detection validation with an Atomic scenario"
+        ],
+        "questions": [
+          "Choose the GUID, commit, platform and telemetry objective.",
+          "Review dependencies, commands, effects and cleanup.",
+          "Prepare a laboratory run covered by the mandate.",
+          "Verify behavior, ingestion, rule matching, alert delivery and final state separately."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Choose the GUID, commit, platform and telemetry objective."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Review dependencies, commands, effects and cleanup."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a laboratory run covered by the mandate."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Verify behavior, ingestion, rule matching, alert delivery and final state separately."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record a timestamp and evidence for each of the five stages. An exit code alone does not establish the outcome.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Atomic YAML review",
+          "Fixture analysis"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/redcanaryco/atomic-red-team"
+      ]
+    },
+    {
+      "id": "DETECTION-SIGMA-CONTRACT",
+      "domain": "cyber-detection",
+      "title": "Telemetry requirements for a Sigma rule",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Telemetry requirements for a Sigma rule"
+        ],
+        "questions": [
+          "Define the log source and fields actually ingested.",
+          "Pin the rule, conversion pipeline and backend.",
+          "Compile and test positive and benign events."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Define the log source and fields actually ingested."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Pin the rule, conversion pipeline and backend."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compile and test positive and benign events."
+        }
+      ],
+      "verification": {
+        "acceptance": "The converted rule must find its positive control in the target backend and pass the benign case.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Local rules and fixtures"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/SigmaHQ/sigma"
+      ]
+    },
+    {
+      "id": "DETECTION-ELASTIC-RUNTIME",
+      "domain": "cyber-detection",
+      "title": "Elastic rule execution",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Elastic rule execution"
+        ],
+        "questions": [
+          "Check index/data stream, integration, ECS and timestamp field.",
+          "Review interval, lookback, exceptions and suppression.",
+          "Test the query and alert creation in an authorized space."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Check index/data stream, integration, ECS and timestamp field."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Review interval, lookback, exceptions and suppression."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Test the query and alert creation in an authorized space."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record query matches, created alerts and delivered notifications separately.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Rule export and ECS mapping"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/elastic/detection-rules"
+      ]
+    },
+    {
+      "id": "DETECTION-SPLUNK-CIM",
+      "domain": "cyber-detection",
+      "title": "Splunk telemetry and CIM mapping",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Splunk telemetry and CIM mapping"
+        ],
+        "questions": [
+          "Find the control event in raw logs and record its sourcetype.",
+          "Check CIM mapping, data model, acceleration and macros.",
+          "Compare raw search and tstats results over the same period."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Find the control event in raw logs and record its sourcetype."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Check CIM mapping, data model, acceleration and macros."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare raw search and tstats results over the same period."
+        }
+      ],
+      "verification": {
+        "acceptance": "Find the known event through the model. An empty query alone does not establish inactivity.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Search export",
+          "Synthetic logs"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/splunk/security_content"
+      ]
+    },
+    {
+      "id": "DETECTION-YARA-CORPUS",
+      "domain": "cyber-detection",
+      "title": "YARA rule precision and cost",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "YARA rule precision and cost"
+        ],
+        "questions": [
+          "Define the file type and classification property.",
+          "Compile on the target engine and measure pattern cost.",
+          "Test authorized positive files and a comparable benign corpus.",
+          "Retain licence, version and false-positive results."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Define the file type and classification property."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compile on the target engine and measure pattern cost."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Test authorized positive files and a comparable benign corpus."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Retain licence, version and false-positive results."
+        }
+      ],
+      "verification": {
+        "acceptance": "The rule must distinguish its control cases without treating a legitimate tool as proof of compromise.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Static compilation",
+          "Laboratory corpus"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/Yara-Rules/rules",
+        "https://github.com/anyrun/YARA"
+      ]
+    },
+    {
+      "id": "DFIR-ARTIFACT-COLLECTION",
+      "domain": "cyber-dfir",
+      "title": "Targeted endpoint collection",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Targeted endpoint collection"
+        ],
+        "questions": [
+          "Define the question, period, population and minimum required artifact.",
+          "Read the VQL definition, parameters, permissions and effects.",
+          "Preserve the original, hash, timestamp and collection log."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Define the question, period, population and minimum required artifact."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Read the VQL definition, parameters, permissions and effects."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Preserve the original, hash, timestamp and collection log."
+        }
+      ],
+      "verification": {
+        "acceptance": "The record must identify the source and distinguish reading, transformation and execution.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Existing exports",
+          "VQL review"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/Velocidex/velociraptor"
+      ]
+    },
+    {
+      "id": "DFIR-SUSPECT-FILE",
+      "domain": "cyber-dfir",
+      "title": "Static analysis of a suspicious file",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Static analysis of a suspicious file"
+        ],
+        "questions": [
+          "Calculate the hash and identify the actual format.",
+          "Inspect structure, signatures, imports and embedded content in a laboratory.",
+          "Compare detections with legitimate uses and the limits of static analysis."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Calculate the hash and identify the actual format."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Inspect structure, signatures, imports and embedded content in a laboratory."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare detections with legitimate uses and the limits of static analysis."
+        }
+      ],
+      "verification": {
+        "acceptance": "Separate suspected capabilities from observed behavior. Public submission requires permission to share.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Metadata",
+          "Isolated static analysis"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/Yara-Rules/rules",
+        "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+      ]
+    },
+    {
+      "id": "OT-MODBUS-FLOW",
+      "domain": "cyber-ot",
+      "title": "Modbus/TCP flows and writes",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "modbus"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Modbus/TCP flows and writes"
+        ],
+        "questions": [
+          "Confirm the protocol by decoding an existing capture.",
+          "Map observed clients, servers, functions and ranges to the supplied naming scheme.",
+          "Distinguish expected process activity, maintenance and unidentified sources.",
+          "Assess segmentation and write authorization evidence without replaying traffic."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Confirm the protocol by decoding an existing capture."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map observed clients, servers, functions and ranges to the supplied naming scheme."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Distinguish expected process activity, maintenance and unidentified sources."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Assess segmentation and write authorization evidence without replaying traffic."
+        }
+      ],
+      "verification": {
+        "acceptance": "Support the finding with frames, endpoints, functions and process context. A register number alone does not identify its physical function.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "tshark -n -r",
+          "Program export"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.wireshark.org/docs/dfref/m/modbus.html",
+        "https://csrc.nist.gov/pubs/sp/800/82/r3/final"
+      ]
+    },
+    {
+      "id": "OT-OPCUA-TRUST",
+      "domain": "cyber-ot",
+      "title": "OPC UA trust and permissions",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "opc-ua"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "OPC UA trust and permissions"
+        ],
+        "questions": [
+          "Compare the advertised endpoint, used endpoint, policy and mode.",
+          "Check configured certificate trust, rejection and renewal.",
+          "Map user identity and role to node permissions."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Compare the advertised endpoint, used endpoint, policy and mode."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Check configured certificate trust, rejection and renewal."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map user identity and role to node permissions."
+        }
+      ],
+      "verification": {
+        "acceptance": "Verify the subject is authorized for the operation as well as checking channel encryption.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Server configuration",
+          "Existing capture"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://reference.opcfoundation.org/Core/Part2/v105/docs/"
+      ]
+    },
+    {
+      "id": "OT-S7-ENGINEERING",
+      "domain": "cyber-ot",
+      "title": "S7 engineering access",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "s7"
+        ],
+        "vendors": [
+          "siemens"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "S7 engineering access"
+        ],
+        "questions": [
+          "Identify CPU, firmware, protections and engineering tool version.",
+          "Map engineering workstations and observed operations to the maintenance plan.",
+          "Compare the exported program, backup and loaded reference where supplied."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify CPU, firmware, protections and engineering tool version."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map engineering workstations and observed operations to the maintenance plan."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the exported program, backup and loaded reference where supplied."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record offline evidence and the remaining physical check. Do not write to a controller to confirm a hypothesis.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "TIA/STEP 7 export",
+          "PCAP"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://cert-portal.siemens.com/",
+        "https://www.wireshark.org/docs/dfref/s/s7comm.html"
+      ]
+    },
+    {
+      "id": "OT-PROFINET-ZONES",
+      "domain": "cyber-ot",
+      "title": "PROFINET discovery and configuration",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "profinet"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "PROFINET discovery and configuration"
+        ],
+        "questions": [
+          "Identify the controller, devices and layer-2 domain.",
+          "Identify discovery and configuration events in a capture.",
+          "Relate name or address changes to known maintenance activity."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the controller, devices and layer-2 domain."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Identify discovery and configuration events in a capture."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Relate name or address changes to known maintenance activity."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record capture point, period and layer-2 coverage. Do not transmit DCP traffic by default.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "PCAP",
+          "Switch configuration"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://csrc.nist.gov/pubs/sp/800/82/r3/final"
+      ]
+    },
+    {
+      "id": "OT-CIP-ACCESS",
+      "domain": "cyber-ot",
+      "title": "EtherNet/IP and CIP access",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "ethernet-ip",
+          "cip"
+        ],
+        "vendors": [
+          "rockwell"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "EtherNet/IP and CIP access"
+        ],
+        "questions": [
+          "Distinguish explicit, implicit and administrative exchanges.",
+          "Identify roles and security capabilities for the exact model.",
+          "Compare observed flows, identities and expected segmentation."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Distinguish explicit, implicit and administrative exchanges."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Identify roles and security capabilities for the exact model."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare observed flows, identities and expected segmentation."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish CIP Security support from product documentation and actual configuration.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "PCAP",
+          "Controller export"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.wireshark.org/docs/dfref/e/enip.html",
+        "https://www.rockwellautomation.com/en-us/trust-center.html"
+      ]
+    },
+    {
+      "id": "OT-PCAP-COVERAGE",
+      "domain": "cyber-ot",
+      "title": "OT capture coverage",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "modbus",
+          "s7",
+          "profinet",
+          "opc-ua",
+          "ethernet-ip"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "OT capture coverage"
+        ],
+        "questions": [
+          "Identify source, SPAN/TAP, duration, clock and packet loss.",
+          "Hash the capture and find an expected control flow.",
+          "Count protocols and conversations offline without external name resolution.",
+          "Retain frames and filters for each observation."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify source, SPAN/TAP, duration, clock and packet loss."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Hash the capture and find an expected control flow."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Count protocols and conversations offline without external name resolution."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Retain frames and filters for each observation."
+        }
+      ],
+      "verification": {
+        "acceptance": "A missing flow is conclusive only when the capture could have observed that traffic.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Offline tshark",
+          "Wireshark"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.wireshark.org/docs/",
+        "https://github.com/rayborg/ICS_repo"
+      ]
+    },
+    {
+      "id": "OT-IEC62443-EVIDENCE",
+      "domain": "cyber-ot",
+      "title": "IEC 62443 applicability and evidence",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "IEC 62443 applicability and evidence"
+        ],
+        "questions": [
+          "Identify the role, part, edition and system under consideration.",
+          "Define zones, conduits and risk-based objectives.",
+          "Map verified requirements to an owner, method and evidence.",
+          "Leave normative identifiers unconfirmed when the source text is unavailable."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the role, part, edition and system under consideration."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Define zones, conduits and risk-based objectives."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map verified requirements to an owner, method and evidence."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Leave normative identifiers unconfirmed when the source text is unavailable."
+        }
+      ],
+      "verification": {
+        "acceptance": "Distinguish target level, component capability and achieved state. The matrix alone does not establish certification.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Authorized documents",
+          "Architecture"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards"
+      ]
+    },
+    {
+      "id": "OT-SIEMENS-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Siemens product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "siemens"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Siemens product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://cert-portal.siemens.com/"
+      ]
+    },
+    {
+      "id": "OT-ROCKWELL-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Rockwell product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "rockwell"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Rockwell product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.rockwellautomation.com/en-us/trust-center.html"
+      ]
+    },
+    {
+      "id": "OT-SCHNEIDER-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Schneider product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "schneider"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Schneider product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.se.com/ww/en/work/support/cybersecurity/overview.jsp"
+      ]
+    },
+    {
+      "id": "OT-OMRON-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Omron product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "omron"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Omron product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.fa.omron.co.jp/product/security/en/"
+      ]
+    }
+  ]
+}

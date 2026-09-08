@@ -1,0 +1,4 @@
+interface:
+  display_name: "AppSec, cloud and AI"
+  short_description: "Review code, identity, cloud and AI security"
+  default_prompt: "Use $cyber-appsec to review this project, trace suspected defects to their impact and propose targeted fixes."

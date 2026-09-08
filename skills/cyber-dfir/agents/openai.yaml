@@ -1,0 +1,4 @@
+interface:
+  display_name: "Investigation and response"
+  short_description: "Preserve evidence and investigate incidents"
+  default_prompt: "Use $cyber-dfir to assess the available evidence, build an incident timeline and prepare containment and recovery actions."

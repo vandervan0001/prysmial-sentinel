@@ -1,0 +1,4 @@
+interface:
+  display_name: "Detection validation"
+  short_description: "Verify behavior through to alert delivery"
+  default_prompt: "Use $cyber-purple-team to prepare a scoped laboratory scenario and verify each stage from behavior to alert delivery."

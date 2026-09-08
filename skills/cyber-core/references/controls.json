@@ -1,0 +1,3699 @@
+{
+  "schema_version": 1,
+  "kind": "cyber-control-catalog",
+  "authored_baseline": "2026-09-08",
+  "controls": [
+    {
+      "id": "CORE-THREAT-MODEL",
+      "domain": "cyber-core",
+      "title": "Threat modeling",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Threat modeling"
+        ],
+        "questions": [
+          "Reconstruct flows from routes, message consumers, scheduled jobs and administrative access. Associate each trust boundary with a concrete mechanism: session, token, network, process or signature.",
+          "Distinguish anonymous actors, users from two organizations, support staff, administrators, compromised suppliers and code executed during delivery. A business organization does not necessarily map to a technical tenant boundary.",
+          "Write testable invariants: who can read which object, change which transition or delegate which capability. Include exports, caches, search, backups and job queues alongside HTTP routes.",
+          "Trace three to five priority scenarios from accessible input to effect: cross-user reads, privilege escalation, repeated actions, transitive trust or state corruption. Keep hypotheses distinct from demonstrated defects.",
+          "Associate each scenario with an existing control, its location and a planned check. Record assumptions supporting the conclusion and those requiring runtime observation."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Reconstruct flows from routes, message consumers, scheduled jobs and administrative access. Associate each trust boundary with a concrete mechanism: session, token, network, process or signature."
+        },
+        {
+          "phase": "review",
+          "instruction": "Distinguish anonymous actors, users from two organizations, support staff, administrators, compromised suppliers and code executed during delivery. A business organization does not necessarily map to a technical tenant boundary."
+        },
+        {
+          "phase": "review",
+          "instruction": "Write testable invariants: who can read which object, change which transition or delegate which capability. Include exports, caches, search, backups and job queues alongside HTTP routes."
+        },
+        {
+          "phase": "review",
+          "instruction": "Trace three to five priority scenarios from accessible input to effect: cross-user reads, privilege escalation, repeated actions, transitive trust or state corruption. Keep hypotheses distinct from demonstrated defects."
+        },
+        {
+          "phase": "review",
+          "instruction": "Associate each scenario with an existing control, its location and a planned check. Record assumptions supporting the conclusion and those requiring runtime observation."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide a flow diagram, an actor × operation × data matrix and prioritized scenarios with their existing checks, available evidence and missing tests.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Mermaid for a small diagram. STRIDE helps explore threats, but a category alone does not establish risk. Match the model to the observed repository and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "asvs",
+        "attack",
+        "atlas"
+      ],
+      "source_path": "skills/cyber-core/references/modules/threat-model.md",
+      "source_sha256": "3cd18f7d6830b1ee1897c811142c273f23deb1aac115382d9993cb009562c4c7"
+    },
+    {
+      "id": "APPSEC-CODE-REVIEW",
+      "domain": "cyber-appsec",
+      "title": "Security code review",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Security code review"
+        ],
+        "questions": [
+          "Map inputs, sensitive operations and existing checks. Trace values through controllers, services, ORMs, jobs and adapters. Read the control module exports; searching a single predicate can miss related checks.",
+          "Review canonicalization, interpolation, serialization, file paths, process creation, server-side URLs, permissions and mutable state. Distinguish a sensitive call using a constant from user input reaching that call.",
+          "Check error paths: skipped initialization, permissive fallback, errors converted to empty values, negative caching, timeouts and retries. Reconstruct behavior after exceptions or interruption.",
+          "Find differences between neighboring endpoints and between synchronous and deferred operations. For an identified flaw, establish the cause and an exact instance before expanding the variant search. Keep a safe comparison case.",
+          "Propose a local fix that restores the invariant. For security diffs, also inspect the actual bundle build and paths excluded from compilation in that environment."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Map inputs, sensitive operations and existing checks. Trace values through controllers, services, ORMs, jobs and adapters. Read the control module exports; searching a single predicate can miss related checks."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review canonicalization, interpolation, serialization, file paths, process creation, server-side URLs, permissions and mutable state. Distinguish a sensitive call using a constant from user input reaching that call."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check error paths: skipped initialization, permissive fallback, errors converted to empty values, negative caching, timeouts and retries. Reconstruct behavior after exceptions or interruption."
+        },
+        {
+          "phase": "review",
+          "instruction": "Find differences between neighboring endpoints and between synchronous and deferred operations. For an identified flaw, establish the cause and an exact instance before expanding the variant search. Keep a safe comparison case."
+        },
+        {
+          "phase": "review",
+          "instruction": "Propose a local fix that restores the invariant. For security diffs, also inspect the actual bundle build and paths excluded from compilation in that environment."
+        }
+      ],
+      "verification": {
+        "acceptance": "Each finding needs an input → check → operation → impact path. Include a test that rules out a competing explanation and the locations of variants actually verified.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Combine text search, symbol navigation and data-flow analysis. Semgrep and CodeQL can help identify candidates. Compare an identified source copy before attributing a regression to the latest diff."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "asvs",
+        "cwe",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/code-review.md",
+      "source_sha256": "78667c0e8d2bc28730e6d7b443b58ef9abeb17327dfc13b7f9eb410f034947df"
+    },
+    {
+      "id": "APPSEC-SAST",
+      "domain": "cyber-appsec",
+      "title": "Static analysis and rules",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Static analysis and rules"
+        ],
+        "questions": [
+          "Choose syntax, taint or interprocedural analysis for the defect under review. Check capabilities of the available version and edition; an installed CLI alone does not establish cross-file analysis support.",
+          "Run local rules against an identified snapshot. Record versions, rules, analyzed and excluded files, parse errors and timeouts. Do not load unreviewed rules from the target repository.",
+          "For compiled CodeQL analysis, verify that the database contains the intended targets and translation units. Isolate the build without production secrets. Starting an extractor does not prove useful code was captured.",
+          "Build a rule from an understood defect: source, transformations, sink and an effective sanitizer. Add vulnerable and safe cases, aliases, wrappers and relevant syntax variants. Verify the protection before treating a validator as a sanitizer.",
+          "Import results with execution metadata. Group by cause and location carefully, keeping source rules and explicit reasons for rejected findings."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Choose syntax, taint or interprocedural analysis for the defect under review. Check capabilities of the available version and edition; an installed CLI alone does not establish cross-file analysis support."
+        },
+        {
+          "phase": "review",
+          "instruction": "Run local rules against an identified snapshot. Record versions, rules, analyzed and excluded files, parse errors and timeouts. Do not load unreviewed rules from the target repository."
+        },
+        {
+          "phase": "review",
+          "instruction": "For compiled CodeQL analysis, verify that the database contains the intended targets and translation units. Isolate the build without production secrets. Starting an extractor does not prove useful code was captured."
+        },
+        {
+          "phase": "review",
+          "instruction": "Build a rule from an understood defect: source, transformations, sink and an effective sanitizer. Add vulnerable and safe cases, aliases, wrappers and relevant syntax variants. Verify the protection before treating a validator as a sanitizer."
+        },
+        {
+          "phase": "review",
+          "instruction": "Import results with execution metadata. Group by cause and location carefully, keeping source rules and explicit reasons for rejected findings."
+        }
+      ],
+      "verification": {
+        "acceptance": "A custom rule must detect its vulnerable cases and leave safe controls unflagged. Report analyzed file counts, parse errors and missing coverage.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "The library provides a local Semgrep runner and targeted rules for a limited set of constructs. Add maintained, reviewed rule packs according to the project. Treat SARIF input as untrusted data."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "semgrep",
+        "codeql",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/sast.md",
+      "source_sha256": "2a5f01a1ba9c56c9ce0893f0906682267689c05fb27612c338685c5d6ebd0e7a"
+    },
+    {
+      "id": "APPSEC-DEPENDENCIES",
+      "domain": "cyber-appsec",
+      "title": "Dependencies and software supply chain",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Dependencies and software supply chain"
+        ],
+        "questions": [
+          "Build the resolved component inventory, including transitive dependencies, copied binaries and libraries in the final image. Compare manifests, lockfiles, SBOMs and distributed artifacts.",
+          "Match security advisories to exact versions and ecosystems, including CVE/GHSA aliases and vendor fixes. A backport can fix a vulnerability without adopting the upstream version number.",
+          "Assess reachability, enabled features, development/build/runtime context, privileges and exposure. Keep reachability unresolved when evidence is missing.",
+          "Check installation scripts, provenance, maintainers and publication permissions using dated records. An unavailable measurement must remain unknown rather than becoming a risk indicator.",
+          "Prioritize a CVE using local impact, KEV, a dated EPSS score and an applicable fix. Prepare the smallest update with build and retest of affected paths, without rewriting the whole lockfile."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Build the resolved component inventory, including transitive dependencies, copied binaries and libraries in the final image. Compare manifests, lockfiles, SBOMs and distributed artifacts."
+        },
+        {
+          "phase": "review",
+          "instruction": "Match security advisories to exact versions and ecosystems, including CVE/GHSA aliases and vendor fixes. A backport can fix a vulnerability without adopting the upstream version number."
+        },
+        {
+          "phase": "review",
+          "instruction": "Assess reachability, enabled features, development/build/runtime context, privileges and exposure. Keep reachability unresolved when evidence is missing."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check installation scripts, provenance, maintainers and publication permissions using dated records. An unavailable measurement must remain unknown rather than becoming a risk indicator."
+        },
+        {
+          "phase": "review",
+          "instruction": "Prioritize a CVE using local impact, KEV, a dated EPSS score and an applicable fix. Prepare the smallest update with build and retest of affected paths, without rewriting the whole lockfile."
+        }
+      ],
+      "verification": {
+        "acceptance": "For each affected component, record resolved identity, presence, sourced vulnerable version range, usage context, fix and limits. A raw CVE list remains a candidate inventory.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "OSV-Scanner, Syft, Grype and Trivy are options. Some queries send component names and versions externally; use local databases or established sharing permission for private dependencies."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "osv",
+        "trivy",
+        "kev",
+        "epss",
+        "slsa",
+        "supply-tools"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/dependencies.md",
+      "source_sha256": "c30bb7fbe3a77926007cb827c543442985ca175300865ae7d54a78cc2db11e8b"
+    },
+    {
+      "id": "APPSEC-SECRETS",
+      "domain": "cyber-appsec",
+      "title": "Secrets and credentials",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Secrets and credentials"
+        ],
+        "questions": [
+          "Define the inspected storage locations before searching. A working-tree scan does not cover Git history, CI caches or image layers.",
+          "Use sanitized output. Keep secret type, file, line, commit and a non-reversible fingerprint of the relevant signal. Never print a secret to prove its presence.",
+          "Distinguish synthetic fixtures, public keys, non-secret identifiers and plausible credentials. Testing a token against its provider requires permission for that use.",
+          "Trace provisioning, permissions, lifetime, rotation, revocation, backups and logs. Check behavior when a secret is missing, expired or renewed.",
+          "For confirmed exposure, prepare revocation and replacement before history cleanup. Check invalidation of derived sessions or tokens. Removing data from Git does not revoke credentials."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Define the inspected storage locations before searching. A working-tree scan does not cover Git history, CI caches or image layers."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use sanitized output. Keep secret type, file, line, commit and a non-reversible fingerprint of the relevant signal. Never print a secret to prove its presence."
+        },
+        {
+          "phase": "review",
+          "instruction": "Distinguish synthetic fixtures, public keys, non-secret identifiers and plausible credentials. Testing a token against its provider requires permission for that use."
+        },
+        {
+          "phase": "review",
+          "instruction": "Trace provisioning, permissions, lifetime, rotation, revocation, backups and logs. Check behavior when a secret is missing, expired or renewed."
+        },
+        {
+          "phase": "review",
+          "instruction": "For confirmed exposure, prepare revocation and replacement before history cleanup. Check invalidation of derived sessions or tokens. Removing data from Git does not revoke credentials."
+        }
+      ],
+      "verification": {
+        "acceptance": "Identify the storage location and exposure path without disclosure. Rotation evidence must cover both the configured replacement and actual invalidation of the old credential.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Gitleaks or an equivalent scanner with masking. Give false-positive exclusions a specific justification and expiry where temporary. Avoid global extension-based exclusions."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "gitleaks",
+        "cheatsheets",
+        "aws"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/secrets.md",
+      "source_sha256": "206b3947ab21f353aa7d6fafec227ab610b1299a4d9f58ac66f013ca2c5b9487"
+    },
+    {
+      "id": "APPSEC-AUTH",
+      "domain": "cyber-appsec",
+      "title": "Authentication and authorization",
+      "applies_to": {
+        "signals": [
+          "web",
+          "api",
+          "mobile",
+          "desktop"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Authentication and authorization"
+        ],
+        "questions": [
+          "Reconstruct registration, verification, sign-in, recovery, account linking and authentication factor changes. Look for recovery paths weaker than the main authentication flow.",
+          "Check sessions and revocation across cookies, APIs, WebSocket connections and jobs. Test account disablement, logout and refresh-token rotation alongside a still-valid session.",
+          "For OAuth/OIDC, check issuer, audience, exact redirect URI, state, flow-specific nonce requirements, PKCE, session binding and privileges. Read the provider guidance and RFC 9700 for the actual client type.",
+          "For WebAuthn and passkeys, examine RP ID, origin, single-use challenge, account binding and user verification requirements for the action. Include enrollment and recovery in the review.",
+          "Build a subject × action × object matrix covering direct access, lists, exports, search, attachments, admin operations and deferred jobs. A permission check in the interface does not protect the server function."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Reconstruct registration, verification, sign-in, recovery, account linking and authentication factor changes. Look for recovery paths weaker than the main authentication flow."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check sessions and revocation across cookies, APIs, WebSocket connections and jobs. Test account disablement, logout and refresh-token rotation alongside a still-valid session."
+        },
+        {
+          "phase": "review",
+          "instruction": "For OAuth/OIDC, check issuer, audience, exact redirect URI, state, flow-specific nonce requirements, PKCE, session binding and privileges. Read the provider guidance and RFC 9700 for the actual client type."
+        },
+        {
+          "phase": "review",
+          "instruction": "For WebAuthn and passkeys, examine RP ID, origin, single-use challenge, account binding and user verification requirements for the action. Include enrollment and recovery in the review."
+        },
+        {
+          "phase": "review",
+          "instruction": "Build a subject × action × object matrix covering direct access, lists, exports, search, attachments, admin operations and deferred jobs. A permission check in the interface does not protect the server function."
+        }
+      ],
+      "verification": {
+        "acceptance": "Run an authorized operation, then repeat the path with a forbidden account or object. Record role, object, session state and persistent effect, with secrets masked.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use an HTTP proxy and server tests with synthetic accounts. Unpredictable identifiers do not replace authorization. Match NIST assurance requirements to the service; this review does not establish compliance by itself."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "auth",
+        "oauth",
+        "asvs"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/auth.md",
+      "source_sha256": "175e1008e3f48e56f461bdea1f2781d4b898b315190debe05548e9b5c906e639"
+    },
+    {
+      "id": "APPSEC-API",
+      "domain": "cyber-appsec",
+      "title": "APIs and data isolation",
+      "applies_to": {
+        "signals": [
+          "web",
+          "api",
+          "ai"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "APIs and data isolation"
+        ],
+        "questions": [
+          "Compare the route inventory, schemas and active handlers. Include internal endpoints exposed through proxies, older API versions, GraphQL mutations and gRPC methods.",
+          "Test access to objects and properties: reads, partial updates, mass assignment, list filters and aggregates. Find paths that omit a restriction applied in the main CRUD handler.",
+          "For GraphQL, review cost, depth, aliases, batching, subscriptions and resolver authorization. Introspection alone is not a vulnerability.",
+          "Trace user-supplied URLs through DNS, redirects and server requests. Test destination and outbound restrictions in a laboratory with a controlled receiver; do not contact real cloud metadata services by default.",
+          "Check webhook validation against raw bytes, signatures, timestamps, replay, idempotency and the associated business object. For uploads, examine actual file type, names, archive extraction, size, storage and download paths."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Compare the route inventory, schemas and active handlers. Include internal endpoints exposed through proxies, older API versions, GraphQL mutations and gRPC methods."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test access to objects and properties: reads, partial updates, mass assignment, list filters and aggregates. Find paths that omit a restriction applied in the main CRUD handler."
+        },
+        {
+          "phase": "review",
+          "instruction": "For GraphQL, review cost, depth, aliases, batching, subscriptions and resolver authorization. Introspection alone is not a vulnerability."
+        },
+        {
+          "phase": "review",
+          "instruction": "Trace user-supplied URLs through DNS, redirects and server requests. Test destination and outbound restrictions in a laboratory with a controlled receiver; do not contact real cloud metadata services by default."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check webhook validation against raw bytes, signatures, timestamps, replay, idempotency and the associated business object. For uploads, examine actual file type, names, archive extraction, size, storage and download paths."
+        }
+      ],
+      "verification": {
+        "acceptance": "Keep the minimal sanitized request, identity, object, response and effect. A 200 response with no objects can hide incorrectly combined filters; check against a known existing object.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use ZAP, Burp or contract tests within the authorized scope. OpenAPI-generated tests can find contract mismatches, but do not establish business rules or permissions."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "api",
+        "asvs",
+        "wstg",
+        "postgres"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/api.md",
+      "source_sha256": "7c4df754cca277e42287440aa1b9b3231de7c017fa35141182608f21e797336b"
+    },
+    {
+      "id": "APPSEC-BROWSER",
+      "domain": "cyber-appsec",
+      "title": "Browser and frontend security",
+      "applies_to": {
+        "signals": [
+          "web"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Browser and frontend security"
+        ],
+        "questions": [
+          "Trace untrusted data into DOM sinks, templates, URLs, styles and Markdown rendering. Check sanitization in the final context, including later transformations.",
+          "Read response headers on actual routes, including errors and cache hits. Assess CSP against dynamically loaded scripts; use report-only mode when a proposed change could break application flows.",
+          "Relate CORS to the credential model. Test expected, unexpected and null origins as applicable. A permissive header without sensitive data or credentials is insufficient to establish impact.",
+          "Test CSRF on cookie-authenticated mutations, forms and method or content-type changes. Check Origin, tokens and SameSite behavior on the exposed flow.",
+          "Review postMessage, window.opener, iframes, service workers, CDN caches and browser storage. Verify that authenticated responses cannot be reused by another identity."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace untrusted data into DOM sinks, templates, URLs, styles and Markdown rendering. Check sanitization in the final context, including later transformations."
+        },
+        {
+          "phase": "review",
+          "instruction": "Read response headers on actual routes, including errors and cache hits. Assess CSP against dynamically loaded scripts; use report-only mode when a proposed change could break application flows."
+        },
+        {
+          "phase": "review",
+          "instruction": "Relate CORS to the credential model. Test expected, unexpected and null origins as applicable. A permissive header without sensitive data or credentials is insufficient to establish impact."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test CSRF on cookie-authenticated mutations, forms and method or content-type changes. Check Origin, tokens and SameSite behavior on the exposed flow."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review postMessage, window.opener, iframes, service workers, CDN caches and browser storage. Verify that authenticated responses cannot be reused by another identity."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the origin, credentials used and affected action or data. Verify the path in a real browser. Do not report HTML injection without a JavaScript effect as confirmed XSS.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use DevTools and a proxy with controlled captures. Verify document visibility, stylesheet loading and session state before measuring behavior. COOP, COEP and CORP depend on isolation needs and integrations."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "wstg",
+        "asvs",
+        "cheatsheets"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/browser.md",
+      "source_sha256": "50d9b7d7446a2a923a0c57c55437a5e65a8f1acb648a0129f73a8749d74ee98b"
+    },
+    {
+      "id": "APPSEC-BUSINESS-LOGIC",
+      "domain": "cyber-appsec",
+      "title": "Business logic and concurrency",
+      "applies_to": {
+        "signals": [
+          "web",
+          "api",
+          "payments"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Business logic and concurrency"
+        ],
+        "questions": [
+          "Map the state machine and separate server transitions, provider callbacks and interface behavior. Look for skipped steps, role changes during an operation and actions after cancellation.",
+          "Check idempotency and binding between the key, subject, operation and parameters. The cache must distinguish repeated identical requests from different requests.",
+          "Use synthetic data and a controlled order of concurrent requests to expose the window between checking and writing. Check transactions, uniqueness constraints, isolation and recovery after conflicts.",
+          "For money or quantities, trace rounding, currency, quantity, sign, decimals, limits and price sources. Compare invariants before and after the operation, including compensation, without real billing.",
+          "Review distributed quotas, reservations, expiry and job recovery. A retry after a timeout may repeat an operation already completed by a third party."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Map the state machine and separate server transitions, provider callbacks and interface behavior. Look for skipped steps, role changes during an operation and actions after cancellation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check idempotency and binding between the key, subject, operation and parameters. The cache must distinguish repeated identical requests from different requests."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use synthetic data and a controlled order of concurrent requests to expose the window between checking and writing. Check transactions, uniqueness constraints, isolation and recovery after conflicts."
+        },
+        {
+          "phase": "review",
+          "instruction": "For money or quantities, trace rounding, currency, quantity, sign, decimals, limits and price sources. Compare invariants before and after the operation, including compensation, without real billing."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review distributed quotas, reservations, expiry and job recovery. A retry after a timeout may repeat an operation already completed by a third party."
+        }
+      ],
+      "verification": {
+        "acceptance": "Demonstrate the broken invariant with initial state, operation order and final state. Include the same scenario run sequentially as a control. A burst of requests alone does not prove a race condition.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use transaction tests and controlled barriers with bounded load. For payment tests, verify that the provider configuration uses test mode."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "wstg",
+        "asvs",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/business-logic.md",
+      "source_sha256": "96a3ddfc96ebf6678605d442f55ef9ad961594cceee2e2bb877fc3879f20143c"
+    },
+    {
+      "id": "APPSEC-REALTIME",
+      "domain": "cyber-appsec",
+      "title": "WebSocket, SSE and message queues",
+      "applies_to": {
+        "signals": [
+          "realtime"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "WebSocket, SSE and message queues"
+        ],
+        "questions": [
+          "Check the handshake and authorization of each subscription and message. Bind channels to server objects; resolve any client-supplied tenant against the authorized identity.",
+          "Test expiry, logout, role removal, closure and reconnection. Reassess channels opened before revocation according to the declared policy.",
+          "Check WebSocket Origin and transport-appropriate CSRF protection. CORS alone does not control the WebSocket handshake. For SSE, review cookies, caching and Last-Event-ID recovery.",
+          "Test ordering, duplication, replay, recovery, dead-letter handling and partial state with synthetic messages. Broker guarantees do not create a transaction with the business database.",
+          "Review limits per message, queue, connection and identity, plus backpressure and cancellation. Verify that limits stop the actual processing. Hiding client-side output does not enforce a processing limit."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Check the handshake and authorization of each subscription and message. Bind channels to server objects; resolve any client-supplied tenant against the authorized identity."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test expiry, logout, role removal, closure and reconnection. Reassess channels opened before revocation according to the declared policy."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check WebSocket Origin and transport-appropriate CSRF protection. CORS alone does not control the WebSocket handshake. For SSE, review cookies, caching and Last-Event-ID recovery."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test ordering, duplication, replay, recovery, dead-letter handling and partial state with synthetic messages. Broker guarantees do not create a transaction with the business database."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review limits per message, queue, connection and identity, plus backpressure and cancellation. Verify that limits stop the actual processing. Hiding client-side output does not enforce a processing limit."
+        }
+      ],
+      "verification": {
+        "acceptance": "Show two subscribers with distinct identities and channels, then a known event received only by the authorized subject. For a leak, retain the observed routing with synthetic content.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use local protocol clients and sanitized broker traces. Set connection, volume and time limits. Saturation tests against a live service require explicit scope."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "cheatsheets",
+        "asvs"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/realtime.md",
+      "source_sha256": "b57e6aadb4ea5140c995c653b828379d1f1609952792ff50c15f8c9325fc1e81"
+    },
+    {
+      "id": "APPSEC-CLOUD",
+      "domain": "cyber-appsec",
+      "title": "Cloud and service identities",
+      "applies_to": {
+        "signals": [
+          "cloud"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Cloud and service identities"
+        ],
+        "questions": [
+          "Start from IaC exports and policies. Where cloud access is authorized, verify the account identity before querying and record collection date, region and permissions.",
+          "Reconstruct effective permissions, trust relationships, delegation and ways to modify a more privileged identity. Assess broad roles against their trust policies and organization-wide constraints.",
+          "Review workload federation and CI OIDC: audience, subject, repository, branch or environment, and duration. Check rotation and removal of long-lived keys.",
+          "Relate network exposure, public storage, encryption keys, logs and backups to the business asset. Resources missing from an incomplete regional inventory remain unverified.",
+          "Compare deployed and declared state, then simulate or prepare targeted changes. A Terraform plan does not establish effective permissions or account state."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Start from IaC exports and policies. Where cloud access is authorized, verify the account identity before querying and record collection date, region and permissions."
+        },
+        {
+          "phase": "review",
+          "instruction": "Reconstruct effective permissions, trust relationships, delegation and ways to modify a more privileged identity. Assess broad roles against their trust policies and organization-wide constraints."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review workload federation and CI OIDC: audience, subject, repository, branch or environment, and duration. Check rotation and removal of long-lived keys."
+        },
+        {
+          "phase": "review",
+          "instruction": "Relate network exposure, public storage, encryption keys, logs and backups to the business asset. Resources missing from an incomplete regional inventory remain unverified."
+        },
+        {
+          "phase": "review",
+          "instruction": "Compare deployed and declared state, then simulate or prepare targeted changes. A Terraform plan does not establish effective permissions or account state."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the principal → permission → resource → effect chain with a dated policy export. List regions, services and accounts that were not inspected.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Prowler, ScoutSuite and IAM simulators depend on provider and version. Collectors make API calls and require permissions; do not use administrator credentials for convenience."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "aws",
+        "azure",
+        "gcp",
+        "slsa"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/cloud.md",
+      "source_sha256": "475937299668089f40bed3b51817a9748493932b45e367176c9991c13c683d74"
+    },
+    {
+      "id": "APPSEC-KUBERNETES",
+      "domain": "cyber-appsec",
+      "title": "Kubernetes and orchestration",
+      "applies_to": {
+        "signals": [
+          "kubernetes"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Kubernetes and orchestration"
+        ],
+        "questions": [
+          "Compare source manifests, rendered Helm output and admitted objects. Identify admission mutations and namespace exceptions. A value in values.yaml does not establish pod state.",
+          "Trace effective RBAC, service accounts, projected tokens, impersonation and secret access. Include pod creation and workload modification rights that can provide indirect access.",
+          "Review privileges, capabilities, hostPath, hostNetwork, UID, seccomp and filesystem access. Relate each exception to the workload requirements.",
+          "Verify ingress and egress policies with the actual CNI, DNS and dependency destinations. Test both allowed and blocked traffic using authorized test pods.",
+          "Review the API server, kubelet, etcd, audit logs, registry and backups. Separate provider-managed controls from team responsibilities."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Compare source manifests, rendered Helm output and admitted objects. Identify admission mutations and namespace exceptions. A value in values.yaml does not establish pod state."
+        },
+        {
+          "phase": "review",
+          "instruction": "Trace effective RBAC, service accounts, projected tokens, impersonation and secret access. Include pod creation and workload modification rights that can provide indirect access."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review privileges, capabilities, hostPath, hostNetwork, UID, seccomp and filesystem access. Relate each exception to the workload requirements."
+        },
+        {
+          "phase": "review",
+          "instruction": "Verify ingress and egress policies with the actual CNI, DNS and dependency destinations. Test both allowed and blocked traffic using authorized test pods."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review the API server, kubelet, etcd, audit logs, registry and backups. Separate provider-managed controls from team responsibilities."
+        }
+      ],
+      "verification": {
+        "acceptance": "Associate each finding with an object, namespace, identity and version. An auth can-i query checks one permission; it does not establish an entire escalation path.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use read-only kubectl queries, kube-bench, Trivy and admission rules within scope. Deploy test pods or collect raw secrets only when a specific authorized check requires them."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "k8s",
+        "trivy"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/kubernetes.md",
+      "source_sha256": "dd8003185df6d9370b05f1ebda40b4218bb009debeb94e411a59e191d71db50e"
+    },
+    {
+      "id": "APPSEC-CONTAINERS",
+      "domain": "cyber-appsec",
+      "title": "Images and containers",
+      "applies_to": {
+        "signals": [
+          "containers"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Images and containers"
+        ],
+        "questions": [
+          "Compare source files with the final image. Review multi-stage copies, users, entrypoints, dependencies and artifacts left in earlier layers.",
+          "Look for secrets passed through ARG/ENV, build files, caches or layer history. Deleting a secret in a later layer leaves it in the original layer.",
+          "Check the base image digest, updates, signature and SBOM for the delivered image. Review the signature verifier trust policy: expected identity, issuer and provenance.",
+          "Relate capabilities, seccomp, UID, mounts, Docker socket access and resource limits to the actual risk. A non-root container with a privileged socket may retain extensive access.",
+          "Test shutdown, signals, temporary files and missing configuration in an isolated runtime. Keep the host socket and real credentials outside the laboratory."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Compare source files with the final image. Review multi-stage copies, users, entrypoints, dependencies and artifacts left in earlier layers."
+        },
+        {
+          "phase": "review",
+          "instruction": "Look for secrets passed through ARG/ENV, build files, caches or layer history. Deleting a secret in a later layer leaves it in the original layer."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check the base image digest, updates, signature and SBOM for the delivered image. Review the signature verifier trust policy: expected identity, issuer and provenance."
+        },
+        {
+          "phase": "review",
+          "instruction": "Relate capabilities, seccomp, UID, mounts, Docker socket access and resource limits to the actual risk. A non-root container with a privileged socket may retain extensive access."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test shutdown, signals, temporary files and missing configuration in an isolated runtime. Keep the host socket and real credentials outside the laboratory."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the digest, platform, relevant layer or configuration, and effect. A Dockerfile scan does not establish the contents of the distributed image.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Trivy, Syft, Grype, OCI inspection and signing tools. Extract untrusted images without starting them or following links into the host filesystem."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "trivy",
+        "slsa",
+        "k8s"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/containers.md",
+      "source_sha256": "e47ba61f57314fdd140073cac846bcaedf3390161723eaac5ed7031d8c51b4a1"
+    },
+    {
+      "id": "APPSEC-IAC",
+      "domain": "cyber-appsec",
+      "title": "Infrastructure as code",
+      "applies_to": {
+        "signals": [
+          "iac"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Infrastructure as code"
+        ],
+        "questions": [
+          "Trace variables and module outputs to rendered resources. Distinguish values unknown at plan time from values demonstrated to be permissive.",
+          "Look for public exposure, broad permissions, disabled logging, encryption settings and network policies. Relate each rule to provider behavior and justified exceptions.",
+          "Review state backends, locking, access, versions and secrets. State and plan files can contain sensitive values even when the interface masks them.",
+          "Check module origins, provider versions, checksums and external data sources. Producing a plan can execute providers and external data programs; use an appropriate isolated environment.",
+          "Prepare a diff and describe its resource effects. Compare it with deployed state to assess drift when access is available. Do not apply a plan solely to confirm a rule finding."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace variables and module outputs to rendered resources. Distinguish values unknown at plan time from values demonstrated to be permissive."
+        },
+        {
+          "phase": "review",
+          "instruction": "Look for public exposure, broad permissions, disabled logging, encryption settings and network policies. Relate each rule to provider behavior and justified exceptions."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review state backends, locking, access, versions and secrets. State and plan files can contain sensitive values even when the interface masks them."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check module origins, provider versions, checksums and external data sources. Producing a plan can execute providers and external data programs; use an appropriate isolated environment."
+        },
+        {
+          "phase": "review",
+          "instruction": "Prepare a diff and describe its resource effects. Compare it with deployed state to assess drift when access is available. Do not apply a plan solely to confirm a rule finding."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the resource address, resolved value, environment context and provider control. Mark the result partial when sensitive or dynamic values prevent a decision.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Checkov, Trivy config and versioned policy-as-code rules. Review suppressions and their justification. Treat plan output as sensitive evidence."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "trivy",
+        "aws",
+        "k8s"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/iac.md",
+      "source_sha256": "1616ccde9affa2d1ae93078e6cf0c9d480c9cb5be7cc7e48235582d53608207a"
+    },
+    {
+      "id": "APPSEC-CICD",
+      "domain": "cyber-appsec",
+      "title": "CI/CD and development agents",
+      "applies_to": {
+        "signals": [
+          "cicd"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "CI/CD and development agents"
+        ],
+        "questions": [
+          "Trace data from pull requests, issues, branches and artifacts into shells, templates, agents and builds. Passing data through an environment variable does not make it trusted.",
+          "Review pull_request_target, workflow_run and bot commands against the commit actually checked out. Job chaining must not give an untrusted branch secrets or a write token.",
+          "Check least-privilege permissions, protected environments, OIDC, persistent runners, caches and artifacts. Verify provenance rather than relying on the presence of an attestation.",
+          "For AI agents, trace untrusted input, available capabilities, secrets, outbound access and the final action. Verify that review or approval covers the exact bytes and target executed.",
+          "Verify that CI builds the deployed artifact and runs type checks and relevant tests with a nonzero case count. Passing tsc does not prove the build succeeds; a build does not prove type checks pass."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace data from pull requests, issues, branches and artifacts into shells, templates, agents and builds. Passing data through an environment variable does not make it trusted."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review pull_request_target, workflow_run and bot commands against the commit actually checked out. Job chaining must not give an untrusted branch secrets or a write token."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check least-privilege permissions, protected environments, OIDC, persistent runners, caches and artifacts. Verify provenance rather than relying on the presence of an attestation."
+        },
+        {
+          "phase": "review",
+          "instruction": "For AI agents, trace untrusted input, available capabilities, secrets, outbound access and the final action. Verify that review or approval covers the exact bytes and target executed."
+        },
+        {
+          "phase": "review",
+          "instruction": "Verify that CI builds the deployed artifact and runs type checks and relevant tests with a nonzero case count. Passing tsc does not prove the build succeeds; a build does not prove type checks pass."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the event → data → privileged step path and identify the code executed. Use synthetic receivers in place of external actions for local demonstrations.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use YAML review, actionlint, zizmor and CodeQL where available. Pin actions and dependencies according to the project maintenance policy. Do not trigger a privileged workflow to test a hypothesis."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "github-actions",
+        "slsa",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/cicd.md",
+      "source_sha256": "4f4394a689862703df0154b51cd10a50325670173c5b3817309c43d893bfe36d"
+    },
+    {
+      "id": "APPSEC-AI",
+      "domain": "cyber-appsec",
+      "title": "LLMs and AI agents",
+      "applies_to": {
+        "signals": [
+          "ai"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "LLMs and AI agents"
+        ],
+        "questions": [
+          "Separate trusted instructions from external data: pages, attachments, images, OCR, tool results and memory. Trace their influence on action parameters and responses.",
+          "Write scenarios with synthetic markers and simulated tools: changed destinations, unrequested actions, access to a forbidden document, replay and persistence in memory. Measure the effect; a refusal message alone is insufficient.",
+          "Examine controls enforced outside the model: tool and object authorization, parameter schemas, outbound access, sandboxing, output validation and approval bound to the specific action.",
+          "Measure legitimate task completion, prohibited actions and disclosure separately. Repeat stochastic cases and record model, parameters, budget and dataset version. An agent that fails every task has not demonstrated useful protection.",
+          "Check loops, delegation, costs, cancellation and retries. Review secondary agents and composed tools; a limit on the first agent cannot protect a tool that bypasses it."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Separate trusted instructions from external data: pages, attachments, images, OCR, tool results and memory. Trace their influence on action parameters and responses."
+        },
+        {
+          "phase": "review",
+          "instruction": "Write scenarios with synthetic markers and simulated tools: changed destinations, unrequested actions, access to a forbidden document, replay and persistence in memory. Measure the effect; a refusal message alone is insufficient."
+        },
+        {
+          "phase": "review",
+          "instruction": "Examine controls enforced outside the model: tool and object authorization, parameter schemas, outbound access, sandboxing, output validation and approval bound to the specific action."
+        },
+        {
+          "phase": "review",
+          "instruction": "Measure legitimate task completion, prohibited actions and disclosure separately. Repeat stochastic cases and record model, parameters, budget and dataset version. An agent that fails every task has not demonstrated useful protection."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check loops, delegation, costs, cancellation and retries. Review secondary agents and composed tools; a limit on the first agent cannot protect a tool that bypasses it."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide sanitized tool-call traces, preconditions, observed outcomes and benign test cases. Keep product evaluation results separate from published benchmark scores.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "PyRIT, garak and AgentDojo provide test frameworks to adapt. Hosted models incur costs and transfer data; use synthetic fixtures and an authorized provider."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "llm",
+        "agentic",
+        "agentdojo",
+        "firewalls",
+        "pyrit",
+        "garak"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/ai.md",
+      "source_sha256": "36c14e965e394898d32780f7d88d9a9bab8c1f888ea4945c70377f08618fecc0"
+    },
+    {
+      "id": "APPSEC-MCP",
+      "domain": "cyber-appsec",
+      "title": "MCP, skills and connectors",
+      "applies_to": {
+        "signals": [
+          "mcp",
+          "ai"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "MCP, skills and connectors"
+        ],
+        "questions": [
+          "Read the protocol documentation matching the deployed version. Review issuer and audience validation, scopes, discovery metadata and OAuth resources. Look for token passthrough and confused-deputy behavior.",
+          "Treat tool descriptions, annotations, resources and responses as untrusted data. Use a modified description and a synthetic marker to verify that permissions remain enforced outside the model.",
+          "Check request and object authorization, session binding, transport-specific origin handling, reconnection and invalidation. A session identifier is not an authentication credential.",
+          "For skills, read SKILL.md, references, scripts, installers, hooks and dependencies together. Check paths outside the intended directory, shell substitutions, downloads and secret access before execution.",
+          "Review tool changes between approval and invocation, lookalike names, hidden parameters and redirects. Bind existing approval to the actual target, content and version executed."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Read the protocol documentation matching the deployed version. Review issuer and audience validation, scopes, discovery metadata and OAuth resources. Look for token passthrough and confused-deputy behavior."
+        },
+        {
+          "phase": "review",
+          "instruction": "Treat tool descriptions, annotations, resources and responses as untrusted data. Use a modified description and a synthetic marker to verify that permissions remain enforced outside the model."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check request and object authorization, session binding, transport-specific origin handling, reconnection and invalidation. A session identifier is not an authentication credential."
+        },
+        {
+          "phase": "review",
+          "instruction": "For skills, read SKILL.md, references, scripts, installers, hooks and dependencies together. Check paths outside the intended directory, shell substitutions, downloads and secret access before execution."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review tool changes between approval and invocation, lookalike names, hidden parameters and redirects. Bind existing approval to the actual target, content and version executed."
+        }
+      ],
+      "verification": {
+        "acceptance": "Identify the control that prevents external data from granting authority. Keep the server or skill version, content hash and traces of an authorized benign action and a prohibited action.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use local protocol tests and simulated servers. Third-party readOnly/destructive labels are insufficient. Supplement static checks with a scoped test of actual effects."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "mcp",
+        "oauth",
+        "runtime-skills",
+        "agentsecbench"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/mcp.md",
+      "source_sha256": "32abe2f7d272ea81da1f38efc6030a793f64a9d4603c9447fe026b6b56cc9c72"
+    },
+    {
+      "id": "APPSEC-RAG",
+      "domain": "cyber-appsec",
+      "title": "RAG, search and memory",
+      "applies_to": {
+        "signals": [
+          "ai",
+          "rag"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "RAG, search and memory"
+        ],
+        "questions": [
+          "Trace document → chunking → embedding → index → filter → reranker → context → response. Check where identity and ACLs are enforced, including ingestion and updates.",
+          "Create two corpora with distinct markers. Verify that a query finds an authorized document, then repeat the query with a forbidden identity. An empty search without a positive control does not test the ACL.",
+          "Review caches, conversation history, shared memory, exports and citations for leaks between users. Check that cache keys include all required authorization context.",
+          "Test updates, access revocation and deletion through indexes and caches. Verify both source document removal and removal of derived copies.",
+          "For poisoning tests, use laboratory documents with instructions unrelated to the task. Observe selection, provenance and influence on tools without inserting the test corpus into a live index."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace document → chunking → embedding → index → filter → reranker → context → response. Check where identity and ACLs are enforced, including ingestion and updates."
+        },
+        {
+          "phase": "review",
+          "instruction": "Create two corpora with distinct markers. Verify that a query finds an authorized document, then repeat the query with a forbidden identity. An empty search without a positive control does not test the ACL."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review caches, conversation history, shared memory, exports and citations for leaks between users. Check that cache keys include all required authorization context."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test updates, access revocation and deletion through indexes and caches. Verify both source document removal and removal of derived copies."
+        },
+        {
+          "phase": "review",
+          "instruction": "For poisoning tests, use laboratory documents with instructions unrelated to the task. Observe selection, provenance and influence on tools without inserting the test corpus into a live index."
+        }
+      ],
+      "verification": {
+        "acceptance": "Keep synthetic IDs, expected ACLs, intermediate results and the context sent to the model. A response can omit the marker even if the model received a forbidden document; inspect access before generation.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use read-only queries, fixtures and sanitized traces. Search quality and confidentiality require separate measurements and a relevant control for each."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "llm",
+        "asb",
+        "agentsecbench",
+        "postgres"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/rag.md",
+      "source_sha256": "51772ef9494332340c03106ea2e40ebe8987284290d06972b8fcad2fcf6e1a4d"
+    },
+    {
+      "id": "APPSEC-MOBILE",
+      "domain": "cyber-appsec",
+      "title": "Mobile applications",
+      "applies_to": {
+        "signals": [
+          "mobile"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Mobile applications"
+        ],
+        "questions": [
+          "Compare source and binary: build configuration, endpoints, debug flags, libraries and permissions. A vulnerable debug configuration may not describe the release.",
+          "Review local storage, Keychain/Keystore, backups, logs, screenshots and shared files. Assess sensitivity against the attacker model and device state.",
+          "Test deep links, intents, exported components, URL schemes, Universal/App Links and WebViews. Check origin, parameters and server authorization after navigation.",
+          "Check TLS trust, network configuration, authentication and account binding. Missing certificate pinning is not automatically a flaw without an applicable requirement.",
+          "Test lifecycle changes, logout, background execution, revocation and account switching. Verify that data or jobs from the previous session do not persist beyond policy."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Compare source and binary: build configuration, endpoints, debug flags, libraries and permissions. A vulnerable debug configuration may not describe the release."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review local storage, Keychain/Keystore, backups, logs, screenshots and shared files. Assess sensitivity against the attacker model and device state."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test deep links, intents, exported components, URL schemes, Universal/App Links and WebViews. Check origin, parameters and server authorization after navigation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check TLS trust, network configuration, authentication and account binding. Missing certificate pinning is not automatically a flaw without an applicable requirement."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test lifecycle changes, logout, background execution, revocation and account switching. Verify that data or jobs from the previous session do not persist beyond policy."
+        }
+      ],
+      "verification": {
+        "acceptance": "Identify the versioned MASVS requirement, relevant MASTG test, binary version and device. Distinguish static analysis, stock devices and modified devices.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use MobSF, JADX, Android/Apple tools and Frida instrumentation in an authorized laboratory. Exploitation on a modified device does not establish the same result on a stock user device."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "mas",
+        "auth",
+        "api"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/mobile.md",
+      "source_sha256": "08dcce26374ed10df99d503aa2587da54b4ea1d5457b6b7c6eaec8297662e98e"
+    },
+    {
+      "id": "APPSEC-DESKTOP",
+      "domain": "cyber-appsec",
+      "title": "Desktop, Electron and extensions",
+      "applies_to": {
+        "signals": [
+          "desktop"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Desktop, Electron and extensions"
+        ],
+        "questions": [
+          "Trace remote content and renderer access to the privileged process. For Electron, check context isolation, sandboxing, Node integration and the actual preload API.",
+          "Review each IPC method: sender, frame, origin, parameter schema, authorized object and system action. Exposing the entire transport through a bridge broadens access.",
+          "Check URL opening, navigation, protocol handlers, imported files and document rendering. Validate destinations after canonicalization and prevent user-controlled paths from becoming commands.",
+          "Review updates, signatures, rollback and artifact origins. Verify that the expected identity is checked before installation; a signature merely being present is insufficient.",
+          "For extensions, trace host permissions, content scripts, service workers and native messaging. Check each message sender, cross-origin access, token storage and capture shutdown after logout."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace remote content and renderer access to the privileged process. For Electron, check context isolation, sandboxing, Node integration and the actual preload API."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review each IPC method: sender, frame, origin, parameter schema, authorized object and system action. Exposing the entire transport through a bridge broadens access."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check URL opening, navigation, protocol handlers, imported files and document rendering. Validate destinations after canonicalization and prevent user-controlled paths from becoming commands."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review updates, signatures, rollback and artifact origins. Verify that the expected identity is checked before installation; a signature merely being present is insufficient."
+        },
+        {
+          "phase": "review",
+          "instruction": "For extensions, trace host permissions, content scripts, service workers and native messaging. Check each message sender, cross-origin access, token storage and capture shutdown after logout."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the untrusted content → bridge → privileged action chain and identify the affected binary. Verify behavior in the shipped runtime, including native dependency ABI.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use DevTools, package inspection and local IPC tests. Do not disable runtime protections to make a test pass. Tauri capabilities and extension permissions depend on version."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "electron",
+        "asvs",
+        "auth"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/desktop.md",
+      "source_sha256": "f9647ff8d5a86c287793abde376105ce1895827d869b794e0c665d294699ce74"
+    },
+    {
+      "id": "APPSEC-NATIVE",
+      "domain": "cyber-appsec",
+      "title": "Native code and memory",
+      "applies_to": {
+        "signals": [
+          "native"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Native code and memory"
+        ],
+        "questions": [
+          "Trace lengths, sizes, signed conversions, offsets and allocation arithmetic from the input format. Compare the value checked with the value actually used.",
+          "Review lifetime, ownership, aliasing, pointer invalidation and error cleanup. For Rust, establish preconditions for unsafe code and FFI; the language alone does not settle safety.",
+          "Check synchronization, memory ordering, callbacks, asynchronous cancellation and shared resources. Reconstruct the timing required for a race before targeted reproduction.",
+          "Compare source and optimized binary: hardening, secret erasure, branches on sensitive values and compiler differences. A debug test does not describe release behavior.",
+          "Build a harness around the real API and run suitable sanitizers on synthetic inputs. Minimize crashes, verify reproducibility and search for variants sharing the cause."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace lengths, sizes, signed conversions, offsets and allocation arithmetic from the input format. Compare the value checked with the value actually used."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review lifetime, ownership, aliasing, pointer invalidation and error cleanup. For Rust, establish preconditions for unsafe code and FFI; the language alone does not settle safety."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check synchronization, memory ordering, callbacks, asynchronous cancellation and shared resources. Reconstruct the timing required for a race before targeted reproduction."
+        },
+        {
+          "phase": "review",
+          "instruction": "Compare source and optimized binary: hardening, secret erasure, branches on sensitive values and compiler differences. A debug test does not describe release behavior."
+        },
+        {
+          "phase": "review",
+          "instruction": "Build a harness around the real API and run suitable sanitizers on synthetic inputs. Minimize crashes, verify reproducibility and search for variants sharing the cause."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the minimal input, compiler options, trace, memory violation or broken invariant, and reachability context. A crash does not automatically establish code execution.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use ASan, UBSan, TSan or Miri where compatible, plus libFuzzer or AFL++. Compile unknown code in a disposable environment with limits on time, memory and output."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "libfuzzer",
+        "ossfuzz",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/native.md",
+      "source_sha256": "4e138f83bacdd1592ab678e5cb5c094a465f5bac5f70818c3fa8ca5a6a5b7b2e"
+    },
+    {
+      "id": "APPSEC-FUZZING",
+      "domain": "cyber-appsec",
+      "title": "Fuzzing and property tests",
+      "applies_to": {
+        "signals": [
+          "native",
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Fuzzing and property tests"
+        ],
+        "questions": [
+          "Call the real product functions. Use a known input to verify that the harness reaches useful processing and that format rejections do not consume the whole campaign.",
+          "Choose coverage-guided fuzzing for native code, structured generation for objects and stateful tests for workflows. Add a dictionary or grammar where the format prevents entry into useful branches.",
+          "Define properties independently of the implementation: conservation, justified monotonicity, round trips over a defined domain, permission isolation or agreement with a reference implementation.",
+          "Set seed, initial corpus, version, timeout and memory limits. Measure executions, useful coverage, rejections, harness failures and crashes. Reproduce a crash outside the fuzzer before assessing it.",
+          "Minimize counterexamples and turn them into regression tests. To verify an assertion, disable the relevant check in an isolated copy and confirm that the test fails for the expected reason."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Call the real product functions. Use a known input to verify that the harness reaches useful processing and that format rejections do not consume the whole campaign."
+        },
+        {
+          "phase": "review",
+          "instruction": "Choose coverage-guided fuzzing for native code, structured generation for objects and stateful tests for workflows. Add a dictionary or grammar where the format prevents entry into useful branches."
+        },
+        {
+          "phase": "review",
+          "instruction": "Define properties independently of the implementation: conservation, justified monotonicity, round trips over a defined domain, permission isolation or agreement with a reference implementation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Set seed, initial corpus, version, timeout and memory limits. Measure executions, useful coverage, rejections, harness failures and crashes. Reproduce a crash outside the fuzzer before assessing it."
+        },
+        {
+          "phase": "review",
+          "instruction": "Minimize counterexamples and turn them into regression tests. To verify an assertion, disable the relevant check in an isolated copy and confirm that the test fails for the expected reason."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the harness, invariant, seed, minimal corpus, nonzero execution evidence and reproduction. A round trip can preserve the same error in both directions; include an independent oracle or control.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Hypothesis, fast-check, proptest, libFuzzer, AFL++, Atheris or Echidna as appropriate. A bounded campaign without crashes records the search performed, not an absence of defects."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "libfuzzer",
+        "ossfuzz",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/fuzzing.md",
+      "source_sha256": "838024f1577d9b6d55415a18ffbdc2bcf5d1b0bb4d7477a768ac39019ee9e9e1"
+    },
+    {
+      "id": "APPSEC-CRYPTO",
+      "domain": "cyber-appsec",
+      "title": "Cryptography and PQC migration",
+      "applies_to": {
+        "signals": [
+          "crypto",
+          "native"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Cryptography and PQC migration"
+        ],
+        "questions": [
+          "Trace key generation, storage, use, rotation and destruction. Distinguish data keys, key wrapping, signatures and credentials. Check failure and recovery behavior.",
+          "Check AEAD use, nonce uniqueness, domain separation, RNGs, KDFs, signature verification and context binding. Test malformed formats and validation errors against known vectors.",
+          "For code that depends on secrets, examine compiler output, branches, memory access and erasure. A branch-free source loop does not prove constant-time behavior on the target platform.",
+          "Inventory asymmetric cryptography and data lifetimes for PQC preparation. Check the published standard, maintained implementation, protocol support and measured interoperability separately.",
+          "Evaluate migration or hybrid operation in a laboratory with size, latency, certificate and rollback budgets. Check errata for the selected primitives; avoid improvised cryptographic substitutions."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace key generation, storage, use, rotation and destruction. Distinguish data keys, key wrapping, signatures and credentials. Check failure and recovery behavior."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check AEAD use, nonce uniqueness, domain separation, RNGs, KDFs, signature verification and context binding. Test malformed formats and validation errors against known vectors."
+        },
+        {
+          "phase": "review",
+          "instruction": "For code that depends on secrets, examine compiler output, branches, memory access and erasure. A branch-free source loop does not prove constant-time behavior on the target platform."
+        },
+        {
+          "phase": "review",
+          "instruction": "Inventory asymmetric cryptography and data lifetimes for PQC preparation. Check the published standard, maintained implementation, protocol support and measured interoperability separately."
+        },
+        {
+          "phase": "review",
+          "instruction": "Evaluate migration or hybrid operation in a laboratory with size, latency, certificate and rollback budgets. Check errata for the selected primitives; avoid improvised cryptographic substitutions."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the key and primitive inventory, expected property, vector or measurement, platform and limitations. No statistical signal in a sample does not prove the absence of a side channel.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Wycheproof, assembly analysis and dudect as needed. FIPS 203 defines ML-KEM; it does not certify the library or deployed protocol."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "pqc",
+        "wycheproof",
+        "tob"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/crypto.md",
+      "source_sha256": "fc6f865be45f2d8253da45a4b68995a941356d41a6a5bc4e46f80d3bc14359de"
+    },
+    {
+      "id": "PENTEST-NETWORK",
+      "domain": "cyber-pentest",
+      "title": "Networks, DNS and TLS",
+      "applies_to": {
+        "signals": [
+          "network"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Networks, DNS and TLS"
+        ],
+        "questions": [
+          "Trace the declared service through local listeners, firewalls, proxies and external routes. Distinguish open ports, reachable applications and usable authenticated operations.",
+          "Check TLS hostname, SNI, certificate chain, protocol and actual termination point. Test proxy and origin separately only when both are in scope.",
+          "Review DNS delegation, historical and dangling records, and domain control. For email, relate SPF/DKIM/DMARC to actual message flow; a DNS record alone does not prove message alignment.",
+          "Compare expected segmentation with observed inter-zone flows using authorized control traffic. Include IPv6 and outbound traffic as well as IPv4 ingress.",
+          "Reproduce HTTP parsing, cache and proxy inconsistencies in an isolated environment. Desynchronization tests on shared connections can affect other users and require an appropriate test setup."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Trace the declared service through local listeners, firewalls, proxies and external routes. Distinguish open ports, reachable applications and usable authenticated operations."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check TLS hostname, SNI, certificate chain, protocol and actual termination point. Test proxy and origin separately only when both are in scope."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review DNS delegation, historical and dangling records, and domain control. For email, relate SPF/DKIM/DMARC to actual message flow; a DNS record alone does not prove message alignment."
+        },
+        {
+          "phase": "review",
+          "instruction": "Compare expected segmentation with observed inter-zone flows using authorized control traffic. Include IPv6 and outbound traffic as well as IPv4 ingress."
+        },
+        {
+          "phase": "review",
+          "instruction": "Reproduce HTTP parsing, cache and proxy inconsistencies in an isolated environment. Desynchronization tests on shared connections can affect other users and require an appropriate test setup."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record time, vantage point, hostname, IP, protocol and result. Failure to reach a service from one probe does not establish its absence.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Nmap against an authorized target list, testssl.sh, openssl and capture analysis. Choose ports and probes explicitly; broad sweeps and NSE scripts are outside the default review."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "wstg",
+        "attack",
+        "cheatsheets"
+      ],
+      "source_path": "skills/cyber-pentest/references/modules/network.md",
+      "source_sha256": "ff917d5497689318154192990866b2aa9ad6f83978056a65772625a9d2840a84"
+    },
+    {
+      "id": "PENTEST-PENTEST",
+      "domain": "cyber-pentest",
+      "title": "Application pentesting",
+      "applies_to": {
+        "signals": [
+          "active"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Application pentesting"
+        ],
+        "questions": [
+          "Start with the known attack surface and configuration. Record each scenario, exact target, method, expected effect, limit and required evidence.",
+          "Verify authentication before testing: identity, role and a known permitted operation. An unauthenticated crawl does not cover authenticated routes even if it finishes without errors.",
+          "Select tests for priority hypotheses and inspect templates or extensions before launch. Read their effects; safe, signed or passive tags do not establish them.",
+          "Reproduce each signal with a minimal request or sequence using synthetic data. Observe the necessary object, state and logs without collecting extra data to make the demonstration look stronger.",
+          "Stop on unexpected impact and preserve the completed steps. Record created test objects, required cleanup and remaining artifacts according to the mandate."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Start with the known attack surface and configuration. Record each scenario, exact target, method, expected effect, limit and required evidence."
+        },
+        {
+          "phase": "review",
+          "instruction": "Verify authentication before testing: identity, role and a known permitted operation. An unauthenticated crawl does not cover authenticated routes even if it finishes without errors."
+        },
+        {
+          "phase": "review",
+          "instruction": "Select tests for priority hypotheses and inspect templates or extensions before launch. Read their effects; safe, signed or passive tags do not establish them."
+        },
+        {
+          "phase": "review",
+          "instruction": "Reproduce each signal with a minimal request or sequence using synthetic data. Observe the necessary object, state and logs without collecting extra data to make the demonstration look stronger."
+        },
+        {
+          "phase": "review",
+          "instruction": "Stop on unexpected impact and preserve the completed steps. Record created test objects, required cleanup and remaining artifacts according to the mandate."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide an adapted WSTG matrix, sanitized requests, confirmed or rejected hypotheses and uncovered surfaces. Include the actual scope of interrupted scans.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "ZAP, Burp and Nuclei are options subject to licence and installation. Automated scanning complements authorization and business-logic tests. Installing the library does not start a pentest."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "wstg",
+        "zap",
+        "nuclei",
+        "api"
+      ],
+      "source_path": "skills/cyber-pentest/references/modules/pentest.md",
+      "source_sha256": "21ff6f1a501b5f451012cc105ea4536cc0d88c53be877e7a005084860c6ddb62"
+    },
+    {
+      "id": "PENTEST-WINDOWS-AD",
+      "domain": "cyber-pentest",
+      "title": "Windows, AD and Entra",
+      "applies_to": {
+        "signals": [
+          "windows"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Windows, AD and Entra"
+        ],
+        "questions": [
+          "Reconstruct groups, delegations, ACLs, trusts and cloud roles from dated exports. Distinguish theoretical permissions, usable principals and paths requiring additional conditions.",
+          "Review service accounts, gMSA, local secrets, LAPS, logon rights and administration protections. Check whether exceptions still serve an active use.",
+          "Review AD CS, certificate templates, approval, enrollment and identity constraints. Confirm configuration before reporting a known attack path. Do not perform actual enrollment by default.",
+          "Check federation and synchronization, Entra applications, consent, emergency accounts and conditional access. A declared policy may exclude the tested user or sign-in type.",
+          "Associate each privilege path with a reduction measure and a read-only or laboratory verification. Preserve logs and trust relationships needed for operation."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Reconstruct groups, delegations, ACLs, trusts and cloud roles from dated exports. Distinguish theoretical permissions, usable principals and paths requiring additional conditions."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review service accounts, gMSA, local secrets, LAPS, logon rights and administration protections. Check whether exceptions still serve an active use."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review AD CS, certificate templates, approval, enrollment and identity constraints. Confirm configuration before reporting a known attack path. Do not perform actual enrollment by default."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check federation and synchronization, Entra applications, consent, emergency accounts and conditional access. A declared policy may exclude the tested user or sign-in type."
+        },
+        {
+          "phase": "review",
+          "instruction": "Associate each privilege path with a reduction measure and a read-only or laboratory verification. Preserve logs and trust relationships needed for operation."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the path nodes and permissions, export dates, preconditions and uncollected areas. A graph path does not prove successful exploitation.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use BloodHound on authorized collections or existing exports, Microsoft tools and policy analysis. Password spraying, credential extraction and lateral movement require scope beyond an ordinary configuration review."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "azure",
+        "auth",
+        "attack"
+      ],
+      "source_path": "skills/cyber-pentest/references/modules/windows-ad.md",
+      "source_sha256": "5041107f59dc14b49aa97004aebbc724770928edeb0d2744491c7736626e6c46"
+    },
+    {
+      "id": "PENTEST-LINUX",
+      "domain": "cyber-pentest",
+      "title": "Linux and system services",
+      "applies_to": {
+        "signals": [
+          "linux"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Linux and system services"
+        ],
+        "questions": [
+          "Inventory active services, listening sockets, users, groups, capabilities and scheduled jobs. Compare expected role and observed exposure from an identified vantage point.",
+          "Review sudoers, systemd units, executable paths, writable files and inherited variables. Trace who can modify files consumed by more privileged services.",
+          "Check data, socket, backup, log and temporary-file permissions. Look for symlinks, file races and writable parent directories without collecting secret contents.",
+          "Review SSH, inactive accounts, authentication, patching and isolation according to the distribution. Distinguish the installed kernel from the one actually running.",
+          "Review restoration and logs. Read a job schedule and script before calling it inactive; missing logs can mean its first run is still in the future."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Inventory active services, listening sockets, users, groups, capabilities and scheduled jobs. Compare expected role and observed exposure from an identified vantage point."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review sudoers, systemd units, executable paths, writable files and inherited variables. Trace who can modify files consumed by more privileged services."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check data, socket, backup, log and temporary-file permissions. Look for symlinks, file races and writable parent directories without collecting secret contents."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review SSH, inactive accounts, authentication, patching and isolation according to the distribution. Distinguish the installed kernel from the one actually running."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review restoration and logs. Read a job schedule and script before calling it inactive; missing logs can mean its first run is still in the future."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the service, principal, permission and possible effect, with sanitized read-only command evidence. Mark unreadable items as unverified rather than absent.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Lynis and native read-only tools within scope. Do not automatically apply hardening guidance that could interrupt access or conflict with operating requirements."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "attack",
+        "cheatsheets",
+        "ir"
+      ],
+      "source_path": "skills/cyber-pentest/references/modules/linux.md",
+      "source_sha256": "e7618f2a1c981178f1e48d3061c4eee786c7d07f053a4adefa8184293ed84219"
+    },
+    {
+      "id": "OT-OT",
+      "domain": "cyber-ot",
+      "title": "OT, ICS and control systems",
+      "applies_to": {
+        "signals": [
+          "ot"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "OT, ICS and control systems"
+        ],
+        "questions": [
+          "Establish physical consequences, fallback modes and availability dependencies from the supplied context. Distinguish control, supervision and safety functions.",
+          "Trace maintenance access, engineering workstations, backups, vendor accounts and IT/OT transfers. Review zones, permitted flows and ways to observe their use.",
+          "Review controller/HMI exports and communication settings: remote writes, passwords, critical commands, readback, versioning and restoration. Do not load a change into equipment merely to verify it.",
+          "Use existing captures and simulators for industrial protocols. Assess authenticity, replay, limits and command consistency on a bench disconnected from the process.",
+          "Prepare physical intervention only with an operating window, operator, restorable backup, monitoring and suitable stop procedure. A tool labeled passive may still send traffic to the controller."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Establish physical consequences, fallback modes and availability dependencies from the supplied context. Distinguish control, supervision and safety functions."
+        },
+        {
+          "phase": "review",
+          "instruction": "Trace maintenance access, engineering workstations, backups, vendor accounts and IT/OT transfers. Review zones, permitted flows and ways to observe their use."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review controller/HMI exports and communication settings: remote writes, passwords, critical commands, readback, versioning and restoration. Do not load a change into equipment merely to verify it."
+        },
+        {
+          "phase": "review",
+          "instruction": "Use existing captures and simulators for industrial protocols. Assess authenticity, replay, limits and command consistency on a bench disconnected from the process."
+        },
+        {
+          "phase": "review",
+          "instruction": "Prepare physical intervention only with an operating window, operator, restorable backup, monitoring and suitable stop procedure. A tool labeled passive may still send traffic to the controller."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide access paths, documented gaps, potential process effects and required follow-up checks. Identify whether evidence comes from an offline export, simulator or physical equipment.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use PCAP analysis, vendor documentation and NIST SP 800-82 rev. 3. Active scans, restarts, register writes and controller load tests are outside the default review."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "ot",
+        "attack",
+        "ir"
+      ],
+      "source_path": "skills/cyber-ot/references/modules/ot.md",
+      "source_sha256": "b5ef2e609bd709165ff299ad170161a7b72f6f62a5bcb0ea572f0b57ffaa8fc9"
+    },
+    {
+      "id": "OT-FIRMWARE",
+      "domain": "cyber-ot",
+      "title": "Firmware, IoT and embedded devices",
+      "applies_to": {
+        "signals": [
+          "firmware"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Firmware, IoT and embedded devices"
+        ],
+        "questions": [
+          "Hash the image and preserve the original. Extract in an isolated environment with file-count and size limits; inspect symlinks and archive paths before writing.",
+          "Inventory components, services, potential secrets and default configuration. Match discovered versions to the exact firmware and vendor backports.",
+          "Review the boot chain, update signatures, signer identity and rollback protection. A signature included in an archive does not prove the device checks it.",
+          "Review debug interfaces, provisioning, device identity, key storage and reset behavior. Distinguish physical-access attacks from exposed network inputs.",
+          "On an authorized emulator or laboratory device, test update formats, simulated power loss and restoration. Document limitations that prevent reproducing physical behavior."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Hash the image and preserve the original. Extract in an isolated environment with file-count and size limits; inspect symlinks and archive paths before writing."
+        },
+        {
+          "phase": "review",
+          "instruction": "Inventory components, services, potential secrets and default configuration. Match discovered versions to the exact firmware and vendor backports."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review the boot chain, update signatures, signer identity and rollback protection. A signature included in an archive does not prove the device checks it."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review debug interfaces, provisioning, device identity, key storage and reset behavior. Distinguish physical-access attacks from exposed network inputs."
+        },
+        {
+          "phase": "review",
+          "instruction": "On an authorized emulator or laboratory device, test update formats, simulated power loss and restoration. Document limitations that prevent reproducing physical behavior."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the hash, model, firmware, extraction path and observation. A string in a binary does not prove a service is active.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Binwalk, Ghidra, format tools and emulation as appropriate. Treat extractors and unknown firmware as untrusted code or input; run without host-system access."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "ot",
+        "ossfuzz",
+        "slsa"
+      ],
+      "source_path": "skills/cyber-ot/references/modules/firmware.md",
+      "source_sha256": "c4f14cc89a631e48cb02f22bcaec58b0781f949b30b1642fb9557f1fe077f39a"
+    },
+    {
+      "id": "APPSEC-SMART-CONTRACTS",
+      "domain": "cyber-appsec",
+      "title": "Smart contracts and protocols",
+      "applies_to": {
+        "signals": [
+          "blockchain"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Smart contracts and protocols"
+        ],
+        "questions": [
+          "Reconstruct value flows and invariants for solvency, supply, shares, rounding and permissions. Compare the declared specification with behavior the protocol permits.",
+          "Review reentrancy, effect ordering, external calls, unchecked returns, approvals and unusual token behavior. Include hooks, transfer fees and rebasing where the protocol accepts those assets.",
+          "Check prices and oracles: freshness, units, decimals, liquidity, sequence and required market conditions. State the economic assumptions behind each simulation.",
+          "Review initialization, upgrades, storage layout, governance, pause controls and privileged keys. Compare deployed bytecode with source before reusing audit results.",
+          "Write property tests and scenarios on a local chain or isolated fork using fictitious assets. Minimize counterexamples and check the same invariant after correction."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Reconstruct value flows and invariants for solvency, supply, shares, rounding and permissions. Compare the declared specification with behavior the protocol permits."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review reentrancy, effect ordering, external calls, unchecked returns, approvals and unusual token behavior. Include hooks, transfer fees and rebasing where the protocol accepts those assets."
+        },
+        {
+          "phase": "review",
+          "instruction": "Check prices and oracles: freshness, units, decimals, liquidity, sequence and required market conditions. State the economic assumptions behind each simulation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review initialization, upgrades, storage layout, governance, pause controls and privileged keys. Compare deployed bytecode with source before reusing audit results."
+        },
+        {
+          "phase": "review",
+          "instruction": "Write property tests and scenarios on a local chain or isolated fork using fictitious assets. Minimize counterexamples and check the same invariant after correction."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the broken invariant, preconditions, minimal sequence, asset balance and version. Slither warnings remain candidates; simulated losses must be labeled as simulated.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Slither, Foundry, Echidna or Medusa according to language and chain. A `latest` documentation URL can point to a development version; match the compiler. Keep real transactions and user keys outside the test harness."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "solidity",
+        "tob",
+        "slsa"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/smart-contracts.md",
+      "source_sha256": "f8bf439ac3e065a83d8cd91140d7e81c6a6f46645fc2e662db4b8f80f184b6d1"
+    },
+    {
+      "id": "DETECTION-DETECTION",
+      "domain": "cyber-detection",
+      "title": "Detection and telemetry",
+      "applies_to": {
+        "signals": [
+          "detection"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Detection and telemetry"
+        ],
+        "questions": [
+          "Start with the behavior to observe and its preconditions. Map ATT&CK or ATLAS techniques to data sources actually ingested.",
+          "Review collection, timestamps, identity, enrichment, normalization and retention. Fields in source logs may disappear before correlation.",
+          "Write rules against stable fields and relevant variants. Add positive and benign events, then test backend conversion and actual query syntax.",
+          "Measure matches, false positives and volume in an identified corpus. For YARA, assess string cost and engine limits; for network rules, assess direction, protocol and flow state.",
+          "Test event → rule → alert → notification using authorized synthetic data. A matching query does not prove the operator received an alert."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Start with the behavior to observe and its preconditions. Map ATT&CK or ATLAS techniques to data sources actually ingested."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review collection, timestamps, identity, enrichment, normalization and retention. Fields in source logs may disappear before correlation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Write rules against stable fields and relevant variants. Add positive and benign events, then test backend conversion and actual query syntax."
+        },
+        {
+          "phase": "review",
+          "instruction": "Measure matches, false positives and volume in an identified corpus. For YARA, assess string cost and engine limits; for network rules, assess direction, protocol and flow state."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test event → rule → alert → notification using authorized synthetic data. A matching query does not prove the operator received an alert."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the rule, engine version, sanitized corpus, positive and negative cases, and alert delivery stage actually verified. Record missing fields as gaps in coverage.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use Sigma, YARA-X, Suricata and the selected SIEM. Use harmless markers; keep existing malicious samples isolated and do not execute them to test a static rule."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "sigma",
+        "suricata",
+        "attack",
+        "atlas"
+      ],
+      "source_path": "skills/cyber-detection/references/modules/detection.md",
+      "source_sha256": "52cc2d093acdb9f620403b51886ed7cf64185543be95f4727af1068106342cb9"
+    },
+    {
+      "id": "DFIR-INCIDENT",
+      "domain": "cyber-dfir",
+      "title": "Incident response and evidence",
+      "applies_to": {
+        "signals": [
+          "incident"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Incident response and evidence"
+        ],
+        "questions": [
+          "Preserve available evidence with source, time, timezone, hash and collection method. Work on copies and distinguish observations, hypotheses and missing data.",
+          "Build a correlated timeline of identities, access, deployments and changes. Check clock offsets and collection gaps before inferring causation.",
+          "Define confirmed scope and possible extensions. Missing exfiltration traces are inconclusive when telemetry could not observe the transfer.",
+          "Prepare proportionate containment for affected sessions, keys, resources and dependencies. Explain effects and rollback before any action that could interrupt service.",
+          "Verify recovery from a clean source, required rotations, restored controls and monitoring. Restarting a service does not establish that the cause was removed."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Preserve available evidence with source, time, timezone, hash and collection method. Work on copies and distinguish observations, hypotheses and missing data."
+        },
+        {
+          "phase": "review",
+          "instruction": "Build a correlated timeline of identities, access, deployments and changes. Check clock offsets and collection gaps before inferring causation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Define confirmed scope and possible extensions. Missing exfiltration traces are inconclusive when telemetry could not observe the transfer."
+        },
+        {
+          "phase": "review",
+          "instruction": "Prepare proportionate containment for affected sessions, keys, resources and dependencies. Explain effects and rollback before any action that could interrupt service."
+        },
+        {
+          "phase": "review",
+          "instruction": "Verify recovery from a clean source, required rotations, restored controls and monitoring. Restarting a service does not establish that the cause was removed."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the timeline, confidence, evidence, alternative explanations, completed actions and pending decisions. Separate containment recommendations from actions actually taken.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use log analysis, cloud exports and disk images within the mandate. A diagnostic request alone does not authorize evidence deletion, reinstallation or access revocation."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "ir",
+        "attack"
+      ],
+      "source_path": "skills/cyber-dfir/references/modules/incident.md",
+      "source_sha256": "5967b7eaef1d9786e2bab6a053d0eda8208e3d5d344cbcb6c641f2c33a0f8949"
+    },
+    {
+      "id": "APPSEC-PRIVACY",
+      "domain": "cyber-appsec",
+      "title": "Sensitive data and isolation",
+      "applies_to": {
+        "signals": [
+          "privacy"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Sensitive data and isolation"
+        ],
+        "questions": [
+          "Map collection, storage, indexes, logs, analytics, exports, prompts and backups. Compare documented data flows with data actually sent.",
+          "Look for excessive fields, identifiers in URLs, request logging and overly broad responses. Check redaction before transfer or storage, including paths outside the interface.",
+          "Review access to primary and derived data: search, attachments, reports, caches, backups and support access.",
+          "Test retention and deletion with a synthetic identifier traced through every known copy. Document delays, backup exceptions and deferred effects.",
+          "Assess exports to third-party services and models: content, configured region, retention and available controls. Record technical verification separately from any legal assessment."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Map collection, storage, indexes, logs, analytics, exports, prompts and backups. Compare documented data flows with data actually sent."
+        },
+        {
+          "phase": "review",
+          "instruction": "Look for excessive fields, identifiers in URLs, request logging and overly broad responses. Check redaction before transfer or storage, including paths outside the interface."
+        },
+        {
+          "phase": "review",
+          "instruction": "Review access to primary and derived data: search, attachments, reports, caches, backups and support access."
+        },
+        {
+          "phase": "review",
+          "instruction": "Test retention and deletion with a synthetic identifier traced through every known copy. Document delays, backup exceptions and deferred effects."
+        },
+        {
+          "phase": "review",
+          "instruction": "Assess exports to third-party services and models: content, configured region, retention and available controls. Record technical verification separately from any legal assessment."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the data-flow map, fields, authorized identities, exposure paths and deletion evidence for each storage location. A written policy does not establish enforcement.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use laboratory network traces and bounded queries on synthetic data. This technical review alone cannot establish GDPR or Swiss FADP compliance."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "asvs",
+        "llm",
+        "postgres"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/privacy.md",
+      "source_sha256": "32c479e43efdf9015b2e07feb5ce04ec7279685c2ccb94c6541c3779ef892029"
+    },
+    {
+      "id": "CORE-TRIAGE",
+      "domain": "cyber-core",
+      "title": "Finding triage and reporting",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Finding triage and reporting"
+        ],
+        "questions": [
+          "Validate imported formats and each scanner execution status. Report errors, timeouts, partial analysis and zero analyzed objects even when there are no findings.",
+          "Try to disprove each priority candidate: constant input, upstream validation, inaccessible route, fixed variant, required prior permission or inapplicable scenario.",
+          "Confirm the path and impact, or retain `needs-context`. Keep the decision open when evidence is missing. Group duplicates without losing distinct sources or locations.",
+          "Set priority according to exposure and business effect. If CVSS is required, calculate the vector and document its assumptions; do not copy a score from a superficially similar issue.",
+          "Report priority findings, fixes, tests and coverage. Volume metrics do not establish audit depth. Justify each `not-applicable` control."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Validate imported formats and each scanner execution status. Report errors, timeouts, partial analysis and zero analyzed objects even when there are no findings."
+        },
+        {
+          "phase": "review",
+          "instruction": "Try to disprove each priority candidate: constant input, upstream validation, inaccessible route, fixed variant, required prior permission or inapplicable scenario."
+        },
+        {
+          "phase": "review",
+          "instruction": "Confirm the path and impact, or retain `needs-context`. Keep the decision open when evidence is missing. Group duplicates without losing distinct sources or locations."
+        },
+        {
+          "phase": "review",
+          "instruction": "Set priority according to exposure and business effect. If CVSS is required, calculate the vector and document its assumptions; do not copy a score from a superficially similar issue."
+        },
+        {
+          "phase": "review",
+          "instruction": "Report priority findings, fixes, tests and coverage. Volume metrics do not establish audit depth. Justify each `not-applicable` control."
+        }
+      ],
+      "verification": {
+        "acceptance": "A confirmed finding must let another reviewer locate the evidence. Preserve original scanner status, triage decisions and untested controls in the report.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "The local importer accepts Semgrep JSON, SARIF, Gitleaks and Trivy JSON. It removes raw excerpts and keeps findings as candidates. Inspect raw evidence under restricted access where needed."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "cvss",
+        "epss",
+        "cwe"
+      ],
+      "source_path": "skills/cyber-core/references/modules/triage.md",
+      "source_sha256": "dfcf7ac66a54ba5594e93b2d2fb17ec1aa854dc79df315b18cf585548b1a299a"
+    },
+    {
+      "id": "APPSEC-REMEDIATION",
+      "domain": "cyber-appsec",
+      "title": "Remediation and retesting",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Remediation and retesting"
+        ],
+        "questions": [
+          "Read existing checks and shared workspace context. Save a comparison copy before editing; do not use Git to restore an entire shared file when undoing a local mutation.",
+          "Fix the component that enforces authority or owns the data. Correct related paths affected by the same cause without expanding into an unrelated refactor.",
+          "Write a test that reaches the defect and an authorized scenario that must still succeed. Require a nonzero executed test count as well as the expected exit code.",
+          "Run the test before and after the fix on identified versions. For mutation checks, use an isolated copy, unique anchors and a restoration check; disable Python bytecode when needed.",
+          "Run the build and relevant checks. Record the fixed source, built artifact, deployment and runtime behavior separately. A local fix does not close an exposure still active remotely."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Read existing checks and shared workspace context. Save a comparison copy before editing; do not use Git to restore an entire shared file when undoing a local mutation."
+        },
+        {
+          "phase": "review",
+          "instruction": "Fix the component that enforces authority or owns the data. Correct related paths affected by the same cause without expanding into an unrelated refactor."
+        },
+        {
+          "phase": "review",
+          "instruction": "Write a test that reaches the defect and an authorized scenario that must still succeed. Require a nonzero executed test count as well as the expected exit code."
+        },
+        {
+          "phase": "review",
+          "instruction": "Run the test before and after the fix on identified versions. For mutation checks, use an isolated copy, unique anchors and a restoration check; disable Python bytecode when needed."
+        },
+        {
+          "phase": "review",
+          "instruction": "Run the build and relevant checks. Record the fixed source, built artifact, deployment and runtime behavior separately. A local fix does not close an exposure still active remotely."
+        }
+      ],
+      "verification": {
+        "acceptance": "Provide the targeted diff, before/after evidence, effect on authorized behavior, variants addressed and remaining delivery step. Use `retested` only after rerunning the check against the identified fix.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Use tests in the shipped runtime and the project tooling. Understand the business effect before changing failing expectations. Preserve neighboring work."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "asvs",
+        "tob",
+        "codeql"
+      ],
+      "source_path": "skills/cyber-appsec/references/modules/remediation.md",
+      "source_sha256": "0c1e5db5a0c8990f4c8df6bf74f891dc6baa331f81a147e83b114ecc6b3bede3"
+    },
+    {
+      "id": "CORE-RESEARCH",
+      "domain": "cyber-core",
+      "title": "Security research",
+      "applies_to": {
+        "signals": [
+          "all"
+        ],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Security research"
+        ],
+        "questions": [
+          "Start with vendor documentation and advisories, then standards, source code and research. Record document version, publication date and access date separately.",
+          "Verify affected ranges, fixes, vulnerability aliases and preconditions. Match the component and version before applying a product CVE.",
+          "For tools, review licence, maintenance, mechanism, limitations and installation. Pin reused code and inspect dependencies before running it.",
+          "Distinguish peer-reviewed research, preprints, documentation and commercial claims. Examine tasks, metrics, baselines, controls, costs and available reproduction code.",
+          "Turn relevant results into project-specific checks. Preserve contradictions and missing data; benchmark performance does not establish local protection."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "review",
+          "instruction": "Start with vendor documentation and advisories, then standards, source code and research. Record document version, publication date and access date separately."
+        },
+        {
+          "phase": "review",
+          "instruction": "Verify affected ranges, fixes, vulnerability aliases and preconditions. Match the component and version before applying a product CVE."
+        },
+        {
+          "phase": "review",
+          "instruction": "For tools, review licence, maintenance, mechanism, limitations and installation. Pin reused code and inspect dependencies before running it."
+        },
+        {
+          "phase": "review",
+          "instruction": "Distinguish peer-reviewed research, preprints, documentation and commercial claims. Examine tasks, metrics, baselines, controls, costs and available reproduction code."
+        },
+        {
+          "phase": "review",
+          "instruction": "Turn relevant results into project-specific checks. Preserve contradictions and missing data; benchmark performance does not establish local protection."
+        }
+      ],
+      "verification": {
+        "acceptance": "Write a short note with primary links, dates, versions, the supported claim and its effect on the audit. Mark blocked or missing sources as unverified.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [],
+        "active": [],
+        "selection_note": "Start from [sources.json](../../../cyber-audit/references/sources.json), then refresh time-sensitive information. HTTP checks establish neither scientific validity nor repository security."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "kev",
+        "epss",
+        "tob",
+        "agentdojo",
+        "firewalls"
+      ],
+      "source_path": "skills/cyber-core/references/modules/research.md",
+      "source_sha256": "c0e21a461b6ab2d837ef0af849f26342cecc3817fb77f9cd5794cd66fb5ae3eb"
+    },
+    {
+      "id": "CORE-ATTACK-MAPPING",
+      "domain": "cyber-core",
+      "title": "Mapping behavior to ATT&CK",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Mapping behavior to ATT&CK"
+        ],
+        "questions": [
+          "Describe the observed actor, action, asset and effect without attributing a group.",
+          "Find the domain, technique and sub-technique in the dated snapshot.",
+          "Compare observed behavior with the technique and record missing evidence.",
+          "Retain the URL, version and mapping confidence."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Describe the observed actor, action, asset and effect without attributing a group."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Find the domain, technique and sub-technique in the dated snapshot."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare observed behavior with the technique and record missing evidence."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Retain the URL, version and mapping confidence."
+        }
+      ],
+      "verification": {
+        "acceptance": "Cite an existing identifier in the correct domain and a supporting observation from the audit record.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "knowledge.py attack"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/mitre-attack/attack-stix-data"
+      ]
+    },
+    {
+      "id": "PENTEST-ASSET-SCOPE",
+      "domain": "cyber-pentest",
+      "title": "Asset discovery and scope",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Asset discovery and scope"
+        ],
+        "questions": [
+          "List supplied assets and the source of each discovery.",
+          "Distinguish presumed ownership, DNS relationships and permission to test.",
+          "Prepare exact probes and ports after confirming target scope."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "List supplied assets and the source of each discovery."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Distinguish presumed ownership, DNS relationships and permission to test."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare exact probes and ports after confirming target scope."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record provenance, role and permission for the proposed test before adding a target.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Supplied inventory",
+          "Authorized public sources"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/projectdiscovery/subfinder",
+        "https://github.com/projectdiscovery/httpx"
+      ]
+    },
+    {
+      "id": "PENTEST-LOL-PRIVILEGE",
+      "domain": "cyber-pentest",
+      "title": "Legitimate binaries and privilege paths",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Legitimate binaries and privilege paths"
+        ],
+        "questions": [
+          "Identify the binary, path, signature and version.",
+          "Trace the principal, permissions, controllable arguments and privileged operation.",
+          "Compare expected administrative use and prepare a laboratory scenario."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the binary, path, signature and version."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Trace the principal, permissions, controllable arguments and privileged operation."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare expected administrative use and prepare a laboratory scenario."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish the privilege path; the binary alone is insufficient evidence.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Permission exports",
+          "Process logs"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/LOLBAS-Project/LOLBAS",
+        "https://github.com/GTFOBins/GTFOBins.github.io"
+      ]
+    },
+    {
+      "id": "HUNT-HYPOTHESIS",
+      "domain": "cyber-hunting",
+      "title": "Hunt hypothesis and log coverage",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Hunt hypothesis and log coverage"
+        ],
+        "questions": [
+          "State the hypothesis, population, period and rejection criterion.",
+          "Find a known positive event in the pipeline.",
+          "Count results before and after each filter.",
+          "Assess anomalies and alternative explanations."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "State the hypothesis, population, period and rejection criterion."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Find a known positive event in the pipeline."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Count results before and after each filter."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Assess anomalies and alternative explanations."
+        }
+      ],
+      "verification": {
+        "acceptance": "Retain population counts, evidence and telemetry limits. An empty population cannot disprove the hypothesis.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Existing logs",
+          "Read-only queries"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/OTRF/ThreatHunter-Playbook"
+      ]
+    },
+    {
+      "id": "PURPLE-ATOMIC-CHAIN",
+      "domain": "cyber-purple-team",
+      "title": "Detection validation with an Atomic scenario",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Detection validation with an Atomic scenario"
+        ],
+        "questions": [
+          "Choose the GUID, commit, platform and telemetry objective.",
+          "Review dependencies, commands, effects and cleanup.",
+          "Prepare a laboratory run covered by the mandate.",
+          "Verify behavior, ingestion, rule matching, alert delivery and final state separately."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Choose the GUID, commit, platform and telemetry objective."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Review dependencies, commands, effects and cleanup."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a laboratory run covered by the mandate."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Verify behavior, ingestion, rule matching, alert delivery and final state separately."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record a timestamp and evidence for each of the five stages. An exit code alone does not establish the outcome.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Atomic YAML review",
+          "Fixture analysis"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/redcanaryco/atomic-red-team"
+      ]
+    },
+    {
+      "id": "DETECTION-SIGMA-CONTRACT",
+      "domain": "cyber-detection",
+      "title": "Telemetry requirements for a Sigma rule",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Telemetry requirements for a Sigma rule"
+        ],
+        "questions": [
+          "Define the log source and fields actually ingested.",
+          "Pin the rule, conversion pipeline and backend.",
+          "Compile and test positive and benign events."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Define the log source and fields actually ingested."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Pin the rule, conversion pipeline and backend."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compile and test positive and benign events."
+        }
+      ],
+      "verification": {
+        "acceptance": "The converted rule must find its positive control in the target backend and pass the benign case.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Local rules and fixtures"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/SigmaHQ/sigma"
+      ]
+    },
+    {
+      "id": "DETECTION-ELASTIC-RUNTIME",
+      "domain": "cyber-detection",
+      "title": "Elastic rule execution",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Elastic rule execution"
+        ],
+        "questions": [
+          "Check index/data stream, integration, ECS and timestamp field.",
+          "Review interval, lookback, exceptions and suppression.",
+          "Test the query and alert creation in an authorized space."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Check index/data stream, integration, ECS and timestamp field."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Review interval, lookback, exceptions and suppression."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Test the query and alert creation in an authorized space."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record query matches, created alerts and delivered notifications separately.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Rule export and ECS mapping"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/elastic/detection-rules"
+      ]
+    },
+    {
+      "id": "DETECTION-SPLUNK-CIM",
+      "domain": "cyber-detection",
+      "title": "Splunk telemetry and CIM mapping",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Splunk telemetry and CIM mapping"
+        ],
+        "questions": [
+          "Find the control event in raw logs and record its sourcetype.",
+          "Check CIM mapping, data model, acceleration and macros.",
+          "Compare raw search and tstats results over the same period."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Find the control event in raw logs and record its sourcetype."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Check CIM mapping, data model, acceleration and macros."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare raw search and tstats results over the same period."
+        }
+      ],
+      "verification": {
+        "acceptance": "Find the known event through the model. An empty query alone does not establish inactivity.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Search export",
+          "Synthetic logs"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/splunk/security_content"
+      ]
+    },
+    {
+      "id": "DETECTION-YARA-CORPUS",
+      "domain": "cyber-detection",
+      "title": "YARA rule precision and cost",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "YARA rule precision and cost"
+        ],
+        "questions": [
+          "Define the file type and classification property.",
+          "Compile on the target engine and measure pattern cost.",
+          "Test authorized positive files and a comparable benign corpus.",
+          "Retain licence, version and false-positive results."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Define the file type and classification property."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compile on the target engine and measure pattern cost."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Test authorized positive files and a comparable benign corpus."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Retain licence, version and false-positive results."
+        }
+      ],
+      "verification": {
+        "acceptance": "The rule must distinguish its control cases without treating a legitimate tool as proof of compromise.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Static compilation",
+          "Laboratory corpus"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/Yara-Rules/rules",
+        "https://github.com/anyrun/YARA"
+      ]
+    },
+    {
+      "id": "DFIR-ARTIFACT-COLLECTION",
+      "domain": "cyber-dfir",
+      "title": "Targeted endpoint collection",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Targeted endpoint collection"
+        ],
+        "questions": [
+          "Define the question, period, population and minimum required artifact.",
+          "Read the VQL definition, parameters, permissions and effects.",
+          "Preserve the original, hash, timestamp and collection log."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Define the question, period, population and minimum required artifact."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Read the VQL definition, parameters, permissions and effects."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Preserve the original, hash, timestamp and collection log."
+        }
+      ],
+      "verification": {
+        "acceptance": "The record must identify the source and distinguish reading, transformation and execution.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Existing exports",
+          "VQL review"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/Velocidex/velociraptor"
+      ]
+    },
+    {
+      "id": "DFIR-SUSPECT-FILE",
+      "domain": "cyber-dfir",
+      "title": "Static analysis of a suspicious file",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Static analysis of a suspicious file"
+        ],
+        "questions": [
+          "Calculate the hash and identify the actual format.",
+          "Inspect structure, signatures, imports and embedded content in a laboratory.",
+          "Compare detections with legitimate uses and the limits of static analysis."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Calculate the hash and identify the actual format."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Inspect structure, signatures, imports and embedded content in a laboratory."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare detections with legitimate uses and the limits of static analysis."
+        }
+      ],
+      "verification": {
+        "acceptance": "Separate suspected capabilities from observed behavior. Public submission requires permission to share.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Metadata",
+          "Isolated static analysis"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": false
+      },
+      "references": [
+        "https://github.com/Yara-Rules/rules",
+        "https://csrc.nist.gov/pubs/sp/800/61/r3/final"
+      ]
+    },
+    {
+      "id": "OT-MODBUS-FLOW",
+      "domain": "cyber-ot",
+      "title": "Modbus/TCP flows and writes",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "modbus"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "Modbus/TCP flows and writes"
+        ],
+        "questions": [
+          "Confirm the protocol by decoding an existing capture.",
+          "Map observed clients, servers, functions and ranges to the supplied naming scheme.",
+          "Distinguish expected process activity, maintenance and unidentified sources.",
+          "Assess segmentation and write authorization evidence without replaying traffic."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Confirm the protocol by decoding an existing capture."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map observed clients, servers, functions and ranges to the supplied naming scheme."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Distinguish expected process activity, maintenance and unidentified sources."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Assess segmentation and write authorization evidence without replaying traffic."
+        }
+      ],
+      "verification": {
+        "acceptance": "Support the finding with frames, endpoints, functions and process context. A register number alone does not identify its physical function.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "tshark -n -r",
+          "Program export"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.wireshark.org/docs/dfref/m/modbus.html",
+        "https://csrc.nist.gov/pubs/sp/800/82/r3/final"
+      ]
+    },
+    {
+      "id": "OT-OPCUA-TRUST",
+      "domain": "cyber-ot",
+      "title": "OPC UA trust and permissions",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "opc-ua"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "OPC UA trust and permissions"
+        ],
+        "questions": [
+          "Compare the advertised endpoint, used endpoint, policy and mode.",
+          "Check configured certificate trust, rejection and renewal.",
+          "Map user identity and role to node permissions."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Compare the advertised endpoint, used endpoint, policy and mode."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Check configured certificate trust, rejection and renewal."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map user identity and role to node permissions."
+        }
+      ],
+      "verification": {
+        "acceptance": "Verify the subject is authorized for the operation as well as checking channel encryption.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Server configuration",
+          "Existing capture"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://reference.opcfoundation.org/Core/Part2/v105/docs/"
+      ]
+    },
+    {
+      "id": "OT-S7-ENGINEERING",
+      "domain": "cyber-ot",
+      "title": "S7 engineering access",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "s7"
+        ],
+        "vendors": [
+          "siemens"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "S7 engineering access"
+        ],
+        "questions": [
+          "Identify CPU, firmware, protections and engineering tool version.",
+          "Map engineering workstations and observed operations to the maintenance plan.",
+          "Compare the exported program, backup and loaded reference where supplied."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify CPU, firmware, protections and engineering tool version."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map engineering workstations and observed operations to the maintenance plan."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the exported program, backup and loaded reference where supplied."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record offline evidence and the remaining physical check. Do not write to a controller to confirm a hypothesis.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "TIA/STEP 7 export",
+          "PCAP"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://cert-portal.siemens.com/",
+        "https://www.wireshark.org/docs/dfref/s/s7comm.html"
+      ]
+    },
+    {
+      "id": "OT-PROFINET-ZONES",
+      "domain": "cyber-ot",
+      "title": "PROFINET discovery and configuration",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "profinet"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "PROFINET discovery and configuration"
+        ],
+        "questions": [
+          "Identify the controller, devices and layer-2 domain.",
+          "Identify discovery and configuration events in a capture.",
+          "Relate name or address changes to known maintenance activity."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the controller, devices and layer-2 domain."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Identify discovery and configuration events in a capture."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Relate name or address changes to known maintenance activity."
+        }
+      ],
+      "verification": {
+        "acceptance": "Record capture point, period and layer-2 coverage. Do not transmit DCP traffic by default.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "PCAP",
+          "Switch configuration"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://csrc.nist.gov/pubs/sp/800/82/r3/final"
+      ]
+    },
+    {
+      "id": "OT-CIP-ACCESS",
+      "domain": "cyber-ot",
+      "title": "EtherNet/IP and CIP access",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "ethernet-ip",
+          "cip"
+        ],
+        "vendors": [
+          "rockwell"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "EtherNet/IP and CIP access"
+        ],
+        "questions": [
+          "Distinguish explicit, implicit and administrative exchanges.",
+          "Identify roles and security capabilities for the exact model.",
+          "Compare observed flows, identities and expected segmentation."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Distinguish explicit, implicit and administrative exchanges."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Identify roles and security capabilities for the exact model."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare observed flows, identities and expected segmentation."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish CIP Security support from product documentation and actual configuration.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "PCAP",
+          "Controller export"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.wireshark.org/docs/dfref/e/enip.html",
+        "https://www.rockwellautomation.com/en-us/trust-center.html"
+      ]
+    },
+    {
+      "id": "OT-PCAP-COVERAGE",
+      "domain": "cyber-ot",
+      "title": "OT capture coverage",
+      "applies_to": {
+        "signals": [],
+        "protocols": [
+          "modbus",
+          "s7",
+          "profinet",
+          "opc-ua",
+          "ethernet-ip"
+        ],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "OT capture coverage"
+        ],
+        "questions": [
+          "Identify source, SPAN/TAP, duration, clock and packet loss.",
+          "Hash the capture and find an expected control flow.",
+          "Count protocols and conversations offline without external name resolution.",
+          "Retain frames and filters for each observation."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify source, SPAN/TAP, duration, clock and packet loss."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Hash the capture and find an expected control flow."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Count protocols and conversations offline without external name resolution."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Retain frames and filters for each observation."
+        }
+      ],
+      "verification": {
+        "acceptance": "A missing flow is conclusive only when the capture could have observed that traffic.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Offline tshark",
+          "Wireshark"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.wireshark.org/docs/",
+        "https://github.com/rayborg/ICS_repo"
+      ]
+    },
+    {
+      "id": "OT-IEC62443-EVIDENCE",
+      "domain": "cyber-ot",
+      "title": "IEC 62443 applicability and evidence",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": []
+      },
+      "knowledge": {
+        "concepts": [
+          "IEC 62443 applicability and evidence"
+        ],
+        "questions": [
+          "Identify the role, part, edition and system under consideration.",
+          "Define zones, conduits and risk-based objectives.",
+          "Map verified requirements to an owner, method and evidence.",
+          "Leave normative identifiers unconfirmed when the source text is unavailable."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the role, part, edition and system under consideration."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Define zones, conduits and risk-based objectives."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Map verified requirements to an owner, method and evidence."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Leave normative identifiers unconfirmed when the source text is unavailable."
+        }
+      ],
+      "verification": {
+        "acceptance": "Distinguish target level, component capability and achieved state. The matrix alone does not establish certification.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Authorized documents",
+          "Architecture"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.isa.org/standards-and-publications/isa-standards/isa-iec-62443-series-of-standards"
+      ]
+    },
+    {
+      "id": "OT-SIEMENS-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Siemens product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "siemens"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Siemens product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://cert-portal.siemens.com/"
+      ]
+    },
+    {
+      "id": "OT-ROCKWELL-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Rockwell product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "rockwell"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Rockwell product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.rockwellautomation.com/en-us/trust-center.html"
+      ]
+    },
+    {
+      "id": "OT-SCHNEIDER-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Schneider product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "schneider"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Schneider product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.se.com/ww/en/work/support/cybersecurity/overview.jsp"
+      ]
+    },
+    {
+      "id": "OT-OMRON-ADVISORY",
+      "domain": "cyber-ot",
+      "title": "Omron product advisories",
+      "applies_to": {
+        "signals": [],
+        "protocols": [],
+        "vendors": [
+          "omron"
+        ]
+      },
+      "knowledge": {
+        "concepts": [
+          "Omron product advisories"
+        ],
+        "questions": [
+          "Identify the part number, firmware, options and engineering tool.",
+          "Compare the vendor advisory, affected version range and preconditions.",
+          "Prepare a fix or compensating measure with verification and process constraints."
+        ]
+      },
+      "workflow": [
+        {
+          "phase": "verify",
+          "instruction": "Identify the part number, firmware, options and engineering tool."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Compare the vendor advisory, affected version range and preconditions."
+        },
+        {
+          "phase": "verify",
+          "instruction": "Prepare a fix or compensating measure with verification and process constraints."
+        }
+      ],
+      "verification": {
+        "acceptance": "Establish applicability from model, version and preconditions; the brand name alone is insufficient.",
+        "positive_control_required": true
+      },
+      "tools": {
+        "passive": [
+          "Vendor advisories",
+          "Supplied inventory"
+        ],
+        "active": [],
+        "selection_note": "Prepare any active test separately for the authorized scope and environment."
+      },
+      "safety": {
+        "default_mode": "read-only",
+        "active_testing_requires_authorization": true,
+        "production_ot": true
+      },
+      "references": [
+        "https://www.fa.omron.co.jp/product/security/en/"
+      ]
+    }
+  ],
+  "note": "Generated from module procedures and domain-controls.json. No tool execution or automatic permission grant."
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project security audit"
+  short_description: "Select methods and verify findings and coverage"
+  default_prompt: "Use $cyber-audit to review this project in depth and report findings, supporting evidence and untested areas."

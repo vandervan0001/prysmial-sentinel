@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Cyber control",
+  "type": "object",
+  "required": [
+    "id",
+    "domain",
+    "title",
+    "applies_to",
+    "knowledge",
+    "workflow",
+    "verification",
+    "tools",
+    "safety",
+    "references"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9-]+$"
+    },
+    "domain": {
+      "enum": [
+        "cyber-core",
+        "cyber-pentest",
+        "cyber-appsec",
+        "cyber-detection",
+        "cyber-hunting",
+        "cyber-purple-team",
+        "cyber-dfir",
+        "cyber-ot"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applies_to": {
+      "type": "object",
+      "required": [
+        "signals",
+        "protocols",
+        "vendors"
+      ],
+      "properties": {
+        "signals": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vendors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "knowledge": {
+      "type": "object",
+      "required": [
+        "concepts",
+        "questions"
+      ]
+    },
+    "workflow": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "phase",
+          "instruction"
+        ],
+        "properties": {
+          "phase": {
+            "type": "string",
+            "minLength": 1
+          },
+          "instruction": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "acceptance",
+        "positive_control_required"
+      ],
+      "properties": {
+        "acceptance": {
+          "type": "string",
+          "minLength": 1
+        },
+        "positive_control_required": {
+          "const": true
+        }
+      }
+    },
+    "tools": {
+      "type": "object",
+      "required": [
+        "passive",
+        "active",
+        "selection_note"
+      ]
+    },
+    "safety": {
+      "type": "object",
+      "required": [
+        "default_mode",
+        "active_testing_requires_authorization",
+        "production_ot"
+      ],
+      "properties": {
+        "default_mode": {
+          "const": "read-only"
+        },
+        "active_testing_requires_authorization": {
+          "const": true
+        },
+        "production_ot": {
+          "type": "boolean"
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_path": {
+      "type": "string"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

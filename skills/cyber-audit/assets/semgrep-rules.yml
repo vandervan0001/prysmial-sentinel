@@ -1,0 +1,73 @@
+rules:
+  - id: cyber-python-eval-input
+    languages: [python]
+    severity: ERROR
+    message: User input reaches dynamic evaluation; verify the complete trust boundary.
+    mode: taint
+    pattern-sources:
+      - pattern: input(...)
+    pattern-sinks:
+      - pattern: eval(...)
+      - pattern: exec(...)
+    metadata:
+      cwe: CWE-95
+      confidence: MEDIUM
+  - id: cyber-python-shell-input
+    languages: [python]
+    severity: ERROR
+    message: User input reaches a shell command; verify input control and quoting.
+    mode: taint
+    pattern-sources:
+      - pattern: input(...)
+    pattern-sinks:
+      - pattern: os.system(...)
+      - pattern: subprocess.run(..., shell=True, ...)
+      - pattern: subprocess.Popen(..., shell=True, ...)
+    metadata:
+      cwe: CWE-78
+      confidence: MEDIUM
+  - id: cyber-python-tls-disabled
+    languages: [python]
+    severity: WARNING
+    message: TLS certificate verification is disabled for a requests call; inspect destination and environment.
+    pattern-either:
+      - pattern: requests.get(..., verify=False, ...)
+      - pattern: requests.post(..., verify=False, ...)
+      - pattern: requests.request(..., verify=False, ...)
+    metadata:
+      cwe: CWE-295
+      confidence: HIGH
+  - id: cyber-python-pickle-input
+    languages: [python]
+    severity: ERROR
+    message: User input reaches pickle deserialization; verify provenance of serialized data.
+    mode: taint
+    pattern-sources:
+      - pattern: input(...)
+    pattern-sinks:
+      - pattern: pickle.loads(...)
+    metadata:
+      cwe: CWE-502
+      confidence: MEDIUM
+  - id: cyber-js-tls-disabled
+    languages: [javascript, typescript]
+    severity: WARNING
+    message: TLS certificate verification is disabled in an options object; inspect use and destination.
+    pattern: "{..., rejectUnauthorized: false, ...}"
+    metadata:
+      cwe: CWE-295
+      confidence: MEDIUM
+  - id: cyber-js-eval-request
+    languages: [javascript, typescript]
+    severity: ERROR
+    message: Request data reaches eval; verify the identity of the request object and data flow.
+    mode: taint
+    pattern-sources:
+      - pattern: $REQ.query
+      - pattern: $REQ.body
+      - pattern: $REQ.params
+    pattern-sinks:
+      - pattern: eval(...)
+    metadata:
+      cwe: CWE-95
+      confidence: MEDIUM
