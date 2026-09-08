@@ -15,7 +15,7 @@ def package():
             if not p.is_file() or p.is_symlink(): continue
             if '__pycache__' in p.parts or p.name.startswith('._') or p.name=='.DS_Store' or p.suffix=='.pyc': continue
             selected.append(p)
-    selected += list(ROOT.glob('*.md'))+[ROOT/'.gitignore']
+    selected += list(ROOT.glob('*.md'))+[ROOT/'.gitignore',ROOT/'CITATION.cff']
     selected=sorted(set(selected))
     manifest={p.relative_to(ROOT).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in selected}
     out=ROOT/'dist'

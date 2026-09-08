@@ -2,6 +2,8 @@
 
 Prysmial Sentinel is a cybersecurity skill library for reviewing software, infrastructure and industrial systems in Codex. It covers code review, pentesting, detection, threat hunting and incident response, with a shared format for evidence and findings.
 
+Created by [vandervan](https://github.com/vandervan0001), as part of [Prysmial](https://prysmial.com).
+
 The library contains nine skills: one audit coordinator and eight domains. They provide 36 specialist methods and 58 searchable controls. Local tools handle project inventory, audit planning, a limited Semgrep scan and scanner report imports. The methods guide the rest of the review.
 
 ## Install and start
@@ -66,6 +68,14 @@ See the [commands and limits](skills/cyber-audit/references/tooling.md). Semgrep
 The research baseline is 8 September 2026. It records [50 primary references](skills/cyber-audit/references/sources.json) and [27 upstream repositories](skills/cyber-audit/references/repositories.json). The package includes a derived MITRE index and eight selected Trail of Bits documentation sets, with source commits, licences and hashes.
 
 Read the [research notes](RESEARCH.md), [third-party notices](THIRD_PARTY_NOTICES.md) and [validation record](VALIDATION.md). Local validation passed 40 tests and the Semgrep rule checks. Specialist methods have not been evaluated across every supported stack or against live client systems. Sources are updated manually.
+
+## Creator and Prysmial
+
+[vandervan](https://github.com/vandervan0001) created Prysmial Sentinel to organize security review methods, local tooling and evidence requirements in one repository.
+
+[Prysmial](https://prysmial.com) builds business software and process automation, including CRMs, applications, portals and AI integrations. Visit the site for project work and collaboration.
+
+See [project credits](CREDITS.md) for authorship and upstream acknowledgements. To reference Sentinel in an article, workshop or audit, use the [citation metadata](CITATION.cff) and identify the version you used.
 
 ## Maintain the library
 

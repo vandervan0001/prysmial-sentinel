@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "When referencing Prysmial Sentinel, cite this project and identify the release or commit used."
+title: "Prysmial Sentinel"
+type: software
+authors:
+  - family-names: "vandervan"
+    affiliation: "Prysmial"
+    website: "https://github.com/vandervan0001"
+repository-code: "https://github.com/vandervan0001/prysmial-sentinel"
+url: "https://github.com/vandervan0001/prysmial-sentinel"
+abstract: "Cybersecurity skills and local audit tools for reviewing software, infrastructure and industrial systems in Codex."
+keywords:
+  - cybersecurity
+  - appsec
+  - pentesting
+  - codex-skills
+  - ot-security

@@ -1,5 +1,7 @@
 # Third-party notices and provenance
 
+Project creator and upstream acknowledgements are recorded in [CREDITS.md](CREDITS.md). The notices below apply to third-party material.
+
 ## Trail of Bits
 
 Source: [trailofbits/skills](https://github.com/trailofbits/skills), commit `d3323cefbcf645678b8dc481de204b02ad3d02dc`, retrieved on 8 September 2026. Authors: Trail of Bits and contributors. Licence: Creative Commons Attribution-ShareAlike 4.0 International. The [full licence is included](skills/cyber-audit/references/upstream/trailofbits/LICENSE).
